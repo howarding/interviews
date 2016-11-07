@@ -24,7 +24,7 @@ public:
 	// Exp: https://discuss.leetcode.com/topic/4996/share-my-o-log-min-m-n-solution-with-explanation
 	// Time:	O(log(m+n))
 	// Space:	O(1)
-	double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+	double findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2) {
 		int m = nums1.size(), n = nums2.size();
 		if (m > n)
 			return findMedianSortedArrays(nums2, nums1);
@@ -54,9 +54,8 @@ public:
 };
 
 
-
 int main() {
-	vector<int> a = {1,3};
+	vector<int> a = {1, 3};
 	vector<int> b = {2};
 	Solution sol;
 	double c = sol.findMedianSortedArrays(a, b);
