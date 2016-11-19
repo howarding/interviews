@@ -20,7 +20,7 @@
 using namespace std;
 
 
-class Solution {
+class Solution_004 {
 public:
     // Exp: https://discuss.leetcode.com/topic/4996/share-my-o-log-min-m-n-solution-with-explanation
     // Time:	O(log(m+n))
@@ -55,10 +55,10 @@ public:
 };
 
 
-int main() {
-    vector<int> a = {1, 3};
-    vector<int> b = {2};
-    Solution sol;
-    double c = sol.findMedianSortedArrays(a, b);
-    cout << c << endl;
-}
+//int main() {
+//    vector<int> a = {1, 3};
+//    vector<int> b = {2};
+//    Solution sol;
+//    double c = sol.findMedianSortedArrays(a, b);
+//    cout << c << endl;
+//}
