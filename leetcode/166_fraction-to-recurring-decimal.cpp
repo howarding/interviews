@@ -14,13 +14,37 @@
 //Be wary of edge cases! List out as many test cases as you can think of and test your code thoroughly.
 
 #include <iostream>
-#include <vector>
+#include <map>
 
 using namespace std;
 
 class Solution_166 {
 public:
+    // Exp: https://discuss.leetcode.com/topic/6079/accepted-cpp-solution-with-explainations
+    // Time:	O(n)
+    // Space:	O(1)
     string fractionToDecimal(int numerator, int denominator) {
-//    TODO
+        string result;
+        if (denominator == 0) return result;
+        if (numerator == 0) return "0";
+        if ((numerator >= 0) != (denominator > 0))
+            result += "-";
+        long numer = numerator < 0 ? (long) numerator * (-1) : (long) numerator;
+        long denom = denominator < 0 ? (long) denominator * (-1) : (long) denominator;
+        result += to_string(numer / denom);
+        if (numer % denom == 0) return result;
+        result += ".";
+        map<int, int> remainder_set;
+        for (long p = numer % denom; p; p %= denom) {
+            if (remainder_set.find(p) != remainder_set.end()) {
+                result.insert(remainder_set[p], "(");
+                result += ")";
+                break;
+            }
+            remainder_set[p] = result.size();
+            p *= 10;
+            result += to_string(p / denom);
+        }
+        return result;
     }
 };
