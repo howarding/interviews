@@ -14,11 +14,10 @@ using namespace std;
 
 class Solution_128 {
 public:
-
+    // Exp: https://discuss.leetcode.com/topic/15383/simple-o-n-with-explanation-just-walk-each-streak/41
+    // Time:	O(n)
+    // Space:	O(n)
     int longestConsecutive(vector<int> &nums) {
-        // Exp: https://discuss.leetcode.com/topic/15383/simple-o-n-with-explanation-just-walk-each-streak/41
-        // Time:	O(n)
-        // Space:	O(n)
         set<int> num_set;
         for (vector<int>::iterator iter = nums.begin(); iter != nums.end(); iter++)
             num_set.insert(*iter);
