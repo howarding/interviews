@@ -46,6 +46,10 @@ public:
                     num += board[k][l] % 2;
         return board[i][j] + num * 2;
     }
+
+    // Follow up 2
+    // Exp: https://discuss.leetcode.com/topic/26236/infinite-board-solution
+
 };
 
 
