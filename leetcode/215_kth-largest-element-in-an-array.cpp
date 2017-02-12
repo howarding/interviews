@@ -13,8 +13,8 @@ using namespace std;
 
 class Solution_215 {
 public:
-    // Exp: https://discuss.leetcode.com/topic/15256/4-c-solutions-using-partition-max-heap-priority_queue-and-multiset-respectively
     // Quick Select
+    // Exp: https://discuss.leetcode.com/topic/15256/4-c-solutions-using-partition-max-heap-priority_queue-and-multiset-respectively
     // Time:	O(n)
     // Space:	O(1)
     int findKthLargest(vector<int> &nums, int k) {

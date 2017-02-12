@@ -12,6 +12,7 @@ using namespace std;
 
 class Solution_016 {
 public:
+    // sort + 2sum II
     // Exp: https://discuss.leetcode.com/topic/1978/a-n-2-solution-can-we-do-better
     // Time:	O(n^2)
     // Space:	O(1)

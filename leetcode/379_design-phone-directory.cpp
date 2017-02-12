@@ -37,6 +37,9 @@
 using namespace std;
 
 class PhoneDirectory {
+    unordered_set<int> used;
+    queue<int> available;
+    int max;
 public:
     // Exp: https://discuss.leetcode.com/topic/53094/java-ac-solution-using-queue-and-set
     // Time:	O(1)
@@ -73,11 +76,6 @@ public:
             available.push(number);
         }
     }
-
-private:
-    unordered_set<int> used;
-    queue<int> available;
-    int max;
 };
 
 /**

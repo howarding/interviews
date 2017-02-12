@@ -14,10 +14,9 @@
 
 using namespace std;
 
-
 class Solution_031 {
 public:
-    // Exp: https://discuss.leetcode.com/topic/2542/share-my-o-n-time-solution
+    // Exp: https://discuss.leetcode.com/topic/15216/a-simple-algorithm-from-wikipedia-with-c-implementation-can-be-used-in-permutations-and-permutations-ii/19
     // Time:	O(n)
     // Space:	O(1)
     void nextPermutation(vector<int> &nums) {
@@ -27,15 +26,9 @@ public:
             i--;
         if (i > 0) {
             for (j = i; j < nums.size() && nums[i - 1] < nums[j]; j++);
-            swap(nums, i - 1, j - 1);
+            swap(nums[i - 1], nums[j - 1]);
         }
         reverse(nums.begin() + i, nums.end());
-    }
-
-    void swap(vector<int> &nums, int i, int j) {
-        int tmp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = tmp;
     }
 };
 

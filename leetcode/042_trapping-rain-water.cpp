@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 class Solution_042 {
 public:
     // Exp: https://discuss.leetcode.com/topic/5125/sharing-my-simple-c-code-o-n-time-o-1-space

@@ -29,6 +29,9 @@ struct Interval {
  */
 class Solution_056 {
 public:
+    // Exp: https://discuss.leetcode.com/topic/20263/c-10-line-solution-easing-understanding
+    // Time:	O(n*log(n))
+    // Space:	O(n)
     vector<Interval> merge(vector<Interval> &intervals) {
         vector<Interval> result;
         if (intervals.empty()) return result;

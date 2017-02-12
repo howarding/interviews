@@ -9,7 +9,6 @@ using namespace std;
 struct ListNode {
     int val;
     ListNode *next;
-
     ListNode(int x) : val(x), next(NULL) {}
 };
 
@@ -30,6 +29,7 @@ struct cmp {
 
 class Solution_023 {
 public:
+    // Heap
     // Exp: https://discuss.leetcode.com/topic/2780/a-java-solution-based-on-priority-queue
     // Time:	O(n*log(k))     n: # total elements;    k: size of the list
     // Space:	O(1)

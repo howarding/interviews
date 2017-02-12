@@ -17,6 +17,7 @@ using namespace std;
 
 class Solution_324 {
 public:
+    // quick select
     // Exp: https://discuss.leetcode.com/topic/41464/step-by-step-explanation-of-index-mapping-in-java
     // Exp: http://blog.sina.com.cn/s/blog_eb52001d0102w2b4.html
     // Quick Select
@@ -52,6 +53,7 @@ public:
     }
 
     int partition(vector<int> &nums, int left, int right) {
+        // Descending Order
         int pivot = nums[left];
         int start = left++;
         while (left <= right) {

@@ -29,7 +29,7 @@ public:
                 if (i == 1 && j == 0)
                     cout << endl;
                 int num = live_num(i, j, m, n, board);
-                if (num > 4 and num < 8)
+                if (num > 4 && num < 8)
                     board[i][j] += 2;
             }
 

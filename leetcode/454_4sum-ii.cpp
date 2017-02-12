@@ -26,6 +26,7 @@ using namespace std;
 
 class Solution_454 {
 public:
+    // Hash Table
     // Exp: https://discuss.leetcode.com/topic/67594/concise-hash-map-o-n-2-solution-with-explanation-c
     // Time:	O(n^2)
     // Space:	O(n)
