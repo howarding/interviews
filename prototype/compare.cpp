@@ -7,9 +7,6 @@ using namespace std;
 
 class heaps {
 
-//    priority_queue<pair<string, int>, vector<pair<string, int>>, cmp_less> max_heap;
-//    priority_queue<pair<string, int>, vector<pair<string, int>>, cmp_greater> min_heap;
-
     struct cmp_less {
         bool operator()(pair<string, int> a, pair<string, int> b) {
             return a.second < b.second;
@@ -21,6 +18,9 @@ class heaps {
             return a.second > b.second;
         }
     };
+
+    priority_queue<pair<string, int>, vector<pair<string, int>>, cmp_less> max_heap;
+    priority_queue<pair<string, int>, vector<pair<string, int>>, cmp_greater> min_heap;
 
     vector<pair<string, int>> result;
 
