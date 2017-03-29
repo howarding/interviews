@@ -43,13 +43,40 @@ public:
         else
             result.push_back(reversed);
     }
+
+
+    // FU: 结果只用输出一组解就可以, 扫两遍去掉没match的括号就可以了
+    // Time:	O(n)
+    // Space:	O(n)
+    string removeInvalidParentheses_fb(string s) {
+        string tmp, result;
+        stack<char> stk;
+        for (char c : s) {
+            if (c == '(') {
+                tmp += c;
+                stk.push(c);
+            } else if (c == ')' && !stk.empty()) {
+                tmp += c;
+                stk.pop();
+            }
+        }
+        int n = stk.size();
+        for (int i = tmp.size() - 1; i >= 0; i--)
+            if (tmp[i] == ')' || n-- <= 0)
+                result = tmp[i] + result;
+        return result;
+    }
 };
 
 
-//int main() {
+int main() {
 //    string s("()())())");
-//    Solution_301 sol;
+//    string s("(a)())()");
+//    string s(")(");
+    string s("(238347)))()(((23r209)))()23239)(df0s9f0w0)w0e()))sf((");
+    Solution_301 sol;
 //    vector<string> result(sol.removeInvalidParentheses(s));
 //    for (string str : result)
 //        cout << str << endl;
-//}
+    cout << sol.removeInvalidParentheses_fb(s) << endl;
+}

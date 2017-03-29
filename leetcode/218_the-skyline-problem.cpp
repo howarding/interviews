@@ -24,6 +24,10 @@ using namespace std;
 
 class Solution_218 {
 public:
+    // Exp1:    https://briangordon.github.io/2014/08/the-skyline-problem.html
+    // Code:
+    // Time:	O()
+    // Space:	O()
     vector<pair<int, int>> getSkyline(vector<vector<int>> &buildings) {
 
     }

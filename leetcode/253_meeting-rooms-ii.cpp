@@ -30,8 +30,9 @@ struct Interval {
  */
 class Solution_253 {
 public:
+    // heap     faster
     // Exp: https://discuss.leetcode.com/topic/20958/ac-java-solution-using-min-heap
-    // Time:	O(n)
+    // Time:	O(n * log(n))
     // Space:	O(n)
     int minMeetingRooms(vector<Interval> &intervals) {
         if (intervals.size() <= 1) return intervals.size();
@@ -59,4 +60,28 @@ public:
             return a.end > b.end;
         }
     };
+
+
+    // array, better idea.
+    // Exp: https://discuss.leetcode.com/topic/20971/c-o-n-log-n-584-ms-3-solutions
+    // Time:	O(n * log(n))
+    // Space:	O(n)
+    int minMeetingRooms1(vector<Interval> &intervals) {
+        vector<vector<int>> times;
+        for (Interval interval : intervals) {
+            times.push_back({interval.start, 1});
+            times.push_back({interval.end, -1});
+        }
+        sort(times.begin(), times.end(), cmp3);
+        int count = 0, result = 0;
+        for (auto &ele : times) {
+            count += ele[1];
+            result = max(result, count);
+        }
+        return result;
+    }
+
+    static bool cmp3(vector<int> a, vector<int> b) {
+        return a[0] < b[0] || (a[0] == b[0] && a[1] < b[1]);
+    }
 };

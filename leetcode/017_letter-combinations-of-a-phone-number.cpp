@@ -65,4 +65,10 @@ public:
         }
         return result;
     }
+
+
+    // 电话本扩展，最后只输出有效地组合，有效组合会给出来，用trie做就可以了
+    vector<string> letterCombinations_fb_fu1(string digits) {
+
+    }
 };

@@ -12,15 +12,16 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_set>
 
 using namespace std;
 
 class Solution_015 {
 public:
-    // Sort + Two Sum II
+    // Sort + Two Sum II (2 Pointers)
     // Exp: https://discuss.leetcode.com/topic/8107/share-my-ac-c-solution-around-50ms-o-n-n-with-explanation-and-comments/16
-    // Time:	O(n^2)
-    // Space:	O(n)
+    // Time:    O(n^2)
+    // Space:    O(n)
     vector<vector<int>> threeSum(vector<int> &nums) {
         if (nums.size() < 3)
             return {};
@@ -49,4 +50,28 @@ public:
         }
         return result;
     }
+
+
+    // FU 1. 如果不能排序怎么做，没有duplicate elements
+    vector<vector<int>> threeSum_fbfu1(vector<int> &nums) {
+        if (nums.size() < 3)
+            return {};
+        vector<vector<int>> result;
+        unordered_set<int> visited;
+        for (int i = 0; i < nums.size() - 2; i++) {
+            int target = -nums[i];
+            for (int j = i + 1; j < nums.size(); j++) {
+                int remain = target - nums[j];
+                if (visited.find(remain) == visited.end())
+                    visited.insert(nums[j]);
+                else
+                    result.push_back({nums[i], nums[j], remain});
+            }
+        }
+        return result;
+    }
+
+
+    // FU 2. 如果有duplicate 的怎么办? 把value和linkedlist映射起来，每个node还要存index,来比较就好了
+
 };

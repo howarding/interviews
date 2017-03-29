@@ -19,12 +19,11 @@ public:
                                           {'{', '}'}};
         stack<char> sta;
         if (s.empty()) return true;
-        for (int i = 0; i < s.size(); i++) {
-            if (dict.find(s[i]) != dict.end()) {
-                sta.push(s[i]);
+        for (char c : s) {
+            if (dict.find(c) != dict.end()) {
+                sta.push(c);
                 continue;
-            }
-            if (sta.empty() || dict[sta.top()] != s[i])
+            } else if (sta.empty() || dict[sta.top()] != c)
                 return false;
             sta.pop();
         }

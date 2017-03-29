@@ -18,16 +18,16 @@
 
 #include <iostream>
 #include <vector>
-#include <unordered_set>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
 class Solution_200 {
 public:
     // BFS
-    // Time:	O(n)
-    // Space:	O(n)
+    // Time:    O(n)
+    // Space:    O(n)
     int numIslands(vector<vector<char>> &grid) {
         int count = 0;
         if (grid.empty()) return count;
@@ -64,7 +64,7 @@ public:
         }
     }
 
-    // DFS: faster than BFS
+    // DFS recursive    FASTER than BFS
     // Exp: https://discuss.leetcode.com/topic/13248/very-concise-java-ac-solution
     int numIslands_1(vector<vector<char>> &grid) {
         int count = 0;
@@ -82,6 +82,13 @@ public:
     void dfs(int m, int n, int i, int j, vector<vector<char>> &grid) {
         if (i < 0 || i == m || j < 0 || j == n || grid[i][j] == '0')
             return;
+        // 如果是锯齿状数组：
+        // 1 0 0 1 1 1
+        // 1 0 1 0 0
+        // 0 0 0 0 0 0 1
+        // 1 1 1
+        // if (i < 0 || i == m || j < 0 || j >= grid[i].size() || grid[i][j] == '0')
+        //     return;
         grid[i][j] = '0';
         dfs(m, n, i - 1, j, grid);
         dfs(m, n, i + 1, j, grid);
@@ -89,6 +96,39 @@ public:
         dfs(m, n, i, j + 1, grid);
     }
 
+
+    // DFS non recursive    stack
+    int numIslands_2(vector<vector<char>> &grid) {
+        int count = 0;
+        if (grid.empty()) return count;
+        int m = grid.size(), n = grid[0].size();
+        vector<vector<int>> directions = {{1,  0},
+                                          {-1, 0},
+                                          {0,  1},
+                                          {0,  -1}};
+        stack<vector<int>> stk;
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                if (grid[i][j] == '1') {
+                    stk.push({i, j});
+                    while (!stk.empty()) {
+                        auto &node = stk.top();
+                        stk.pop();
+                        if (grid[node[0]][node[1]] == '1') {
+                            grid[node[0]][node[1]] = '0';
+                            for (auto &direction : directions) {
+                                auto neighbor = vector<int>({node[0] + direction[0], node[1] + direction[1]});
+                                if (neighbor[0] < 0 || neighbor[0] == m || neighbor[1] < 0 || neighbor[1] == n)
+                                    continue;
+                                if (grid[neighbor[0]][neighbor[1]] == '1')
+                                    stk.push(neighbor);
+                            }
+                        }
+                    }
+                    count++;
+                }
+        return count;
+    }
 
     // Union-Find
 

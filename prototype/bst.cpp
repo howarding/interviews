@@ -63,7 +63,7 @@ void iterativeInOrder(TreeNode *node) {
     if (!node) return;
     stack<TreeNode *> sta;
 
-    while (!sta.empty() || node) {
+    while (node || !sta.empty()) {
         if (node) {
             sta.push(node);
             node = node->left;
@@ -88,7 +88,7 @@ void iterativePostOrder(TreeNode *node) {
             sta.push(node);
             node = node->left;
         }
-        tmp = NULL;
+        tmp = nullptr;
         while (!sta.empty()) {
             node = sta.top();
             sta.pop();
@@ -103,6 +103,14 @@ void iterativePostOrder(TreeNode *node) {
         }
     } while (!sta.empty());
 }
+
+
+/*
+ *  bt: binary tree
+ *  reverse(InOrder(bt)) == PostOrder(bt, order(right, left, root))
+ *
+ */
+
 
 
 // search a node with val == key in bst, recursive

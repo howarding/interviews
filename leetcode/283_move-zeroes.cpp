@@ -18,12 +18,28 @@ public:
     // Time:	O(n)
     // Space:	O(1)
     void moveZeroes(vector<int> &nums) {
-        int n = nums.size();
         if (nums.empty()) return;
         int insertPos = 0;
-        for (int num : nums)
-            if (num) nums[insertPos++] = num;
-        while (insertPos < n)
-            nums[insertPos++] = 0;
+        for (int i = 0; i < nums.size(); i++)
+            if (nums[i])
+                swap(nums[i], nums[insertPos++]);
+    }
+
+
+    // Move zeros and return the count of non-zeros elements. The order of non-zero elements does not matter.
+    int moveZeroes_fb(vector<int> &nums) {
+        if (nums.empty()) return 0;
+        int insertPos = 0;
+        for (int i = 0; i < nums.size(); i++)
+            if (nums[i])
+                swap(nums[i], nums[insertPos++]);
+        return insertPos;
     }
 };
+
+
+//int main() {
+//    Solution_283 sol;
+//    vector<int> nums({1, 0, 0, 1, 0, 3, 0, 0, 5, 6});
+//    cout << sol.moveZeroes_fb(nums) << endl;
+//}
