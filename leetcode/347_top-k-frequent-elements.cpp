@@ -23,7 +23,7 @@ public:
     vector<int> topKFrequent(vector<int> &nums, int k) {
         vector<int> result;
         if (nums.empty()) return result;
-        unordered_map<int, int> dict;
+        unordered_map<int, int> dict;   // 先统计每个num次数
         for (int num : nums)
             dict[num]++;
 

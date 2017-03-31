@@ -42,19 +42,19 @@ public:
 };
 
 
-int main() {
-    Heaps heaps;
-    vector<pair<string, int>> points({{"a", 1},
-                                      {"b", 0},
-                                      {"e", 0},
-                                      {"c", 2},
-                                      {"d", -1}});
-    sort(points.begin(), points.end(), heaps.compare_less);
-    for (auto &point : points)
-        cout << point.first << " ";
-    cout << endl;
+//int main() {
+//    Heaps heaps;
+//    vector<pair<string, int>> points({{"a", 1},
+//                                      {"b", 0},
+//                                      {"e", 0},
+//                                      {"c", 2},
+//                                      {"d", -1}});
+//    sort(points.begin(), points.end(), heaps.compare_less);
+//    for (auto &point : points)
+//        cout << point.first << " ";
+//    cout << endl;
 //    sort(points.begin(), points.end(), !(heaps.compare_less));
 //    for (auto& point : points)
 //        cout << point.first << " ";
 //    cout << endl;
-}
+//}
