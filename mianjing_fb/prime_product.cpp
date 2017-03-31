@@ -32,11 +32,11 @@ public:
 };
 
 
-int main() {
-    Solution_pp sol;
-    vector<int> nums({2, 3, 5});
-    vector<int> result(sol.primeProduct(nums));
-    for (int num : result)
-        cout << num << " ";
-    cout << endl;
-}
+//int main() {
+//    Solution_pp sol;
+//    vector<int> nums({2, 3, 5});
+//    vector<int> result(sol.primeProduct(nums));
+//    for (int num : result)
+//        cout << num << " ";
+//    cout << endl;
+//}
