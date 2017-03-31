@@ -24,30 +24,33 @@ using namespace std;
 
 class Solution_044 {
 public:
-    // Exp: https://discuss.leetcode.com/topic/17901/accepted-c-dp-solution-with-a-trick
     // 2D DP
+    // Exp: https://discuss.leetcode.com/topic/17901/accepted-c-dp-solution-with-a-trick
     // Time:	O(mn)
     // Space:	O(n)
     bool isMatch(string s, string p) {
-        int n = s.size(), m = p.size();
+        int m = p.size(), n = s.size();
         vector<bool> dp(n + 1, false);
         dp[0] = true;
         bool pre_up;
         for (int i = 0; i < m; i++) {
             pre_up = dp[0];
             dp[0] = dp[0] && p[i] == '*';
-            bool row_result = false;
+            bool row_result = false;    // 用来提前结束遍历矩阵
             for (int j = 1; j <= n; j++) {
                 bool result;
                 if (p[i] == '*')
+                    // 只要P[i]和S[j-1]相匹配 或者，
+                    // P[i-1]和S[j]相匹配
                     result = dp[j - 1] || dp[j];
-                else
+                else    // 如果P[i-1]和S[j-1]相匹配而且,
+                    // 要么p[i]正好是'?'，要么p[i] == s[j-1] (j是从1开始遍历的)
                     result = pre_up && (p[i] == '?' || p[i] == s[j - 1]);
                 pre_up = dp[j];
                 dp[j] = result;
-                row_result |= dp[j];
+                row_result |= dp[j];    // 查看全行是否全是false
             }
-            if (!row_result) return false;
+            if (!row_result) return false;  // 只要当前行全是false，就肯定没法匹配了
         }
         return dp[n];
     }

@@ -22,7 +22,7 @@ public:
     }
 
     int quick_select(vector<int> &nums, int left, int right, int k) {
-        int i = partition(nums, left, right);
+        int i = partition(nums, left, right);   // left,right 都参与排序
         int len = i - left + 1;
         if (len == k) return nums[i];
         if (len < k)
@@ -35,10 +35,10 @@ public:
         int pivot = nums[left];
         int start = left++;
         while (left <= right) {
-            if (nums[left] < pivot && nums[right] > pivot)
+            if (nums[left] < pivot && nums[right] > pivot)  // 这是降序排列，改变符号是升序
                 swap(nums[left++], nums[right--]);
-            if (nums[left] >= pivot) left++;
-            if (nums[right] <= pivot) right--;
+            if (nums[left] >= pivot) left++;    // 这是降序排列，改变符号是升序
+            if (nums[right] <= pivot) right--;  // 这是降序排列，改变符号是升序
         }
         swap(nums[start], nums[right]);
         return right;

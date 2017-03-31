@@ -42,6 +42,8 @@ struct TreeNode {
 class Solution_098 {
 public:
     // Inorder  Recursive
+    // Time:	O(n)
+    // Space:	O(1)
     bool isValidBST(TreeNode *root) {
         TreeNode *prev = nullptr;
         return helper(root, prev);
@@ -57,6 +59,8 @@ public:
 
 
     // Inorder  Iterative   FASTER
+    // Time:	O(n)
+    // Space:	O(n)
     bool isValidBST_1(TreeNode *root) {
         if (!root) return true;
         stack<TreeNode *> stk;

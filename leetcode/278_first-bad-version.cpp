@@ -23,7 +23,7 @@ public:
             if (isBadVersion(mid)) right = mid - 1;
             else left = mid + 1;
         }
-        return left;
+        return left;    // 这个时候left是第一个bad version，right是最后一个good version.
     }
 };
 

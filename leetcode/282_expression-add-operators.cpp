@@ -27,6 +27,11 @@ public:
         return result;
     }
 
+
+    // last 是用来表示到目前为止的path中，最近的一个乘积项的值
+    // 如果path = 1 + 2 + 3, 那么last = 3
+    // 如果path = 2 + 3 * 2, 那么last = 3 * 2
+    // 如果path = 1 - 3 * 5 * 6, 那么last = - 3 * 5 * 6
     void helper(string &num, int target, int start, long eval, long last, string &path, vector<string> &result) {
         if (start == num.size()) {
             if (eval == target)
@@ -36,7 +41,7 @@ public:
 
         for (int i = start; i < num.size(); i++) {
             if (i > start && num[start] == '0') break;    // ignore those numbers starting w/ 0
-            string ele = num.substr(start, i - start + 1);
+            string ele = num.substr(start, i - start + 1);  // 从start到i的字符串作为数字
             long cur = stol(ele);
             int len = path.size();
             if (start == 0) {

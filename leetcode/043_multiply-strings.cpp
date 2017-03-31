@@ -21,7 +21,7 @@ public:
     string multiply(string num1, string num2) {
         if (num1 == "0" || num2 == "0") return "0";
         int m = num1.size(), n = num2.size();
-        vector<int> product(m + n, 0);
+        vector<int> product(m + n, 0);  // 相乘的数字最多m+n位
         for (int i = 0; i < m; i++)
             if (num1[i] - '0')
                 for (int j = 0; j < n; j++)

@@ -69,14 +69,14 @@ public:
 };
 
 
-int main() {
+//int main() {
 //    string s("()())())");
 //    string s("(a)())()");
 //    string s(")(");
-    string s("(238347)))()(((23r209)))()23239)(df0s9f0w0)w0e()))sf((");
-    Solution_301 sol;
+//    string s("(238347)))()(((23r209)))()23239)(df0s9f0w0)w0e()))sf((");
+//    Solution_301 sol;
 //    vector<string> result(sol.removeInvalidParentheses(s));
 //    for (string str : result)
 //        cout << str << endl;
-    cout << sol.removeInvalidParentheses_fb(s) << endl;
-}
+//    cout << sol.removeInvalidParentheses_fb(s) << endl;
+//}

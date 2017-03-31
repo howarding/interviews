@@ -18,6 +18,7 @@
 using namespace std;
 
 class Solution_039 {
+    int count = 0;
 public:
     // Exp: https://discuss.leetcode.com/topic/14654/accepted-16ms-c-solution-use-backtracking-easy-understand
     // Time:
@@ -36,6 +37,7 @@ public:
             result.push_back(path);
             return;
         }
+
         for (int i = start; i < candidates.size(); i++) {
             path.push_back(candidates[i]);
             dfs(candidates, i, rest - candidates[i], path, result);
@@ -43,3 +45,16 @@ public:
         }
     }
 };
+
+
+//int main() {
+//    Solution_039 sol;
+//    vector<int> candidates({2,3,6,7});
+//    int target = 7;
+//    vector<vector<int>> result(sol.combinationSum(candidates, target));
+//    for (auto& path : result) {
+//        for (auto& ele : path)
+//            cout << ele << " ";
+//        cout << endl;
+//    }
+//}

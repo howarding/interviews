@@ -27,16 +27,16 @@ public:
         for (char c : t)
             dict[c]++;
         int count = t.size();
-        int start = 0, end = 0;
-        int minLen = INT_MAX, minStart = 0;
+        int start = 0, end = 0; // window的起止点
+        int minLen = INT_MAX, minStart = 0; // 记录最小的window长度和起始点
         while (end < s.size()) {
-            if (dict[s[end++]]-- > 0) count--;
-            while (!count) {
+            if (dict[s[end++]]-- > 0) count--;  //s[end]是t里的字符
+            while (!count) {    // t中所有字符都搜到
                 if (minLen > end - start) {
                     minLen = end - start;
                     minStart = start;
                 }
-                if (++dict[s[start++]] > 0) count++;
+                if (++dict[s[start++]] > 0) count++;    // s[start]如果是t里的字符，则count++
             }
         }
         return minLen > s.size() ? "" : s.substr(minStart, minLen);

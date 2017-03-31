@@ -21,6 +21,9 @@ using namespace std;
 
 class Solution_090 {
 public:
+    // DFS
+    // Time:	O(2^n)
+    // Space:	O(2^n)
     vector<vector<int>> subsetsWithDup(vector<int> &nums) {
         vector<vector<int>> result;
         if (nums.empty()) return result;
@@ -44,6 +47,10 @@ public:
     }
 
 
+    // Iterative
+    // Exp:     https://discuss.leetcode.com/topic/4661/c-solution-and-explanation
+    // Time:
+    // Space:
     vector<vector<int>> subsetsWithDup_1(vector<int> &nums) {
         vector<vector<int>> result({{}});
         if (nums.empty()) return result;

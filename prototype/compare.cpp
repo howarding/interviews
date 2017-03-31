@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class heaps {
+class Heaps {
 
     struct cmp_less {
         bool operator()(pair<string, int> a, pair<string, int> b) {
@@ -40,3 +40,21 @@ public:
         sort(result.begin(), result.end(), compare_greater);
     }
 };
+
+
+int main() {
+    Heaps heaps;
+    vector<pair<string, int>> points({{"a", 1},
+                                      {"b", 0},
+                                      {"e", 0},
+                                      {"c", 2},
+                                      {"d", -1}});
+    sort(points.begin(), points.end(), heaps.compare_less);
+    for (auto &point : points)
+        cout << point.first << " ";
+    cout << endl;
+//    sort(points.begin(), points.end(), !(heaps.compare_less));
+//    for (auto& point : points)
+//        cout << point.first << " ";
+//    cout << endl;
+}
