@@ -27,12 +27,12 @@ public:
         for (int num : nums)
             dict[num]++;
 
-        // pair<first, second>: first is frequency,  second is number
+        // pair<first, second>: first is number,  second is frequency
         priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> max_heap;
         for (auto pair : dict) {
-            max_heap.push({pair.second, pair.first});
+            max_heap.push(pair);
             if (max_heap.size() > (int) dict.size() - k) {
-                result.push_back(max_heap.top().second);
+                result.push_back(max_heap.top().first);
                 max_heap.pop();
             }
         }
@@ -41,7 +41,7 @@ public:
 
     struct cmp {
         bool operator()(pair<int, int> a, pair<int, int> b) {
-            return a.first < b.first;
+            return a.second < b.second;
         }
     };
 };
