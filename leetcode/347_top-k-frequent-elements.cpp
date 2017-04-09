@@ -18,7 +18,7 @@ class Solution_347 {
 public:
     // Hash Table, Heap
     // Exp: https://discuss.leetcode.com/topic/44226/c-o-n-log-n-k-unordered_map-and-priority_queue-maxheap-solution
-    // Time:	O(n * log(n-k))
+    // Time:	O(n * log(k))
     // Space:	O(n)
     vector<int> topKFrequent(vector<int> &nums, int k) {
         vector<int> result;
@@ -28,20 +28,26 @@ public:
             dict[num]++;
 
         // pair<first, second>: first is number,  second is frequency
-        priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> max_heap;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> min_heap;
         for (auto pair : dict) {
-            max_heap.push(pair);
-            if (max_heap.size() > (int) dict.size() - k) {
-                result.push_back(max_heap.top().first);
-                max_heap.pop();
+            if (min_heap.size() < k)
+                min_heap.push(pair);
+            else if (min_heap.top().second < pair.second) {
+                min_heap.push(pair);
+                min_heap.pop();
             }
+        }
+        while (!min_heap.empty()) {
+            pair<int, int> ele = min_heap.top();
+            result.push_back(ele.first);
+            min_heap.pop();
         }
         return result;
     }
 
     struct cmp {
         bool operator()(pair<int, int> a, pair<int, int> b) {
-            return a.second < b.second;
+            return a.second > b.second;
         }
     };
 };
