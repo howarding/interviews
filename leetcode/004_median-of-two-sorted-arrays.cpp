@@ -13,12 +13,10 @@
 //
 //The median is (2 + 3)/2 = 2.5
 
-
 #include <iostream>
 #include <vector>
 
 using namespace std;
-
 
 class Solution_004 {
 public:
