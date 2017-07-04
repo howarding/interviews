@@ -71,14 +71,12 @@ public:
     // Exp: DP
     // Time:	O(n^2)
     // Space:	O(n^2)
-    string longestPalindrome3(string s) {
-
-    }
+    string longestPalindrome3(string s) {}
 };
 
 
-int main() {
-    Solution_005 sol;
-    string s = "babad";
-    cout << sol.longestPalindrome(s) << endl;
-}
+//int main() {
+//    Solution_005 sol;
+//    string s = "babad";
+//    cout << sol.longestPalindrome(s) << endl;
+//}
