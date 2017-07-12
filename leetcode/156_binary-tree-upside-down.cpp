@@ -35,9 +35,9 @@ struct TreeNode {
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-class Solution {
+class Solution_156 {
 public:
     TreeNode* upsideDownBinaryTree(TreeNode* root) {
-
+        if (!root) return nullptr;
     }
 };
