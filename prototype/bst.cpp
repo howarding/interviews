@@ -94,7 +94,7 @@ void iterativePostOrder(TreeNode *node) {
             sta.pop();
             if (tmp == node->right) {
                 cout << node->val << " ";
-                tmp = node->right;
+                tmp = node;
             } else {
                 sta.push(node);
                 node = node->right;

@@ -24,6 +24,9 @@ struct ListNode {
  */
 class Solution_082 {
 public:
+    // My own
+    // Time:	O(n)
+    // Space:	O(1)
     ListNode* deleteDuplicates(ListNode* head) {
         if(!head || !head->next) return head;
         ListNode *result = new ListNode(0);
