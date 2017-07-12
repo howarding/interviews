@@ -37,7 +37,46 @@ struct TreeNode {
  */
 class Solution_156 {
 public:
+    // Recursive (My own)
+    // Time:	O(n)
+    // Space:	O(n)
     TreeNode* upsideDownBinaryTree(TreeNode* root) {
         if (!root) return nullptr;
+        return rootNode(root);
     }
+
+    TreeNode* rootNode(TreeNode* node) {
+        if (!node->left) return node;
+        TreeNode* root(rootNode(node->left));
+        node->left->left = node->right;
+        node->left->right = node;
+        node->left = node->right = nullptr;
+        return root;
+    }
+
+    // Iterative
+    // Exp: https://discuss.leetcode.com/topic/40924/java-recursive-o-logn-space-and-iterative-solutions-o-1-space-with-explanation-and-figure
+    // Time:	O(n)
+    // Space:	O(1)
+    TreeNode* upsideDownBinaryTree1(TreeNode* root){
+        if (!root) return nullptr;
+        TreeNode *node(nullptr), *left(root), *right(nullptr);
+        while (left) {
+            TreeNode* tmp(left->left);
+            left->left = right;
+            right = left->right;
+            left->right = node;
+            node = left;
+            left = tmp;
+        }
+        return node;
+    };
 };
+
+
+//int main() {
+//    Solution_156 sol;
+//    TreeNode* root = new TreeNode(1);
+//    root->left = new TreeNode(2);
+//    sol.upsideDownBinaryTree(root);
+//}
