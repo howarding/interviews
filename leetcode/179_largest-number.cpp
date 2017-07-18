@@ -13,8 +13,8 @@ class Solution_179 {
 public:
     // Sort w/ right COMPARATOR!!!
     // Exp: https://discuss.leetcode.com/topic/7286/a-simple-c-solution
-    // Time:	O(n)
-    // Space:	O(1)
+    // Time:	O(nlog(n))
+    // Space:	O(n)
     string largestNumber(vector<int>& nums) {
         string result;
         if (nums.empty()) return result;

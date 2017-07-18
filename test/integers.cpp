@@ -33,4 +33,11 @@ using namespace std;
 //    cout << b << endl;
 //    cout << c << endl;
 //    cout << d << endl;
+
+    // INT_MAX + 1 = INT_MIN
+//    int a = 0xFFFFFFFF; // 11111111 11111111 11111111 11111111
+//    int b = 0x7FFFFFFF; // 01111111 11111111 11111111 11111111 = INT_MAX
+//    int c = 0x80000000; // 10000000 00000000 00000000 00000000 = INT_MIN
+//    cout << a << '\t' << b << '\t' << c << endl;
+
 //}
