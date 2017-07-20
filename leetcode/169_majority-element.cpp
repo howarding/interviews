@@ -11,22 +11,24 @@ using namespace std;
 class Solution_169 {
 public:
     // Exp: https://discuss.leetcode.com/topic/17446/6-suggested-solutions-in-c-with-explanations
+    // Exp: https://gregable.com/2013/10/majority-vote-algorithm-find-majority.html
     // Moore Voting Algorithm
     // Time:	O(n)
     // Space:	O(1)
     int majorityElement(vector<int>& nums) {
-        int result = nums[0], count = 1;
-        for (int i = 1; i < nums.size(); i++) {
-            if (!count) {
-                count++;
-                result = nums[i];
-            } else if (nums[i] == result)
+        int result = 0, count = 0;
+        for (int num : nums) {
+            if (count == 0)
+                result = num;
+            if (result == num)
                 count++;
             else
                 count--;
         }
         return result;
     }
+
+
 
     // Hash Table
     // Time:	O(n)
