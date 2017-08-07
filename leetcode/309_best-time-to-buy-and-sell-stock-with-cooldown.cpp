@@ -19,6 +19,13 @@ using namespace std;
 class Solution_309 {
 public:
     int maxProfit(vector<int> &prices) {
-
+        int buy(INT_MIN), sell(0), pre_sell(0);
+        for (int price : prices) {
+            int tmp = sell;
+            sell = max(buy + price, sell);
+            buy = max(pre_sell - price, buy);
+            pre_sell = tmp;
+        }
+        return max(buy, sell);
     }
 };

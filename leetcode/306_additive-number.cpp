@@ -16,14 +16,15 @@
 //How would you handle overflow for very large input integers?
 
 #include <iostream>
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
 
 using namespace std;
 
 class Solution_306 {
 public:
+    // Recursive
+    // Exp: https://discuss.leetcode.com/topic/29872/0ms-concise-c-solution-perfectly-handles-the-follow-up-and-leading-0s
+    // Time:	O(n)
+    // Space:	O(n)
     bool isAdditiveNumber(string num) {
         string first, second;
         for (int i = 1; i <= num.size() / 2; i++)
@@ -35,22 +36,21 @@ public:
         return false;
     }
 
+
     bool helper(string& num, int start, string& first, string& second) {
         if (start == num.size()) return true;
-        for (int i = start + 1; i <= num.size(); i++) {
-            while (num[i] == '0') i++;
+        if ((first[0] == '0' && first.size() > 1) || (second[0] == '0' && second.size() > 1)) return false;
+        for (int i = start + 1; i <= (num[start] == '0' ? start + 1 : num.size()); i++) {
             string third = num.substr(start, i - start);
-            if ((first.empty()|| second.empty()) && i < num.size())
-                return helper(num, i, second, third);
             if (additive(first, second, third) && helper(num, i, second, third))
                 return true;
         }
         return false;
     }
 
-    bool additive(string first, string second, string third) {
-        if (third.size() < first.size() || third.size() < second.size()) return false;
+    bool additive(string& first, string& second, string& third) {
         int carry = 0, m = first.size(), n = second.size(), l = third.size();
+        if (l < min(m, n) || l > max(m, n) + 1) return false;
         for (int i = 0; i < max(m, n); i++) {
             int a = i < m ? first[m-1-i] - '0' : 0;
             int b = i < n ? second[n-1-i] - '0' : 0;
@@ -66,8 +66,8 @@ public:
 
 
 
-int main() {
-    Solution_306 sol;
-    string num = "1203";
-    cout << sol.isAdditiveNumber(num) << endl;
-}
+//int main() {
+//    Solution_306 sol;
+//    string num = "199001200";
+//    cout << sol.isAdditiveNumber(num) << endl;
+//}
