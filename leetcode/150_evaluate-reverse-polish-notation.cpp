@@ -52,22 +52,22 @@ public:
 //}
 
 
-int main() {
-    Solution_150 sol;
-    string str;
-    int n;
-    getline(cin, str);
-    stringstream myStream(str);
-    myStream >> n;
-    for (int i = 0; i < n; i++) {
-        str.clear();
-        getline(cin, str);
-        istringstream buf(str);
-        vector<string> tokens{
-                istream_iterator<string>(buf),
-                istream_iterator<string>()
-        };
-        cout << sol.evalRPN(tokens) << endl;
-    }
-    return 0;
-}
+//int main() {
+//    Solution_150 sol;
+//    string str;
+//    int n;
+//    getline(cin, str);
+//    stringstream myStream(str);
+//    myStream >> n;
+//    for (int i = 0; i < n; i++) {
+//        str.clear();
+//        getline(cin, str);
+//        istringstream buf(str);
+//        vector<string> tokens{
+//                istream_iterator<string>(buf),
+//                istream_iterator<string>()
+//        };
+//        cout << sol.evalRPN(tokens) << endl;
+//    }
+//    return 0;
+//}

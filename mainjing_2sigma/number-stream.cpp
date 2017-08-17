@@ -76,16 +76,16 @@ public:
  * double param_2 = obj.findMedian();
  */
 
-int main()
-{
-    cout << setprecision(1) << fixed;
-    int n, a;
-    cin >> n;
-    MedianFinder obj;
-    for(int i = 1; i<=n; i++)
-    {
-        cin >> a;
-        obj.addNum(a);
-        cout << obj.findMedian() << endl;
-    }
-}
+//int main()
+//{
+//    cout << setprecision(1) << fixed;
+//    int n, a;
+//    cin >> n;
+//    MedianFinder obj;
+//    for(int i = 1; i<=n; i++)
+//    {
+//        cin >> a;
+//        obj.addNum(a);
+//        cout << obj.findMedian() << endl;
+//    }
+//}
