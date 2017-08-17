@@ -3,6 +3,7 @@
 #include <iostream>
 #include <queue>
 #include <cmath>
+#include <iomanip>
 
 using namespace std;
 
@@ -10,8 +11,8 @@ using namespace std;
 class MedianFinder {
     priority_queue<int, vector<int>, greater<int>> min_heap;
     priority_queue<int, vector<int>, less<int>> max_heap;
-    double avg, sqr_avg;
-    int count;
+    double avg, sqr_avg;    // for avg and std
+    int count;              // for avg and std
 public:
     /** initialize your data structure here. */
     MedianFinder() {
@@ -50,7 +51,9 @@ public:
 
     //  Time: O(1)
     double findMedian() {
-        return min_heap.size() == max_heap.size() ? (max_heap.top() + min_heap.top()) / 2.0 : min_heap.top();
+        return min_heap.size() == max_heap.size()
+               ? (max_heap.top() + min_heap.top()) / 2.0
+               : min_heap.top();
     }
 
 
@@ -72,3 +75,17 @@ public:
  * obj.addNum(num);
  * double param_2 = obj.findMedian();
  */
+
+int main()
+{
+    cout << setprecision(1) << fixed;
+    int n, a;
+    cin >> n;
+    MedianFinder obj;
+    for(int i = 1; i<=n; i++)
+    {
+        cin >> a;
+        obj.addNum(a);
+        cout << obj.findMedian() << endl;
+    }
+}

@@ -9,6 +9,8 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+#include <sstream>
+#include <iterator>
 
 using namespace std;
 
@@ -17,9 +19,10 @@ public:
     int evalRPN(vector<string> &tokens) {
         if (tokens.empty()) return 0;
         stack<int> operands;
-        for (int i = 0; i < tokens.size(); i++) {
-            if (isdigit(tokens[i][0]) || tokens[i].size() > 1) {
-                operands.push(stoi(tokens[i]));
+
+        for (string& s : tokens) {
+            if (isdigit(s[0]) || s.size() > 1) {
+                operands.push(stoi(s));
                 continue;
             }
             int b = operands.top();
@@ -27,11 +30,11 @@ public:
             int a = operands.top();
             operands.pop();
             int result;
-            if (tokens[i] == "+")
+            if (s == "+")
                 result = a + b;
-            else if (tokens[i] == "-")
+            else if (s == "-")
                 result = a - b;
-            else if (tokens[i] == "*")
+            else if (s == "*")
                 result = a * b;
             else
                 result = a / b;
@@ -47,3 +50,24 @@ public:
 //    Solution_150 sol;
 //    cout << sol.evalRPN(tokens) << endl;
 //}
+
+
+int main() {
+    Solution_150 sol;
+    string str;
+    int n;
+    getline(cin, str);
+    stringstream myStream(str);
+    myStream >> n;
+    for (int i = 0; i < n; i++) {
+        str.clear();
+        getline(cin, str);
+        istringstream buf(str);
+        vector<string> tokens{
+                istream_iterator<string>(buf),
+                istream_iterator<string>()
+        };
+        cout << sol.evalRPN(tokens) << endl;
+    }
+    return 0;
+}

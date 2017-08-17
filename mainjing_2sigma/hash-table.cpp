@@ -22,7 +22,8 @@ public:
     }
 
     // Search
-    // Use linear probing to get the element ahead if the element is not found at the computed hash code.
+    // Use linear probing to get the element ahead if the element is not found
+    // at the computed hash code.
     DataItem* search(int key) {
         //get the hash
         int hashIndex = hashCode(key);
@@ -45,7 +46,8 @@ public:
 
 
     // Insert
-    // Use linear probing for empty location, if an element is found at the computed hash code.
+    // Use linear probing for empty location, if an element is found at the
+    // computed hash code.
     void insert(int key,int data) {
         auto item = new DataItem(key, data);
 
@@ -66,8 +68,10 @@ public:
 
 
     // Delete
-    // Use linear probing to get the element ahead if an element is not found at the computed hash code.
-    // When found, store a dummy item there to keep the performance of the hash table intact.
+    // Use linear probing to get the element ahead if an element is not found
+    // at the computed hash code.
+    // When found, store a dummy item there to keep the performance of the
+    // hash table intact.
     DataItem* remove(DataItem* item) {
         int key = item->key;
 

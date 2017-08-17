@@ -15,21 +15,63 @@
 #include <iostream>
 #include <vector>
 #include <map>
-//#include <random>
 
 using namespace std;
 
+// Many put
+// Few get
+// faster put
+class weightedSampler1 {
+    map<string, int> dict;
+    int totalWeight;
+public:
+    weightedSampler1() : totalWeight(0) {};
+    // Time:    O(1)
+    // Space:   O(n)
+    void put(const string key, int weight) {
+        totalWeight += weight - dict[key];
+//        dict
+    }
+
+    // Time:    O(n)
+    // Space:   O(1)
+    string get() {
+        int num = rand() % totalWeight + 1;
+        map<string, int>::iterator iter = dict.begin();
+        while (num > 0)
+            num -= (iter++)->second;
+        return iter->first;
+
+    }
+
+    // Time:    O(1)
+    void remove(const string key) {
+        if (!dict.count(key)) return;
+        totalWeight -= dict[key];
+        dict[key] = 0;
+    }
+};
+
+
+
+// Few put
+// Many get
+// faster get
 class weightedSampler {
     map<string, int> dict;
     vector<int> cumWeights;
     vector<string> keys;
-    int totalWeight;
+//    map<string, FnPtr>
 public:
-    weightedSampler(): totalWeight(0) {};
-    //
-    void setWeight(const string key, int weight) {
+    // Time:    O(n)
+    // Space:   O(n) * 3
+    void put(const string key, int weight) {
         if (!dict.count(key)) {
-            cumWeights.push_back(cumWeights.empty() ? weight : weight + cumWeights.back());
+            cumWeights.push_back(
+                    cumWeights.empty()
+                    ? weight
+                    : weight + cumWeights.back()
+            );
             dict[key] = weight;
             keys.push_back(key);
         } else
@@ -42,7 +84,8 @@ public:
 
     // Binary Search
     // Time:    O(log(n))
-    string getRandomObject() {
+    // Space:   O(1)
+    string get() {
         int num = rand() % cumWeights.back() + 1;
         // Binary Search
         int left = 0, right = cumWeights.size() - 1;
@@ -53,5 +96,55 @@ public:
             else right = mid - 1;
         }
         return keys[left];
+    }
+};
+
+
+
+// Many put
+// Few get
+// faster put
+class weightedSampler2 {
+    map<string, int> dict;
+    int totalWeight;
+public:
+    weightedSampler2() : totalWeight(0) {};
+    // Time:    O(1)
+    // Space:   O(n)
+    void put(const string key, int weight) {
+        totalWeight += weight - dict[key];
+    }
+
+    // Time:    O(log(n))
+    // Space:   O(n)
+    string get() {
+        vector<string> keys;
+        vector<int> cumWeights;
+        for (auto& pair : dict) {
+            if (!pair.second) continue;
+            keys.push_back(pair.first);
+            cumWeights.push_back(
+                    cumWeights.empty()
+                    ? pair.second
+                    : pair.second + cumWeights.back());
+        }
+
+        int num = rand() % cumWeights.back() + 1;
+        // Binary Search
+        int left = 0, right = cumWeights.size() - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (num == cumWeights[mid]) return keys[mid];
+            if (num > cumWeights[mid]) left = mid + 1;
+            else right = mid - 1;
+        }
+        return keys[left];
+    }
+
+    // Time:    O(1)
+    void remove(const string& key) {
+        if (!dict.count(key)) return;
+        totalWeight -= dict[key];
+        dict[key] = 0;
     }
 };
