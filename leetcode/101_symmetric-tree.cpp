@@ -38,7 +38,7 @@ struct TreeNode {
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-class Solution {
+class Solution_101 {
 public:
     // Recursive
     // Exp: https://discuss.leetcode.com/topic/4332/my-c-accepted-code-in-16ms-with-iteration-solution

@@ -27,12 +27,38 @@
 
 #include <iostream>
 #include <vector>
+#include <deque>
 
 using namespace std;
 
 class Solution_239 {
 public:
+    // deque
+    // Exp: https://discuss.leetcode.com/topic/19067/clean-c-o-n-solution-using-a-deque
+    // Time:	O(n)
+    // Space:	O(k)
     vector<int> maxSlidingWindow(vector<int> &nums, int k) {
-
+        vector<int> result;
+        if (nums.empty() || k <= 0) return result;
+        deque<int> deq;
+        for (int i = 0; i < nums.size(); i++) {
+            if (!deq.empty() && i == deq.front() + k) deq.pop_front();
+            while (!deq.empty() && nums[deq.back()] < nums[i])
+                deq.pop_back();
+            deq.push_back(i);
+            if (i >= k - 1) result.push_back(nums[deq.front()]);
+        }
+        return result;
     }
 };
+
+
+int main() {
+    Solution_239 sol;
+    vector<int> nums({1,3,-1,-3,5,3,6,7});
+    int k = 3;
+    vector<int> result(sol.maxSlidingWindow(nums, k));
+    for (int num : result)
+        cout << num << "\t";
+    cout << endl;
+}
