@@ -46,9 +46,8 @@ public:
         vector<vector<bool>> visit(m, vector<bool>(n, false));
         for (int i = 0; i < m; i++)
             for (int j = 0; j < n; j++)
-                if (!root->child[board[i][j] - 'a'])
-                    search(board, visit, root->child[board[i][j] - 'a'], i, j, result);
-
+                search(board, visit, root, i, j, result);
+        return result;
     }
 
     void insert(TrieNode *root, string word) {
@@ -60,20 +59,21 @@ public:
         root->word = word;
     }
 
-    void search(vector<vector<char>> &board, vector<vector<bool>> &visit, TrieNode *p, int i, int j,
-                vector<string> &result) {
+    void search(vector<vector<char>>& board, vector<vector<bool>>& visit, TrieNode *p, int i, int j,
+                vector<string>& result) {
         int m = board.size(), n = board[0].size();
         if (i < 0 || j < 0 || i >= m || j >= n) return;
-        if (visit[i][j]) return;
+        p = p->child[board[i][j] - 'a'];
+        if (!p || visit[i][j]) return;
         if (!p->word.empty()) {
             result.push_back(p->word);
             p->word.clear();
         }
         visit[i][j] = true;
-        search(board, visit, p->child[board[i + 1][j] - 'a'], i + 1, j, result);
-        search(board, visit, p->child[board[i - 1][j] - 'a'], i - 1, j, result);
-        search(board, visit, p->child[board[i][j + 1] - 'a'], i, j + 1, result);
-        search(board, visit, p->child[board[i][j - 1] - 'a'], i, j - 1, result);
+        search(board, visit, p, i + 1, j, result);
+        search(board, visit, p, i - 1, j, result);
+        search(board, visit, p, i, j + 1, result);
+        search(board, visit, p, i, j - 1, result);
         visit[i][j] = false;
     }
 };

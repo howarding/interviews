@@ -53,12 +53,12 @@ public:
 };
 
 
-int main() {
-    Solution_239 sol;
-    vector<int> nums({1,3,-1,-3,5,3,6,7});
-    int k = 3;
-    vector<int> result(sol.maxSlidingWindow(nums, k));
-    for (int num : result)
-        cout << num << "\t";
-    cout << endl;
-}
+//int main() {
+//    Solution_239 sol;
+//    vector<int> nums({1,3,-1,-3,5,3,6,7});
+//    int k = 3;
+//    vector<int> result(sol.maxSlidingWindow(nums, k));
+//    for (int num : result)
+//        cout << num << "\t";
+//    cout << endl;
+//}
