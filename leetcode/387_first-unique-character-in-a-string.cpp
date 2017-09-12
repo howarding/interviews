@@ -32,8 +32,8 @@ public:
 };
 
 
-int main() {
-    Solution_387 sol;
-    string s("leetcode");
-    cout << sol.firstUniqChar(s) << endl;
-}
+//int main() {
+//    Solution_387 sol;
+//    string s("leetcode");
+//    cout << sol.firstUniqChar(s) << endl;
+//}

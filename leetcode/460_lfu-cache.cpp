@@ -22,21 +22,62 @@
 //    cache.get(4);       // returns 4
 
 #include <iostream>
+#include <unordered_map>
+#include <list>
 
 using namespace std;
 
+// 3 Hashmap
+// Exp: https://discuss.leetcode.com/topic/69436/concise-c-o-1-solution-using-3-hash-maps-with-explanation
+// Time:	O(1)
+// Space:	O(n)
 class LFUCache {
+    int _capacity;
+    int num;
+    int min_count;
+    unordered_map<int, pair<int, int>> cache;
+    unordered_map<int, list<int>> count_list;
+    unordered_map<int, list<int>::iterator> key_iter;
+
 public:
     LFUCache(int capacity) {
-
+        _capacity = capacity;
+        num = 0;
     }
 
+    // Time:    O(1)
+    // Space:   O(n)
     int get(int key) {
+        if (cache.find(key) == cache.end()) return -1;
+        count_list[cache[key].second].erase(key_iter[key]);
+        cache[key].second++;
+        count_list[cache[key].second].push_front(key);
+        key_iter[key] = count_list[cache[key].second].begin();
 
+        if (count_list[min_count].size() == 0)
+            min_count++;
+        return cache[key].first;
     }
 
+    // Time:    O(1)
+    // Space:   O(n)
     void put(int key, int value) {
-
+        if (_capacity <= 0) return;
+        if (get(key) != -1) {
+            cache[key].first = value;
+            return;
+        }
+        if (num++ == _capacity) {
+            int key2 = count_list[min_count].back();
+            count_list[min_count].pop_back();
+            cache.erase(key2);
+            key_iter.erase(key2);
+            num--;
+        }
+        min_count = 1;
+        cache[key] = {value, 1};
+        count_list[1].push_front(key);
+        key_iter[key] = count_list[1].begin();
     }
 };
 
@@ -46,3 +87,23 @@ public:
  * int param_1 = obj.get(key);
  * obj.put(key,value);
  */
+
+
+//int main() {
+//    int capacity = 2;
+//    LFUCache obj(capacity);
+//    obj.put(1,1);
+//    cout << "pass" << endl;
+//    obj.put(2,2);
+//    cout << "pass" << endl;
+//    cout << obj.get(1) << endl;
+//    obj.put(3,3);
+//    cout << "pass" << endl;
+//    cout << obj.get(2) << endl;
+//    cout << obj.get(3) << endl;
+//    obj.put(4,4);
+//    cout << "pass" << endl;
+//    cout << obj.get(1) << endl;
+//    cout << obj.get(3) << endl;
+//    cout << obj.get(4) << endl;
+//}
