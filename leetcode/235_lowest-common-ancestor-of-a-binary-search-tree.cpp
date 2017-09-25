@@ -32,7 +32,7 @@ struct TreeNode {
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-class Solution {
+class Solution_235 {
 public:
     // Recursive
     // Exp: https://discuss.leetcode.com/topic/18387/3-lines-with-o-1-space-1-liners-alternatives

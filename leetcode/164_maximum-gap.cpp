@@ -44,8 +44,8 @@ public:
 };
 
 
-int main() {
-    Solution_164 sol;
-    vector<int> nums({1,1,1,1});
-    cout << sol.maximumGap(nums) << endl;
-}
+//int main() {
+//    Solution_164 sol;
+//    vector<int> nums({1,1,1,1});
+//    cout << sol.maximumGap(nums) << endl;
+//}

@@ -28,11 +28,15 @@ public:
         reverse(result.begin(), result.end());
         return result;
     }
+
+
+
+    // Time:	O(n)
+    // Space:	O(1)
+    int titleToNumber(string s) {
+        int result = 0;
+        for (char c : s)
+            result = result * 26 + c - 'A' + 1;
+        return result;
+    }
 };
-
-
-//int main() {
-//    int n = 27;
-//    Solution_168 sol;
-//    cout << sol.convertToTitle(n) << endl;
-//}
