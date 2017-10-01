@@ -39,6 +39,38 @@ public:
     // Time:	O(n)
     // Space:	O(1)
     TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q) {
+        if (!root || root == p || root == q) return root;
+        TreeNode *left = lowestCommonAncestor(root->left, p, q);
+        TreeNode *right = lowestCommonAncestor(root->right, p, q);
+        return left ? (right ? root : left) : right;
+    }
+};
 
+
+
+
+//Lowest Common Ancestor of a Binary Search Tree
+class Solution_235 {
+public:
+    // Recursive
+    // Exp: https://discuss.leetcode.com/topic/18387/3-lines-with-o-1-space-1-liners-alternatives
+    // Time:    O(n)    Only 1 path of the tree.
+    // Space:   O(1)
+    TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q) {
+        return (root->val - p->val) * (root->val - q->val) <= 0 ? root :
+               lowestCommonAncestor(root->val > p->val ? root->left : root->right, p, q);
+    }
+
+
+    // Iterative    faster
+    // Time:    O(h)    Only 1 path of the tree.
+    // Space:   O(1)
+    TreeNode *lowestCommonAncestor_1(TreeNode *root, TreeNode *p, TreeNode *q) {
+        while (root) {
+            if ((root->val - p->val) * (root->val - q->val) <= 0)
+                return root;
+            root = root->val > p->val ? root->left : root->right;
+        }
+        return root;
     }
 };

@@ -31,20 +31,20 @@ public:
     // Space:	O(n)
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
         ListNode *head = new ListNode(0);
-        ListNode *p = head;
+        ListNode *node = head;
         int carry = 0;
         while (l1 || l2) {
             int v1 = l1 ? l1->val : 0;
             int v2 = l2 ? l2->val : 0;
             int value = (v1 + v2 + carry) % 10;
             carry = (v1 + v2 + carry) / 10;
-            p->next = new ListNode(value);
-            p = p->next;
+            node->next = new ListNode(value);
+            node = node->next;
             if (l1) l1 = l1->next;
             if (l2) l2 = l2->next;
         }
         if (carry)
-            p->next = new ListNode(carry);
+            node->next = new ListNode(carry);
         return head->next;
     }
 };

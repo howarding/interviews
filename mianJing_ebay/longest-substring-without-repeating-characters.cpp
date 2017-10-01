@@ -26,8 +26,6 @@ public:
         for (int i = 0; i < s.size(); i++) {
             if (chars[s[i]] >= 0) {
                 result = max(result, i - start);
-                if (result == 10)
-                    cout << "i:\t" << i << "\tstart:\t" << start << endl;
                 start = chars[s[i]] + 1;
                 for (int j = 0; j < 256; j++)
                     if (chars[j] < chars[s[i]]) chars[j] = -1;
