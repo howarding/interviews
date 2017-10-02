@@ -19,46 +19,16 @@
 
 using namespace std;
 
-// Exp: 2 stacks, My own
-// Time:	O(1)
-// Space:	O(n)
-class MinStack {
-    stack<int> nums, mins;
-public:
-    /** initialize your data structure here. */
-    MinStack() {
-
-    }
-
-    void push(int x) {
-        nums.push(x);
-        mins.push(mins.empty() ? x : min(mins.top(), x));
-    }
-
-    void pop() {
-        nums.pop();
-        mins.pop();
-    }
-
-    int top() {
-        return nums.top();
-    }
-
-    int getMin() {
-        return mins.top();
-    }
-};
-
-
+// 1 stack
 // Exp: https://discuss.leetcode.com/topic/4953/share-my-java-solution-with-only-one-stack
 // Time:	O(1)
 // Space:	O(n)
-class MinStack_1 {
+class MinStack {
     stack<long> offsets;
     long min_num;
 public:
     /** initialize your data structure here. */
-    MinStack_1() {
+    MinStack() {
     }
 
     void push(int x) {
@@ -87,6 +57,38 @@ public:
         return min_num;
     }
 };
+
+
+// Exp: 2 stacks, My own
+// Time:	O(1)
+// Space:	O(n)
+class MinStack1 {
+    stack<int> nums, mins;
+public:
+    /** initialize your data structure here. */
+    MinStack1() {
+
+    }
+
+    void push(int x) {
+        nums.push(x);
+        mins.push(mins.empty() ? x : min(mins.top(), x));
+    }
+
+    void pop() {
+        nums.pop();
+        mins.pop();
+    }
+
+    int top() {
+        return nums.top();
+    }
+
+    int getMin() {
+        return mins.top();
+    }
+};
+
 
 /**
  * Your MinStack object will be instantiated and called as such:

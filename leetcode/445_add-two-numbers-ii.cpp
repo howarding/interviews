@@ -61,7 +61,7 @@ public:
             l2 = l2->next;
         }
         int carry = 0;
-        ListNode *tail = NULL;
+        ListNode *tail = nullptr;
         while (!sta.empty()) {
             int val = sta.top();
             sta.pop();

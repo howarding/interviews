@@ -17,30 +17,23 @@ using namespace std;
 
 class Solution {
 public:
-    // Exp: My own method, takes time. 56ms
+    // HashMap
     // Time:	O(n)
-    // Space:	O(n)
+    // Space:	O(1)
     string reverseVowels(string s) {
-        string result;
-        if (s.empty()) return result;
-        unordered_set<char> vowels({'a', 'e', 'i', 'o', 'u'});
-        vector<char> chars;
-        for (char c : s)
-            chars.push_back(c);
-        int i = 0, j = chars.size() - 1;
+        unordered_set<char> vowels({'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'});
+        int i = 0, j = s.size() - 1;
         while (i <= j) {
-            if (vowels.find(chars[i]) != vowels.end() && vowels.find(chars[j]) != vowels.end()) {
-                swap(chars[i++], chars[j--]);
+            if (vowels.find(s[i]) != vowels.end() && vowels.find(s[j]) != vowels.end()) {
+                swap(s[i++], s[j--]);
                 continue;
             }
-            if (vowels.find(chars[i]) == vowels.end())
+            if (vowels.find(s[i]) == vowels.end())
                 i++;
-            if (vowels.find(chars[j]) == vowels.end())
+            if (vowels.find(s[j]) == vowels.end())
                 j--;
         }
-        for (char c : chars)
-            result += c;
-        return result;
+        return s;
     }
 
 

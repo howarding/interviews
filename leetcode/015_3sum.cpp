@@ -26,7 +26,7 @@ public:
         if (nums.size() < 3)
             return {};
         sort(nums.begin(), nums.end());
-        vector<vector<int> > result;
+        vector<vector<int>> result;
         for (int i = 0; i < nums.size() - 2; i++) {
             int target = -nums[i];
             int left = i + 1, right = nums.size() - 1;

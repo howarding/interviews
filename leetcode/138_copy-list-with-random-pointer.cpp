@@ -26,17 +26,17 @@ struct RandomListNode {
 class Solution_138 {
 public:
     RandomListNode *copyRandomList(RandomListNode *head) {
-        unordered_map<RandomListNode *, RandomListNode *> old2new;
+        unordered_map<RandomListNode*, RandomListNode*> old2new;
         RandomListNode *dummy = new RandomListNode(-1);
         RandomListNode *tmp = head;
         RandomListNode *curr = dummy;
         while (tmp) {
             RandomListNode *newNode = new RandomListNode(tmp->label);
             old2new[tmp] = newNode;
-            curr->next = newNode;
-            curr = curr->next;
+            curr = curr->next = newNode;
             tmp = tmp->next;
         }
+
         tmp = head;
         while (tmp) {
             if (tmp->random) {

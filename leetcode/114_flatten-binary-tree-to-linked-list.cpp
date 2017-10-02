@@ -47,25 +47,44 @@ struct TreeNode {
  */
 class Solution_114 {
 public:
-    // InOrder (My own)
+    // preOrder (My own)
     // Time:	O(n)
     // Space:	O(1)
     void flatten(TreeNode *root) {
         if (!root) return;
         TreeNode* pre = new TreeNode(-1);
-        inOrder(root, pre);
+        preOrder(root, pre);
     }
 
-    void inOrder(TreeNode* node, TreeNode* &pre) {
+    void preOrder(TreeNode* node, TreeNode* &pre) {
         if (!node) return;
         pre->left = nullptr;
         pre->right = node;
         pre = node;
         TreeNode* right = node->right;
-        inOrder(node->left, pre);
-        inOrder(right, pre);
+        preOrder(node->left, pre);
+        preOrder(right, pre);
     }
 
+
+    // Iterative
+    // Exp: https://discuss.leetcode.com/topic/9933/16-lines-iterative-c-solution
+    void flatten2(TreeNode *root) {
+        while(root){
+            if(root->left == NULL)
+                root = root->right;
+            else {
+                if(root->right){
+                    TreeNode *l = root->left;
+                    while(l->right) l = l->right;
+                    l->right = root->right;
+                }
+                root->right = root->left;
+                root->left = NULL;
+                root = root->right;
+            }
+        }
+    }
 
 
     // PostOrder

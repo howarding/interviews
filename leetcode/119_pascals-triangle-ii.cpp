@@ -21,12 +21,8 @@ public:
         if (rowIndex < 0) return result;
         result.push_back(1);
         for (int i = 0; i < rowIndex; i++) {
-            int n = result.size(), pre = result[0];
-            for (int j = 1; j < n; j++) {
-                int tmp = result[j];
-                result[j] += pre;
-                pre = tmp;
-            }
+            for (int j = result.size() - 1; j > 0; j--)
+                result[j] += result[j-1];
             result.push_back(1);
         }
         return result;
