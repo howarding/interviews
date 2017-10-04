@@ -236,16 +236,52 @@ void insert(TreeNode *&root, TreeNode *node) {
 }
 
 
-// remove a node with val == key from BST and return the removed node
-// Exp: http://quiz.geeksforgeeks.org/binary-search-tree-set-2-delete/
-// not finished.
-TreeNode *remove(TreeNode *node, TreeNode *parent, int key) {
-    if (!node) return NULL;
-    if (node->val < key)
-        return remove(node->right, node, key);
-    if (node->val > key)
-        return remove(node->left, node, key);
-    if (!node->left) {
-        TreeNode *tmp = node;
+// delete a node with val == key from BST and return the root node
+// Recursive
+// Exp: https://discuss.leetcode.com/topic/65792/recursive-easy-to-understand-java-solution
+// Time:	O(log(n))
+// Space:	O(1)
+TreeNode* deleteNode(TreeNode* root, int key) {
+    if (!root) return root;
+    if (root->val < key) root->right = deleteNode(root->right, key);
+    else if (root->val > key) root->left = deleteNode(root->left, key);
+    else {
+        if (!root->left) return root->right;
+        if (!root->right) return root->left;
+        TreeNode* node = root->right;
+        while (node->left) node = node->left;
+        node->left = root->left;
+        return root->right;
     }
+    return root;
+}
+
+
+// Iterative
+// Exp: https://discuss.leetcode.com/topic/67962/iterative-solution-in-java-o-h-time-and-o-1-space
+// Time:	O(log(n))
+// Space:	O(1)
+
+TreeNode* deleteRootNode(TreeNode* node) {
+    if (!node) return node;
+    if (!node->left) return node->right;
+    if (!node->right) return node->left;
+    TreeNode* tmp = node->right;
+    while (tmp->left) tmp = tmp->left;
+    tmp->left = node->left;
+    return node->right;
+}
+
+TreeNode* deleteNode1(TreeNode* root, int key) {
+    if (!root) return root;
+    TreeNode *parent = nullptr, *node = root;
+    while (node && node->val != key) {
+        parent = node;
+        if (node->val > key) node = node->left;
+        else node = node->right;
+    }
+    if (!parent) return deleteRootNode(node);
+    if (parent->left == node) parent->left = deleteRootNode(node);
+    else parent->right = deleteRootNode(node);
+    return root;
 }

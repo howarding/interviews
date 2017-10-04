@@ -25,6 +25,7 @@ public:
 
     }
 
+    // Time:    O(n)
     /** Push element x onto stack. */
     void push(int x) {
         que.push(x);
@@ -35,6 +36,7 @@ public:
         }
     }
 
+    // Time:    O(1)
     /** Removes the element on top of the stack and returns that element. */
     int pop() {
         int val = que.front();
@@ -42,11 +44,13 @@ public:
         return val;
     }
 
+    // Time:    O(1)
     /** Get the top element. */
     int top() {
         return que.front();
     }
 
+    // Time:    O(1)
     /** Returns whether the stack is empty. */
     bool empty() {
         return que.empty();

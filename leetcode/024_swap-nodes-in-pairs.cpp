@@ -26,6 +26,9 @@ struct ListNode {
  */
 class Solution_024 {
 public:
+    // Iterative
+    // Time:	O(n)
+    // Space:	O(1)
     ListNode* swapPairs(ListNode* head) {
         if (!head || !head->next) return head;
         ListNode* dummy = new ListNode(-1);
@@ -39,5 +42,17 @@ public:
             node = node->next->next;
         }
         return dummy->next;
+    }
+
+
+    // Recursive
+    // Time:	O(n)
+    // Space:	O(1)
+    ListNode* swapPairs1(ListNode* head) {
+        if (!head || !head->next) return head;
+        ListNode* result = head->next;
+        head->next = swapPairs1(head->next->next);
+        result->next = head;
+        return result;
     }
 };

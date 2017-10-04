@@ -78,7 +78,7 @@ public:
     string serialize1(TreeNode *root) {
         string result;
         if (!root) return result;
-        queue<TreeNode *> que;
+        queue<TreeNode*> que;
         result = to_string(root->val);
         que.push(root);
         while (!que.empty()) {

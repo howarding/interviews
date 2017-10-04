@@ -28,6 +28,26 @@ public:
     // Space:	O(n)
     TreeNode* sortedArrayToBST(vector<int>& nums) {
         if(nums.empty()) return nullptr;
+        TreeNode* result = helper(nums, 0, nums.size());
+        return result;
+    }
+
+    TreeNode* helper(vector<int>& nums, int left, int right) {
+        if (left == right) return nullptr;
+        int mid = (left + right) / 2;
+        TreeNode* result = new TreeNode(nums[mid]);
+        result->left = helper(nums, left, mid);
+        result->right = helper(nums, mid + 1, right);
+        return result;
+    }
+
+
+
+    // Vector Iterator
+    // Time:	O(n)
+    // Space:	O(n)
+    TreeNode* sortedArrayToBST1(vector<int>& nums) {
+        if(nums.empty()) return nullptr;
         TreeNode* result;
         vector<int>::iterator front = nums.begin(), back = nums.end();
         dfs(result, front, back);
@@ -41,4 +61,6 @@ public:
         dfs(p->left, front, mid);
         dfs(p->right, mid + 1, back);
     }
+
+
 };
