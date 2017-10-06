@@ -27,8 +27,6 @@ using namespace std;
 class Solution_212 {
 public:
     // Trie, Backtracking
-    // Exp: http://www.jiuzhang.com/solutions/word-search-ii/
-
     struct TrieNode {
         string word = "";
         vector<TrieNode *> child;

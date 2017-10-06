@@ -57,10 +57,10 @@ public:
     // Space:	O(V)
     bool topological_sort_dfs() {
         stack<int> stk;
-        vector<bool> visited(V, false), onpath(V, false);
+        vector<bool> visited(V, false), onPath(V, false);
 
         for (int i = 0; i < V; i++)
-            if (!visited[i] && !topological_sort_helper(i, visited, onpath, stk))
+            if (!visited[i] && !topological_sort_helper(i, visited, onPath, stk))
                 return false;
 
         while (!stk.empty()) {
@@ -70,13 +70,14 @@ public:
         return true;
     }
 
-    bool topological_sort_helper(int node, vector<bool> &visited, vector<bool> onpath, stack<int> &stk) {
-        onpath[node] = visited[node] = true;
+    bool topological_sort_helper(int node, vector<bool> &visited, vector<bool>& onPath, stack<int> &stk) {
+        onPath[node] = visited[node] = true;
         for (int child : adj[node])
-            if (onpath[child] || (!visited[child] && !topological_sort_helper(child, visited, onpath, stk)))
+            if (onPath[child] || (!visited[child] && !topological_sort_helper(child, visited, onPath, stk)))
                 return false;
         stk.push(node);
-        return !(onpath[node] = false);
+        onPath[node] = false;
+        return true;
     }
 
 

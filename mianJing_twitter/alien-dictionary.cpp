@@ -45,7 +45,7 @@
 
 using namespace std;
 
-class Solution_269 {
+class Solution_ad {
 public:
     // Topological Sort, BFS, queue.
     // Time:	O(V + E)
