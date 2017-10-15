@@ -25,7 +25,7 @@ struct ListNode {
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution {
+class Solution_206 {
 public:
     // Exp: https://discuss.leetcode.com/topic/13268/in-place-iterative-and-recursive-java-solution
 
@@ -35,6 +35,7 @@ public:
     ListNode *reverseList(ListNode *head) {
         ListNode *p = nullptr;
         while (head) {
+            // Need at least 3 pointers
             ListNode *tmp = head->next;
             head->next = p;
             p = head;

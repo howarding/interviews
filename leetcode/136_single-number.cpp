@@ -5,11 +5,13 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_set>
 
 using namespace std;
 
 class Solution_136 {
 public:
+    // XOR
     // Exp: https://discuss.leetcode.com/topic/1916/my-o-n-solution-using-xor
     // Time:	O(n)
     // Space:	O(1)
@@ -18,5 +20,19 @@ public:
         for (int num : nums)
             result ^= num;
         return result;
+    }
+
+
+    // Hash Table
+    // Time:	O(n)
+    // Space:	O(n)
+    int singleNumber1(vector<int> &nums) {
+        unordered_set<int> numbers;
+        for (int num : nums)
+            if (numbers.find(num) == numbers.end())
+                numbers.insert(num);
+            else
+                numbers.erase(num);
+        return *numbers.begin();
     }
 };

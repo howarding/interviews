@@ -28,6 +28,7 @@ public:
     // Time:	O(1)
     // Space:	O(1)
     void deleteNode(ListNode *node) {
-        *node = *(node->next);
+        node->val = node->next->val;
+        node->next = node->next->next;
     }
 };

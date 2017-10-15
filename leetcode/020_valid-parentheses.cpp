@@ -32,8 +32,8 @@ public:
 };
 
 
-int main() {
-    string s = "()";
-    Solution_020 sol;
-    cout << sol.isValid(s) << endl;
-}
+//int main() {
+//    string s = "()";
+//    Solution_020 sol;
+//    cout << sol.isValid(s) << endl;
+//}

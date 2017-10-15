@@ -18,7 +18,7 @@ public:
     // Hash Table
     // Exp: https://discuss.leetcode.com/topic/24739/c-code-in-9-lines
     // Time:	O(n)
-    // Space:	O(n)
+    // Space:	O(1)
     int lengthOfLongestSubstring(string s) {
         if (s.size() <= 1) return s.size();
         vector<int> ind(256, -1);

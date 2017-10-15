@@ -26,15 +26,10 @@ struct TreeNode {
 class Solution_104 {
 public:
     // Exp: DFS
-    // Time:	O(h)
+    // Time:	O(n)
     // Space:	O(1)
     int maxDepth(TreeNode *root) {
-        return helper(root, 0);
+        if (!root) return 0;
+        return max(maxDepth(root->left), maxDepth(root->right)) + 1;
     }
-
-    int helper(TreeNode *node, int count) {
-        if (!node) return count;
-        return max(helper(node->left, count + 1), helper(node->right, count + 1));
-    }
-
 };
