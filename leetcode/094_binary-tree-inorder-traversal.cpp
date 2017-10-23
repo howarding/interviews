@@ -26,7 +26,7 @@ struct TreeNode {
 };
 
 /**
- * Definition for a binary tree node.
+ * Definition for a binary tree root.
  * struct TreeNode {
  *     int val;
  *     TreeNode *left;
@@ -36,27 +36,21 @@ struct TreeNode {
  */
 class Solution_094 {
 public:
-    // Iterative
+    // Iterative, Stack
     // Time:	O(n)
     // Space:	O(n)
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> result;
-        if (!root) return result;
         stack<TreeNode*> stk;
-        TreeNode* node = root;
-        while (node) {
-            stk.push(node);
-            node = node ->left;
-        }
-
-        while (!stk.empty()) {
-            TreeNode* node = stk.top();
-            stk.pop();
-            result.push_back(node->val);
-            node = node->right;
-            while (node) {
-                stk.push(node);
-                node = node->left;
+        while (root || !stk.empty()) {
+            if (root) {
+                stk.push(root);
+                root = root->left;
+            } else {
+                root = stk.top();
+                stk.pop();
+                result.push_back(root->val);
+                root = root->right;
             }
         }
         return result;

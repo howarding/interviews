@@ -32,7 +32,7 @@ struct ListNode {
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution {
+class Solution_025 {
 public:
     // Reverse group by group
     // Time:	O(n)

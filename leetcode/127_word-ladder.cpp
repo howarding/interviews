@@ -29,6 +29,9 @@ using namespace std;
 
 class Solution_127 {
 public:
+    // BFS
+    // Time:	O(n)
+    // Space:	O(n)
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
         unordered_set<string> words(wordList.begin(), wordList.end());
         words.insert(endWord);

@@ -39,8 +39,6 @@ public:
     bool hasPathSum(TreeNode* root, int sum) {
         if (!root) return false;
         sum -= root->val;
-        bool left = root->left ? hasPathSum(root->left, sum) : false;
-        bool right = root->right ? hasPathSum(root->right, sum) : false;
-        return !root->left && !root->right ? sum == 0 : left || right;
+        return !root->left && !root->right ? sum == 0 : hasPathSum(root->left, sum) || hasPathSum(root->right, sum);
     }
 };

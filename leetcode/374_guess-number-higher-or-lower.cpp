@@ -29,19 +29,20 @@ int guess(int num, int real) {
 
 class Solution_374 {
 public:
+    // Binary Search
     // Exp: https://discuss.leetcode.com/topic/51034/short-java-code-using-binary-search
     // Time:	O(log(n))
     // Space:	O(1)
     int guessNumber(int n, int real) {
-        int i = 1, j = n, mid;
-        while (i <= j) {
-            mid = ((j - i) >> 1) + i;
+        int left = 1, right = n, mid;
+        while (left <= right) {
+            mid = ((right - left) >> 1) + left;
             int res = guess(mid, real);
             if (res == 0) return mid;
             if (res == 1)
-                i = mid + 1;
+                left = mid + 1;
             else
-                j = mid - 1;
+                right = mid - 1;
         }
         return -1;
     }

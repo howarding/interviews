@@ -39,5 +39,10 @@ using namespace std;
 //    int b = 0x7FFFFFFF; // 01111111 11111111 11111111 11111111 = INT_MAX
 //    int c = 0x80000000; // 10000000 00000000 00000000 00000000 = INT_MIN
 //    cout << a << '\t' << b << '\t' << c << endl;
-
+//    char c = 'a';
+//    cout << c << endl;
+//    c ^= 256;
+//    cout << (c == 'a') << endl;
+//    c ^= 256;
+//    cout << (c == 'a') << endl;
 //}

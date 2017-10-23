@@ -25,24 +25,50 @@ struct RandomListNode {
  */
 class Solution_138 {
 public:
+    // 1 pass!!!    Faster
+    // Exp: https://segmentfault.com/a/1190000009675203
+    // Time:	O(n)
+    // Space:	O(1)
     RandomListNode *copyRandomList(RandomListNode *head) {
-        unordered_map<RandomListNode*, RandomListNode*> old2new;
+        unordered_map<RandomListNode*, RandomListNode*> dict;
         RandomListNode *dummy = new RandomListNode(-1);
-        RandomListNode *tmp = head;
+        RandomListNode *node = head;
         RandomListNode *curr = dummy;
-        while (tmp) {
-            RandomListNode *newNode = new RandomListNode(tmp->label);
-            old2new[tmp] = newNode;
-            curr = curr->next = newNode;
-            tmp = tmp->next;
+        while (node) {
+            if (dict.find(node) == dict.end())
+                dict[node] = new RandomListNode(node->label);
+            curr = curr->next = dict[node];
+            if (node->random) {
+                if (dict.find(node->random) == dict.end())
+                    dict[node->random] = new RandomListNode(node->random->label);
+                curr->random = dict[node->random];
+            }
+            node = node->next;
+        }
+        return dummy->next;
+    }
+
+
+    // 2 passes
+    // Time:	O(n)
+    // Space:	O(1)
+    RandomListNode *copyRandomList1(RandomListNode *head) {
+        unordered_map<RandomListNode*, RandomListNode*> dict;
+        RandomListNode *dummy = new RandomListNode(-1);
+        RandomListNode *node = head;
+        RandomListNode *curr = dummy;
+        while (node) {
+            dict[node] = new RandomListNode(node->label);
+            curr = curr->next = dict[node];
+            node = node->next;
         }
 
-        tmp = head;
-        while (tmp) {
-            if (tmp->random) {
-                old2new[tmp]->random = old2new[tmp->random];
+        node = head;
+        while (node) {
+            if (node->random) {
+                dict[node]->random = dict[node->random];
             }
-            tmp = tmp->next;
+            node = node->next;
         }
         return dummy->next;
     }

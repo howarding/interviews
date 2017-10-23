@@ -20,4 +20,35 @@ public:
         }
         return low;
     }
+
+    // Set up an error threshold, when (high - low) < err, return.
+    // Time:    O(log(x/err))
+    double sqrt_double(double x) {
+        // x > 1
+        double err = 1e-6;
+        double low = 1, high = x;
+        while (low < high - err) {
+            double mid = low + (high - low) / 2;
+            double divider = x / mid;
+            if (mid == divider) return mid;
+            if (mid < divider) low = mid;
+            else high = mid;
+        }
+        return high;
+    }
+
+    // Time:    O(log(x/err))
+    double sqrt_double_1(double x) {
+        // x < 1
+        double err = 1e-6;
+        double low = 1, high = x;
+        while (low < high - err) {
+            double mid = low + (high - low) / 2;
+            double square = mid * mid;
+            if (square == x) return mid;
+            if (square < x) low = mid;
+            else high = mid;
+        }
+        return high;
+    }
 };

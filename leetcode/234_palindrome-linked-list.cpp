@@ -4,6 +4,7 @@
 //Could you do it in O(n) time and O(1) space?
 
 #include <iostream>
+#include <stack>
 
 using namespace std;
 
@@ -24,6 +25,7 @@ struct ListNode {
  */
 class Solution_234 {
 public:
+    // 2Pointers,   reverse half list
     // Exp: https://discuss.leetcode.com/topic/18304/share-my-c-solution-o-n-time-and-o-1-memory
     // Time:	O(n)
     // Space:	O(1)
@@ -50,7 +52,7 @@ public:
     ListNode *reverseList(ListNode *head) {
         ListNode *pre = NULL;
         ListNode *next = NULL;
-        while (head != NULL) {
+        while (!head) {
             next = head->next;
             head->next = pre;
             pre = head;
@@ -59,31 +61,27 @@ public:
         return pre;
     }
 
-    // Reverse half list.   My own.   Work but TLE
+
+
+    // 2Pointers,   Stack
     // Time:	O(n)
-    // Space:	O(1)
+    // Space:	O(n)
     bool isPalindrome1(ListNode *head) {
-        if (!head) return true;
-        int count = 0;
-        ListNode *p = head, *q = nullptr, *tmp = nullptr;
-        while (p) {
-            count++;
-            p = p->next;
+        if (!head || !head->next) return true;
+        stack<int> stk;
+        ListNode* dummy = new ListNode(-1);
+        dummy->next = head;
+        ListNode *slow = dummy, *fast = dummy;
+        while (fast->next && fast->next->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+            stk.push(slow->val);
         }
-        p = head;
-        for (int i = 0; i < count / 2; i++)
-            p = p->next;
-        q = p->next;
-        while (q) {
-            tmp = q->next;
-            q->next = p;
-            p = q;
-            q = tmp;
-        }
-        for (int i = 0; i < count / 2; i++) {
-            if (head->val != p->val) return false;
-            head = head->next;
-            p = p->next;
+        slow = fast->next ? slow->next->next : slow->next;
+        while (!stk.empty()) {
+            if (stk.top() != slow->val) return false;
+            stk.pop();
+            slow = slow->next;
         }
         return true;
     }

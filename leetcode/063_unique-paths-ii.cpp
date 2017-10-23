@@ -23,6 +23,9 @@ using namespace std;
 
 class Solution_063 {
 public:
+    // DP (My own)
+    // Time:	O(mn)
+    // Space:	O(n)
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
         if (obstacleGrid.empty() || obstacleGrid[0][0] == 1) return 0;
         int m = obstacleGrid.size(), n = obstacleGrid[0].size();

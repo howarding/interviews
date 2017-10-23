@@ -21,12 +21,57 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_map>
+#include <stack>
 
 using namespace std;
 
 class Solution_496 {
 public:
+    // Stack + Hashmap
+    // Exp: https://leetcode.com/problems/next-greater-element-i/solution/
+    // Time:	O(n)
+    // Space:	O(n)
     vector<int> nextGreaterElement(vector<int>& findNums, vector<int>& nums) {
+        stack<int> stk;
+        unordered_map<int, int> dict;
+        vector<int> result;
+        for (int num : nums) {
+            while (!stk.empty() && num > stk.top()) {
+                dict[stk.top()] = num;
+                stk.pop();
+            }
+            stk.push(num);
+        }
+        while (!stk.empty()) {
+            dict[stk.top()] = -1;
+            stk.pop();
+        }
+        for (int num : findNums)
+            result.push_back(dict[num]);
+        return result;
+    }
 
+
+
+    // Hashmap
+    // Exp: https://leetcode.com/problems/next-greater-element-i/solution/
+    // Time:	O(mn)
+    // Space:	O(n)
+    vector<int> nextGreaterElement1(vector<int>& findNums, vector<int>& nums) {
+        vector<int> result(findNums.size(), 0);
+        unordered_map<int, int> dict;
+        for (int i = 0; i < nums.size(); i++)
+            dict[nums[i]] = i;
+        int j;
+        for (int i = 0; i < findNums.size(); i++) {
+            for (j = dict[findNums[i]]; j < nums.size(); j++)
+                if (findNums[i] < nums[j]) {
+                    result[i] = nums[j];
+                    break;
+                }
+            if (j == nums.size()) result[i] = -1;
+        }
+        return result;
     }
 };
