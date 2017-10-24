@@ -2,7 +2,7 @@
 //
 //For example, given
 //s = "leetcode",
-//dict = ["leet", "code"].
+//words = ["leet", "code"].
 //
 //Return true because "leetcode" can be segmented as "leet code".
 
@@ -20,13 +20,13 @@ public:
     // Time:	O(n^2)
     // Space:	O(n)
     bool wordBreak(string s, vector<string> &wordDict) {
-        unordered_set<string> dict(wordDict.begin(), wordDict.end());
+        unordered_set<string> words(wordDict.begin(), wordDict.end());
         vector<bool> f(s.size() + 1, false);
         f[0] = true;
         for (int i = 1; i <= s.size(); i++)
             for (int j = i - 1; j >= 0; j--)
                 // for any j < i, if f[j] is true and s[j to i] in wordDict, f[i] is true
-                if (f[j] && dict.find(s.substr(j, i - j)) != dict.end()) {
+                if (f[j] && words.find(s.substr(j, i - j)) != words.end()) {
                     f[i] = true;
                     break;
                 }
@@ -37,7 +37,7 @@ public:
     // Time:	O(n^2)
     // Space:	O(n)
     bool wordBreak1(string s, vector<string>& wordDict) {
-        unordered_set<string> dict(wordDict.begin(), wordDict.end());
+        unordered_set<string> words(wordDict.begin(), wordDict.end());
         vector<bool> visited(s.size(), false);
         queue<int> que;
         que.push(0);
@@ -46,7 +46,7 @@ public:
             que.pop();
             if (visited[start]) continue;
             for (int i = 1; i <= s.size() - start; i++) {
-                if (dict.find(s.substr(start, i)) != dict.end()) {
+                if (words.find(s.substr(start, i)) != words.end()) {
                     if (start + i == s.size()) return true;
                     que.push(start + i);
                 }
