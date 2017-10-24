@@ -122,21 +122,21 @@ public:
 
 
 
-int main()
-{
-//    int k = 5;
-//    History h(k);
-    int k = 2;
-    Browser h(k);
-    cout << "before visits:\n";
-    h.visit("nytimes.com");
-    h.visit("guardian.co.uk");
-    h.visit("www.google.com");
-    h.visit("dev.ibm.com");
-    h.visit("www.google.com");
-    h.visit("www.google.com");
-    h.visit("www.google.com");
+//int main()
+//{
+////    int k = 5;
+////    History h(k);
+//    int k = 2;
+//    Browser h(k);
+//    cout << "before visits:\n";
+//    h.visit("nytimes.com");
 //    h.visit("guardian.co.uk");
-    cout << "after  visits:\n";
-    h.printTopK();
-}
+//    h.visit("www.google.com");
+//    h.visit("dev.ibm.com");
+//    h.visit("www.google.com");
+//    h.visit("www.google.com");
+//    h.visit("www.google.com");
+////    h.visit("guardian.co.uk");
+//    cout << "after  visits:\n";
+//    h.printTopK();
+//}

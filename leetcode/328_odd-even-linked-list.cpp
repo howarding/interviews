@@ -36,14 +36,14 @@ public:
     ListNode* oddEvenList(ListNode* head) {
         if (!head || !head->next) return head;
         ListNode* oddDummy = new ListNode(-1);
-        ListNode* eventDummy = new ListNode(-1);
-        ListNode *node = head, *odd = oddDummy, *even = eventDummy;
+        ListNode* evenDummy = new ListNode(-1);
+        ListNode *node = head, *odd = oddDummy, *even = evenDummy;
         while (node) {
             odd = odd->next = node;
             even = even->next = node->next;
             node = node->next ? node->next->next : node->next;
         }
-        odd->next = eventDummy->next;
+        odd->next = evenDummy->next;
         return oddDummy->next;
     }
 };
