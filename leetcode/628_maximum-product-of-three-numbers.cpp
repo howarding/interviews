@@ -11,7 +11,7 @@
 //    2. Multiplication of any three numbers in the input won't exceed the range of 32-bit signed integer.
 
 #include <iostream>
-#include <stack>
+#include <vector>
 
 using namespace std;
 

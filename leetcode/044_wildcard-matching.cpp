@@ -60,6 +60,8 @@ public:
 //int main() {
 //    string s = "zacabz";
 //    string p = "*a?b*";
+//    string s = "aab";
+//    string p = "c*a*b";
 //    Solution_044 sol;
 //    cout << sol.isMatch(s, p) << endl;
 //}
