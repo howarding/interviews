@@ -82,6 +82,7 @@ struct TreeNode {
  */
 class Solution_314 {
 public:
+    // BFS + Hashmap
     // Exp: https://discuss.leetcode.com/topic/31109/my-solution-in-c
     // Time:	O(n)
     // Space:	O(n)

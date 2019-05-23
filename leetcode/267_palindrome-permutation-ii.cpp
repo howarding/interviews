@@ -16,7 +16,7 @@
 
 using namespace std;
 
-class Solution {
+class Solution_267 {
 public:
     // 266 + 47
     // Exp: https://discuss.leetcode.com/topic/22214/ac-java-solution-with-explanation
@@ -44,8 +44,8 @@ public:
 
     void getPerm(vector<char> half, string mid, int i, vector<string> &result) {
         if (half.empty() || i == half.size() - 1) {
-            for (int k = half.size() - 1; k >= 0; k--)
-                mid = half[k] + mid + half[k];
+            mid.insert(mid.end(), half.begin(), half.end());
+            mid.insert(mid.begin(), half.rbegin(), half.rend());
             result.push_back(mid);
             return;
         }
@@ -56,3 +56,12 @@ public:
         }
     }
 };
+
+
+//int main() {
+//    Solution_267 sol;
+//    string s = "aabb";
+//    vector<string> result(sol.generatePalindromes(s));
+//    for (string& ele: result)
+//        cout << ele << endl;
+//}

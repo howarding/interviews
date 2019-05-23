@@ -10,28 +10,26 @@ using namespace std;
 
 class Solution_228 {
 public:
+    // Sim to LC163: Missing Ranges
     // Exp: https://discuss.leetcode.com/topic/17117/10-line-c-easy-understand/4
     // Time:	O(n)
     // Space:	O(1)
-    vector<string> summaryRanges(vector<int> &nums) {
+    vector<string> summaryRanges(vector<int>& nums) {
         vector<string> result;
         if (nums.empty()) return result;
-        int n = nums.size();
-        int i = 1;
-        int start = nums[0];
-        while (i < n) {
-            if (nums[i] > nums[i - 1] + 1) {
-                string ele =
-                    nums[i - 1] == start ?
-                    to_string(start) :
-                    to_string(start) + "->" + to_string(nums[i - 1]);
-                result.push_back(ele);
-                start = nums[i];
+        int start = nums[0], end = nums[0];
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] == nums[i-1] + 1) end++;
+            else {
+                result.push_back(getRange(start, end));
+                start = end = nums[i];
             }
-            i++;
         }
-        string ele = nums[n - 1] == start ? to_string(start) : to_string(start) + "->" + to_string(nums[n - 1]);
-        result.push_back(ele);
+        result.push_back(getRange(start, end));
         return result;
+    }
+
+    string getRange(int start, int end) {
+        return start == end ? to_string(end) : to_string(start) + "->" + to_string(end);
     }
 };

@@ -29,7 +29,7 @@ public:
     // Hash Table
     // Exp: https://discuss.leetcode.com/topic/67594/concise-hash-map-o-n-2-solution-with-explanation-c
     // Time:	O(n^2)
-    // Space:	O(n)
+    // Space:	O(n^2)
     int fourSumCount(vector<int> &A, vector<int> &B, vector<int> &C, vector<int> &D) {
         map<int, int> m1, m2;
         fillMap(A, B, m1);

@@ -5,39 +5,52 @@
 
 using namespace std;
 
+// 1. Function object CLASS
+struct Cmp_less {
+    bool operator()(const pair<string, int>& a, const pair<string, int>& b) {
+        return a.second < b.second;
+    }
+};
+
+struct Cmp_greater {
+    bool operator()(const pair<string, int>& a, const pair<string, int>& b) {
+        return a.second > b.second;
+    }
+};
+
+
+// 2. Function pointer
+static bool compare_less(const pair<string, int>& a, const pair<string, int>& b) {
+    return a.second < b.second;
+}
+
+static bool compare_greater(const pair<string, int>& a, const pair<string, int>& b) {
+    return a.second > b.second;
+}
+
+
 class Heaps {
-
-    struct cmp_less {
-        bool operator()(pair<string, int> a, pair<string, int> b) {
-            return a.second < b.second;
-        }
-    };
-
-    struct cmp_greater {
-        bool operator()(pair<string, int> a, pair<string, int> b) {
-            return a.second > b.second;
-        }
-    };
-
-    priority_queue<pair<string, int>, vector<pair<string, int>>, cmp_less> max_heap;
-    priority_queue<pair<string, int>, vector<pair<string, int>>, cmp_greater> min_heap;
 
     vector<pair<string, int>> result;
 
 public:
-    static bool compare_less(pair<string, int> a, pair<string, int> b) {
-        return a.second < b.second;
-    }
-
-    static bool compare_greater(pair<string, int> a, pair<string, int> b) {
-        return a.second > b.second;
-    }
-
     void sort_result() {
         // Ascending order
         sort(result.begin(), result.end(), compare_less);
         // Descending order
         sort(result.begin(), result.end(), compare_greater);
+
+        // Function object
+        Cmp_less cmp_less;
+        Cmp_greater cmp_greater;
+        sort(result.begin(), result.end(), cmp_less);
+        sort(result.begin(), result.end(), cmp_greater);
+
+
+
+        // heaps
+        priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_less> max_heap;
+        priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_greater> min_heap;
     }
 };
 
@@ -49,12 +62,20 @@ public:
 //                                      {"e", 0},
 //                                      {"c", 2},
 //                                      {"d", -1}});
-//    sort(points.begin(), points.end(), heaps.compare_less);
-//    for (auto &point : points)
-//        cout << point.first << " ";
-//    cout << endl;
-//    sort(points.begin(), points.end(), !(heaps.compare_less));
-//    for (auto& point : points)
-//        cout << point.first << " ";
-//    cout << endl;
+//
+//    sort(points.begin(), points.end(), compare_less);
+//    sort(points.begin(), points.end(), compare_greater);
+//
+//    // Function object
+//    Cmp_less cmp_less;
+//    Cmp_greater cmp_greater;
+//    sort(points.begin(), points.end(), cmp_less);
+//    sort(points.begin(), points.end(), cmp_greater);
+//
+//
+//
+//    // heaps
+//    priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_less> max_heap;
+//    priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_greater> min_heap;
+//
 //}

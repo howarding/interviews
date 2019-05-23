@@ -17,7 +17,7 @@ class Solution_047 {
 public:
     // Backtrack
     // Exp: https://discuss.leetcode.com/topic/8831/a-simple-c-solution-in-only-20-lines
-    // Time:	O(n)
+    // Time:	O(nlogn)
     // Space:	O(1)
     vector<vector<int>> permuteUnique(vector<int> &nums) {
         sort(nums.begin(), nums.end());
@@ -39,3 +39,14 @@ public:
         }
     }
 };
+
+//int main() {
+//    Solution_047 sol;
+//    vector<int> nums{1, 2, 2, 4};
+//    vector<vector<int>> result(sol.permuteUnique(nums));
+//    for (auto&& path: result) {
+//        for (auto num: path)
+//            cout << num << '\t';
+//        cout << endl;
+//    }
+//}

@@ -23,10 +23,9 @@ public:
     // Time:    O(n^2)
     // Space:    O(n)
     vector<vector<int>> threeSum(vector<int> &nums) {
-        if (nums.size() < 3)
-            return {};
-        sort(nums.begin(), nums.end());
         vector<vector<int>> result;
+        if (nums.size() < 3) return result;
+        sort(nums.begin(), nums.end());
         for (int i = 0; i < nums.size() - 2; i++) {
             int target = -nums[i];
             int left = i + 1, right = nums.size() - 1;
@@ -37,12 +36,10 @@ public:
                 else if (target > sum)
                     left++;
                 else {
-                    vector<int> ele({nums[i], nums[left], nums[right]});
-                    result.push_back(ele);
-                    while (nums[left] == ele[1])
-                        left++;
-                    while (nums[right] == ele[2])
-                        right--;
+                    result.push_back({nums[i], nums[left], nums[right]});
+                    while (left < nums.size() - 1 && nums[left] == nums[left+1]) left++;
+                    while (right > 0 && nums[right] == nums[right-1]) right--;
+                    left++;
                 }
             }
             while (i < nums.size() - 2 && nums[i] == nums[i + 1])
@@ -54,9 +51,8 @@ public:
 
     // FU 1. 如果不能排序怎么做，没有duplicate elements
     vector<vector<int>> threeSum_fbfu1(vector<int> &nums) {
-        if (nums.size() < 3)
-            return {};
         vector<vector<int>> result;
+        if (nums.size() < 3) return result;
         unordered_set<int> visited;
         for (int i = 0; i < nums.size() - 2; i++) {
             int target = -nums[i];

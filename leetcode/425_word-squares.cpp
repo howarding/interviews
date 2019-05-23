@@ -58,6 +58,7 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
@@ -65,5 +66,38 @@ class Solution_425 {
 public:
     vector<vector<string>> wordSquares(vector<string> &words) {
 
+    }
+
+    // Exp: https://leetcode.com/problems/word-squares/discuss/91344/Short-PythonC%2B%2B-solution
+    // Time:    O()
+    // Space:   O(kn)
+    vector<vector<string>> wordSquares2(vector<string> &words) {
+        unordered_map<string, vector<string>> dict;
+        for (const string& word: words)
+            for (int i = 0; i < word.size(); i++) {
+                string str = word.substr(0, i);
+                dict[str].push_back(word);
+            }
+
+        vector<vector<string>> result;
+        vector<string> path;
+        int n = words[0].size();
+        helper(dict, result, path, 0, n);
+        return result;
+    }
+
+    void helper(unordered_map<string, vector<string>>& dict, vector<vector<string>>& result, vector<string>& path, int i, int n) {
+        if (i == n) {
+            result.push_back(path);
+            return;
+        }
+        string pre;
+        for (int j = 0; j < i; j++)
+            pre += path[j][i];
+        for (auto&& word: dict[pre]) {
+            path.push_back(word);
+            helper(dict, result, path, i+1, n);
+            path.pop_back();
+        }
     }
 };

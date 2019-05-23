@@ -22,7 +22,7 @@ public:
     // Exp: https://discuss.leetcode.com/topic/3294/accepted-c-o-n-solution
     // Time:	O(n)
     // Space:	O(n)
-    vector<int> twoSum(vector<int> &nums, int target) {
+    vector<int> twoSum(vector<int>& nums, int target) {
         map<int, int> index;
         for (int i = 0; i < nums.size(); i++) {
             int remain = target - nums[i];

@@ -22,8 +22,7 @@ public:
     void nextPermutation(vector<int> &nums) {
         if (nums.size() < 2) return;
         int i = nums.size() - 1, j;
-        while (i > 0 && nums[i - 1] >= nums[i])
-            i--;
+        while (i > 0 && nums[i - 1] >= nums[i]) i--;
         if (i > 0) {
             for (j = i; j < nums.size() && nums[i - 1] < nums[j]; j++);
             swap(nums[i - 1], nums[j - 1]);

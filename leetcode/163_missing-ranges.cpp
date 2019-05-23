@@ -16,27 +16,22 @@ public:
     vector<string> findMissingRanges(vector<int> &nums, int lower, int upper) {
         vector<string> result;
         if (nums.empty()) {
-            result.push_back(get_range(lower, upper));
+            result.push_back(getRange(lower, upper));
             return result;
         }
-        int n = nums.size();
-        int left = lower;
-        for (int i = 0; i <= n; i++) {
-            if (nums[i] == INT_MIN) {
-                left++;
-                continue;
-            }
-            int right = (i == n ? upper : nums[i] - 1);
-            if (right >= left)
-                result.push_back(get_range(left, right));
+        int i = 0;
+        while (i < nums.size()) {
+            if (lower < nums[i])
+                result.push_back(getRange(lower, nums[i] - 1));
             if (nums[i] == INT_MAX)
-                break;
-            left = nums[i] + 1;
+                return result;
+            lower = nums[i++] + 1;
         }
+        if (lower <= upper) result.push_back(getRange(lower, upper));
         return result;
     }
 
-    string get_range(int start, int end) {
+    string getRange(int start, int end) {
         return start == end ? to_string(start) : to_string(start) + "->" + to_string(end);
     }
 };

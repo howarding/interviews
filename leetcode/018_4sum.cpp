@@ -18,11 +18,12 @@ using namespace std;
 
 class Solution_018 {
 public:
+    // sort + 2sum II - Input array is sorted
     // Exp: https://discuss.leetcode.com/topic/28641/my-16ms-c-code
     // Time:	O(n^3)
     // Space:	O(n)
     vector<vector<int>> fourSum(vector<int> &nums, int target) {
-        vector<vector<int> > result;
+        vector<vector<int>> result;
         if (nums.size() < 4) return result;
         sort(nums.begin(), nums.end());
         for (int i = 0; i < nums.size() - 3; i++) {
@@ -36,19 +37,15 @@ public:
                     else if (remain > sum)
                         left++;
                     else {
-                        vector<int> ele({nums[i], nums[j], nums[left], nums[right]});
-                        result.push_back(ele);
-                        while (nums[left] == ele[2])
-                            left++;
-                        while (nums[right] == ele[3])
-                            right--;
+                        result.push_back({nums[i], nums[j], nums[left], nums[right]});
+                        while (left < right && nums[left] == nums[left+1]) left++;
+                        while (left < right && nums[right-1] == nums[right]) right--;
+                        left++;
                     }
                 }
-                while (j < nums.size() - 2 && nums[j] == nums[j + 1])
-                    j++;
+                while (j < nums.size() - 2 && nums[j] == nums[j + 1]) j++;
             }
-            while (i < nums.size() - 3 && nums[i] == nums[i + 1])
-                i++;
+            while (i < nums.size() - 3 && nums[i] == nums[i + 1]) i++;
         }
         return result;
     }

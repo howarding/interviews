@@ -9,28 +9,46 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <unordered_set>
 
 using namespace std;
 
 class Solution_128 {
 public:
+    // BEST: unordered_set
     // Exp: https://discuss.leetcode.com/topic/15383/simple-o-n-with-explanation-just-walk-each-streak/41
     // Time:	O(n)
     // Space:	O(n)
     int longestConsecutive(vector<int> &nums) {
-        set<int> num_set;
-        for (vector<int>::iterator iter = nums.begin(); iter != nums.end(); iter++)
-            num_set.insert(*iter);
-        int best = 0;
-        for (set<int>::iterator iter = num_set.begin(); iter != num_set.end(); iter++) {
-            int n = *iter;
-            if (num_set.find(n - 1) == num_set.end()) {
-                int m = n + 1;
-                while (num_set.find(m) != num_set.end())
-                    m++;
-                best = max(m - n, best);
+        unordered_set<int> numbers;
+        for (const int& num: nums) numbers.insert(num);
+        int result = 0;
+        for (int num: numbers) {
+            if (numbers.find(num-1) == numbers.end()) {
+                int n = num + 1;
+                while (numbers.find(n) != numbers.end()) n++;
+                result = max(result, n - num);
             }
         }
-        return best;
+        return result;
+    }
+
+
+    // SET is sorted
+    // Time:	O(n)
+    // Space:	O(n)
+    int longestConsecutive2(vector<int> &nums) {
+        set<int> numbers;
+        if (nums.empty()) return 0;
+        for (const int& num: nums) numbers.insert(num);
+        int result = 0, length = 0;
+        for (int num: numbers) {
+            length++;
+            if (numbers.find(num+1) == numbers.end()) {
+                result = max(result, length);
+                length = 0;
+            }
+        }
+        return result;
     }
 };
