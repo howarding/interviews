@@ -33,7 +33,7 @@ void foo3(char ch, int i, Bar2& bar2) {
 }
 
 
-int main() {
+//int main() {
 //    PFT pft = bar;
 //    void (*p)(char, int) = bar;
 //    foo('e',12,pft);
@@ -49,4 +49,4 @@ int main() {
 //    for (int i : a)
 //        cout << i << "\t";
 //    cout << endl;
-}
+//}

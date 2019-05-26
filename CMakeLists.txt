@@ -14,4 +14,4 @@ add_executable(
         ${mianjing_2sigma}
         ${mianJing_google}
         ${prototype}
-)
+        prototype/bits.cpp)

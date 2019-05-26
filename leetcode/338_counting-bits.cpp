@@ -21,22 +21,21 @@ using namespace std;
 
 class Solution_338 {
 public:
+    // BEST: DP!
     // Exp: https://discuss.leetcode.com/topic/40262/four-lines-c-time-o-n-space-o-n
     // Time:	O(n)
     // Space:	O(1)
     vector<int> countBits(int num) {
-        //// My own answer
-        // vector<int> result({0});
-        // int power = 0, base = 1, ele = 1;
-        // while ((base *= 2) <= num) power++;
-        // for (int i = 0; i <= power; i++) {
-        //     for(int n = ele; n < min(ele * 2, num+1); n++)
-        //         result.push_back(result[n-ele]+1);
-        //     ele *= 2;
-        // }
-        // return result;
+        vector<int> ret(num + 1, 0);
+        for (int i = 1; i <= num; ++i)
+            ret[i] = ret[i >> 1] + (i & 1);
+        return ret;
+    }
 
-        //// From discussion, more efficient.
+    // DP
+    // Time:	O(n)
+    // Space:	O(1)
+    vector<int> countBits2(int num) {
         vector<int> ret(num + 1, 0);
         for (int i = 1; i <= num; ++i)
             ret[i] = ret[i & (i - 1)] + 1;
