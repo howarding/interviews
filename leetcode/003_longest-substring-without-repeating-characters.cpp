@@ -20,7 +20,6 @@ public:
     // Time:	O(n)
     // Space:	O(1)
     int lengthOfLongestSubstring(string s) {
-        if (s.size() <= 1) return s.size();
         vector<int> ind(256, -1);
         int start = -1, result = 0;
         for (int i = 0; i < s.size(); i++) {
