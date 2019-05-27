@@ -13,6 +13,7 @@ using namespace std;
 
 class Solution_159 {
 public:
+    // Hash Table + 2P
     // Exp: https://discuss.leetcode.com/topic/26640/simple-o-n-java-solution-easily-extend-to-k-characters
     // Time:	O(n)
     // Space:	O(1)
@@ -34,10 +35,10 @@ public:
     }
 };
 
-int main() {
-    string s = "eceba";
-    Solution_159 sol;
-    cout << sol.lengthOfLongestSubstringTwoDistinct(s) << endl;
+//int main() {
+//    string s = "eceba";
+//    Solution_159 sol;
+//    cout << sol.lengthOfLongestSubstringTwoDistinct(s) << endl;
 //    unordered_map<char, int> dict;
 //    for (int i = 0; i < s.size(); i++)
 //        dict[s[i]] = i;
@@ -49,4 +50,4 @@ int main() {
 //            dict.erase(s[i]);
 //    for(auto&& pair: dict)
 //        cout << pair.first << ' ' << pair.second << endl;
-}
+//}

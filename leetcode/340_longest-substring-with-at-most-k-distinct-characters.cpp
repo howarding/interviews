@@ -11,35 +11,24 @@ using namespace std;
 
 class Solution_340 {
 public:
+    // Hash Table + 2P
     // Exp: https://discuss.leetcode.com/topic/41711/8-lines-c-o-n-8ms
-
-    // 1. Array (faster)
-    // Time:	O(n^2)
+    // Time:	O(n)
     // Space:	O(1)
     int lengthOfLongestSubstringKDistinct(string s, int k) {
-        int ctr[256] = {}, j = -1, distinct = 0, max_len = 0;
+        if (k == 0) return 0;
+        unordered_map<char, int> counter;   // 字符的hist
+        // start    记录有效字符串的起始位置
+        // distinct 记录不重复字符的数量
+        int max_len = 0, start = 0, distinct = 0;
         for (int i = 0; i < s.size(); i++) {
-            distinct += ctr[s[i]]++ == 0;
-            while (distinct > k)
-                distinct -= --ctr[s[++j]] == 0;
-            max_len = max(max_len, i - j);
-        }
-        return max_len;
-    }
-
-
-    // 2. Hash Table
-    // Time:	O(n^2)
-    // Space:	O(1)
-    int lengthOfLongestSubstringKDistinct_1(string s, int k) {
-        unordered_map<char, int> ctr;
-        int j = -1, max_len = 0;
-        for (int i = 0; i < s.size(); i++) {
-            ctr[s[i]]++;
-            while (ctr.size() > k)
-                if (--ctr[s[++j]] == 0)
-                    ctr.erase(s[j]);
-            max_len = max(max_len, i - j);
+            if (counter[i]++ == 0) distinct++;
+            while (distinct > k) {
+                counter[start]--;
+                if (counter[start++] == 0)
+                    distinct--;
+            }
+            max_len = max(max_len, i - start + 1);  // 每次循环都更新有效字符串的最大长度
         }
         return max_len;
     }
