@@ -49,4 +49,14 @@ void foo3(char ch, int i, Bar2& bar2) {
 //    for (int i : a)
 //        cout << i << "\t";
 //    cout << endl;
+
+//    string* a = new string(1, '2');
+//    a->append(1, 'c');
+//    cout << a  << "\t" << *a << endl;
+//    a->push_back('d');
+//    cout << a  << "\t" << *a << endl;
+
+//    string s = to_string('a');
+//    cout << s << endl;  // "97", not "a"
+
 //}

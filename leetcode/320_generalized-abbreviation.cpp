@@ -11,6 +11,7 @@ using namespace std;
 
 class Solution_320 {
 public:
+    // Backtrack  极难理解
     // Exp: https://discuss.leetcode.com/topic/32270/java-backtracking-solution
     // Time:	O(2^n)
     // Space:	O(2^n)
@@ -33,3 +34,13 @@ public:
         dfs(word, result, point + 1, cur + (count > 0 ? to_string(count) : "") + word[point], 0);
     }
 };
+
+
+//int main() {
+//    Solution_320 sol;
+//    string word("word");
+//    vector<string> result = sol.generateAbbreviations(word);
+//    for (const string& str: result)
+//        cout << str << "\t";
+//    cout << endl;
+//}
