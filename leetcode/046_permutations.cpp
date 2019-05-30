@@ -44,4 +44,44 @@ public:
             }
         }
     }
+
+
+
+
+
+    //////////////////////////////////////////////
+    // Google 输入是数字
+    vector<vector<int>> permute(int num) {
+        vector<vector<int>> result;
+        vector<int> path;
+        dfs(num, path, result);
+        return result;
+    }
+
+    void dfs(int num, vector<int>& path, vector<vector<int>>& result) {
+        if (path.size() == num) {
+            result.push_back(path);
+            return;
+        }
+        for (int i = 1; i <= num; i++) {
+            vector<int>::iterator iter = find(path.begin(), path.end(), i);
+            if (iter == path.end()) {
+                path.push_back(i);
+                dfs(num, path, result);
+                path.pop_back();
+            }
+        }
+    }
 };
+
+
+//int main() {
+//    Solution_046 sol;
+//    int num = 5;
+//    vector<vector<int>> result(sol.permute(num));
+//    for (auto&& path: result) {
+//        for (int& n: path)
+//            cout << n << "\t";
+//        cout << endl;
+//    }
+//}

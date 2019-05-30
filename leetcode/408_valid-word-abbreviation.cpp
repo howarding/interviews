@@ -23,10 +23,32 @@ using namespace std;
 
 class Solution_408 {
 public:
+    // My own
+    // Time:    O(n)
+    // Space:   O(1)
+    bool validWordAbbreviation(string word, string abbr) {
+        if (word.empty() != abbr.empty()) return false;
+        int start = 0, num = 0;
+        for (const char c: abbr) {
+            if (!num && c == '0') return false;
+            if (isdigit(c)) {
+                num = num * 10 + c - '0';
+                continue;
+            }
+            if (num) {
+                start += num;
+                num = 0;
+            }
+            if (start >= word.size() || word[start++] != c) return false;
+        }
+        return start + num == word.size();
+    }
+
+
     // Exp: https://discuss.leetcode.com/topic/61348/short-and-easy-to-understand-java-solution
     // Time:	O(n)
     // Space:	O(1)
-    bool validWordAbbreviation(string word, string abbr) {
+    bool validWordAbbreviation2(string word, string abbr) {
         int i = 0, j = 0;
         while (i < word.size() && j < abbr.size()) {
             if (word[i] == abbr[j]) {

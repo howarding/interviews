@@ -58,5 +58,6 @@ void foo3(char ch, int i, Bar2& bar2) {
 
 //    string s = to_string('a');
 //    cout << s << endl;  // "97", not "a"
-
+//    char a = 'c';
+//    cout << isalnum(a) << endl;
 //}

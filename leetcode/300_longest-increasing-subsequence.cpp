@@ -15,33 +15,43 @@ using namespace std;
 
 class Solution_300 {
 public:
-    // Binary Search (My own)
+    // BEST: DP + Binary Search (My own)
+    // Exp: https://www.cnblogs.com/grandyang/p/4938187.html
     // Time:	O(nlog(n))
     // Space:	O(n)
     int lengthOfLIS(vector<int>& nums) {
-        vector<int> mins;
+        vector<int> dp;
         for (int num : nums) {
-            if (mins.empty()) {
-                mins.push_back(num);
-                continue;
-            }
-            int left = 0, right = mins.size() - 1;
+            int left = 0, right = dp.size() - 1;
             while (left <= right) {
                 int mid = (left + right) / 2;
-                if (mins[mid] == num) {
-                    left = mid;
-                    break;
-                }
-                if (mins[mid] > num)
+                if (num <= dp[mid])
                     right = mid - 1;
                 else
                     left = mid + 1;
             }
-            if (left == mins.size())
-                mins.push_back(num);
+            if (left == dp.size())
+                dp.push_back(num);
             else
-                mins[left] = min(mins[left], num);
+                dp[left] = num;
         }
-        return mins.size();
+        return dp.size();
+    }
+
+    // DP
+    // Time:    O(n^2)
+    // Space:   O(n)
+    int lengthOfLIS2(vector<int>& nums) {
+        if (nums.empty()) return 0;
+        vector<int> dp(nums.size(), 1);
+        int result = 0;
+        dp[0] = 1;
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = 0; j < i; j++)
+                if (nums[i] > nums[j])
+                    dp[i] = max(dp[i], dp[j] + 1);
+            result = max(result, dp[i]);
+        }
+        return result;
     }
 };
