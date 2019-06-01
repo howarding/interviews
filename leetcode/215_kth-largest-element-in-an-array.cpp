@@ -32,7 +32,7 @@ public:
     }
 
     int partition(vector<int> &nums, int left, int right) {
-        int pivot = nums[left];
+        int pivot = nums[left]; // pivot是左边数
         int start = left++;
         while (left <= right) {
             if (nums[left] < pivot && nums[right] > pivot)  // 这是降序排列，改变符号是升序

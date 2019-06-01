@@ -5,7 +5,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 file(GLOB leetcode "leetcode/*.cpp")
 file(GLOB mianjing_2sigma "mianjing_2sigma")
 file(GLOB mianJing_google "mianJing_google")
-file(GLOB prototype "prototype")
+file(GLOB prototype "prototype/*.cpp")
 
 add_executable(
         google
@@ -14,4 +14,4 @@ add_executable(
         ${mianjing_2sigma}
         ${mianJing_google}
         ${prototype}
-        prototype/bits.cpp leetcode/248_strobogrammatic-number-iii.cpp)
+        prototype/bits.cpp leetcode/248_strobogrammatic-number-iii.cpp mianJing_google/flow-free.cpp)
