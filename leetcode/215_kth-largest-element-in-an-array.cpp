@@ -8,12 +8,13 @@
 
 #include <iostream>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
 class Solution_215 {
 public:
-    // Quick Select
+    // BEST: Quick Select
     // Exp: https://discuss.leetcode.com/topic/15256/4-c-solutions-using-partition-max-heap-priority_queue-and-multiset-respectively
     // Time:	O(n)
     // Space:	O(1)
@@ -40,8 +41,21 @@ public:
             if (nums[left] >= pivot) left++;    // 这是降序排列，改变符号是升序
             if (nums[right] <= pivot) right--;  // 这是降序排列，改变符号是升序
         }
-        swap(nums[start], nums[right]);
+        swap(nums[start], nums[right]);         // 因为pivot是左边数，所以和nums[right]替换
         return right;
+    }
+
+    // min heap
+    // Time:    O(n*log(k))
+    // Space:   O(k)
+    int findKthLargest2(vector<int> &nums, int k) {
+        priority_queue<int, vector<int>, greater<int>> que;
+        for (int num: nums) {
+            que.push(num);
+            if (que.size() > k)
+                que.pop();
+        }
+        return que.top();
     }
 };
 

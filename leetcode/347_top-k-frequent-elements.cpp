@@ -22,7 +22,6 @@ public:
     // Space:	O(n)
     vector<int> topKFrequent(vector<int> &nums, int k) {
         vector<int> result;
-        if (nums.empty()) return result;
         unordered_map<int, int> dict;   // 先统计每个num次数
         for (int num : nums)
             dict[num]++;
@@ -30,18 +29,16 @@ public:
         // pair<first, second>: first is number,  second is frequency
         priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> min_heap;
         for (auto pair : dict) {
-            if (min_heap.size() < k)
-                min_heap.push(pair);
-            else if (min_heap.top().second < pair.second) {
-                min_heap.push(pair);
+            min_heap.push(pair);
+            if (min_heap.size() > k)
                 min_heap.pop();
-            }
         }
         while (!min_heap.empty()) {
             pair<int, int> ele = min_heap.top();
             result.push_back(ele.first);
             min_heap.pop();
         }
+        reverse(result.begin(), result.end());
         return result;
     }
 
@@ -51,3 +48,12 @@ public:
         }
     };
 };
+
+
+//int main() {
+//    Solution_347 sol;
+//    vector<int> nums{1, 1, 1, 1, 2, 2, 2, 3, 3, 4};
+//    vector<int> result = sol.topKFrequent(nums, 3);
+//    for (int num: result)
+//        cout << num << "\t";
+//}

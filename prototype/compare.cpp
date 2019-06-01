@@ -18,6 +18,20 @@ struct Cmp_greater {
     }
 };
 
+class Cmp_less1 {
+public:
+    bool operator()(const pair<string, int>& a, const pair<string, int>& b) {
+        return a.second < b.second;
+    }
+};
+
+class Cmp_greater1 {
+public:
+    bool operator()(const pair<string, int>& a, const pair<string, int>& b) {
+        return a.second > b.second;
+    }
+};
+
 
 // 2. Function pointer
 static bool compare_less(const pair<string, int>& a, const pair<string, int>& b) {
@@ -35,6 +49,9 @@ class Heaps {
 
 public:
     void sort_result() {
+
+        // Sort
+        // Function pointer
         // Ascending order
         sort(result.begin(), result.end(), compare_less);
         // Descending order
@@ -49,8 +66,11 @@ public:
 
 
         // heaps
+        // Function object CLASS
         priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_less> max_heap;
         priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_greater> min_heap;
+        priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_less1> max_heap1;
+        priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_greater1> min_heap1;
     }
 };
 
@@ -73,9 +93,11 @@ public:
 //    sort(points.begin(), points.end(), cmp_greater);
 //
 //
-//
+
 //    // heaps
 //    priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_less> max_heap;
 //    priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_greater> min_heap;
+//    priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_less1> max_heap1;
+//    priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_greater1> min_heap1;
 //
 //}

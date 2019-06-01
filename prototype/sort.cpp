@@ -118,13 +118,13 @@ int partition(vector<int>& nums, int left, int right) {
 }
 
 
-int main() {
-    vector<int> nums({9, 7, 6, 15, 16, 5, 10, 11});
-    insertionSort(nums);
-////    mergeSort(nums, 0, nums.size());
+//int main() {
+//    vector<int> nums({9, 7, 6, 15, 16, 5, 10, 11});
+//    insertionSort(nums);
+//    mergeSort(nums, 0, nums.size());
 //    quickSort(nums, 0, nums.size() - 1);
 //    quickSort2(nums, 0, nums.size() - 1);
-    quickSort3(nums, 0, nums.size() - 1);
-    for (int num : nums)
-        cout << num << "\t";
-}
+//    quickSort3(nums, 0, nums.size() - 1);
+//    for (int num : nums)
+//        cout << num << "\t";
+//}
