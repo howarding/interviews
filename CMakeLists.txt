@@ -6,6 +6,7 @@ file(GLOB leetcode "leetcode/*.cpp")
 file(GLOB mianjing_2sigma "mianjing_2sigma")
 file(GLOB mianJing_google "mianJing_google")
 file(GLOB prototype "prototype/*.cpp")
+file(GLOB test "test/*.cpp")
 
 add_executable(
         google
@@ -14,4 +15,5 @@ add_executable(
         ${mianjing_2sigma}
         ${mianJing_google}
         ${prototype}
-        prototype/bits.cpp leetcode/248_strobogrammatic-number-iii.cpp mianJing_google/flow-free.cpp)
+        ${test}
+        prototype/bits.cpp leetcode/248_strobogrammatic-number-iii.cpp mianJing_google/flow-free.cpp leetcode/703_kth-largest-element-in-a-stream.cpp leetcode/973_k-closest-points-to-origin.cpp test/fileReadWrite.cpp leetcode/465_optimal-account-balancing.cpp)

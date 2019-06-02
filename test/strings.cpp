@@ -57,4 +57,8 @@ using namespace std;
 //    string c = a.substr(0, -1);
 //    cout << b << endl;
 //    cout << c << endl;
+//
+//    string a = "hello world!";
+//    cout << a.substr(0, 5) << endl;
+//    cout << a.substr(5) << endl;
 //}

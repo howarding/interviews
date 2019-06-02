@@ -24,25 +24,21 @@ public:
     // Exp: https://discuss.leetcode.com/topic/20823/4ms-easy-c-solution-with-explanations
     // Time:	O(n)
     // Space:	O(n)
-    vector<vector<string>> groupStrings(vector<string> &strings) {
-        unordered_map<string, vector<string> > mp;
+    vector<vector<string>> groupStrings(vector<string>& strings) {
+        unordered_map<string, vector<string>> mp;
         for (auto &s : strings)
             mp[shift(s)].push_back(s);
         vector<vector<string>> result;
-        for (auto &&ele : mp) {
-            sort(ele.second.begin(), ele.second.end());
+        for (auto&& ele : mp)
             result.push_back(ele.second);
-        }
         return result;
     }
 
     string shift(string &s) {
-        string t;
-        for (int i = 1; i < s.size(); i++) {
-            int diff = s[i] - s[i - 1];
-            if (diff < 0) diff += 26;
-            t += 'a' + diff;
-        }
-        return t;
+        string result;
+        int diff = s[0] - 'a';
+        for (const char c: s)
+            result.push_back(c - diff < 'a' ? c - diff + 26 : c - diff);
+        return result;
     }
 };

@@ -23,18 +23,30 @@ public:
     // Time:	O(n)
     // Space:	O(n)
     int hIndex(vector<int> &citations) {
+        if (citations.empty()) return 0;
         int count = citations.size();
-        if (count == 0) return 0;
-
-        vector<int> hist(count + 1);
-        for (int i = 0; i < count; i++)
-            hist[min(count, citations[i])]++;
-
-        int t = 0;
+        vector<int> hist(count + 1);    // 统计hist
+        for (const int& citation: citations)
+            hist[min(count, citation)]++;
+        int result = 0;
         for (int i = count; i >= 0; i--) {
-            t += hist[i];
-            if (t >= i) return i;
+            result += hist[i];
+            if (result >= i) return i;
         }
         return 0;
+    }
+
+
+    // Sort
+    // Time:    O(nlogn)
+    // Space:   O(1)
+    int hIndex2(vector<int>& citations) {
+        sort(citations.begin(), citations.end(), [](int a, int b){return a > b;});
+        int h = 1;
+        while (h <= citations.size()) {
+            if (citations[h-1] < h) break;
+            h++;
+        }
+        return h - 1;
     }
 };

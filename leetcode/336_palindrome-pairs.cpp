@@ -23,7 +23,6 @@ public:
     // Space:	O(n)
     vector<vector<int>> palindromePairs(vector<string> &words) {
         vector<vector<int>> result;
-        if (words.size() < 2) return result;
         unordered_map<string, int> dict;
         for (int i = 0; i < words.size(); i++) {
             string word = words[i];
@@ -40,7 +39,7 @@ public:
         for (int i = 0; i < words.size(); i++)
             for (int j = 0; j < words[i].size(); j++) {
                 string left = words[i].substr(0, j);
-                string right = words[i].substr(j, words.size() - j);
+                string right = words[i].substr(j);
                 if (dict.find(left) != dict.end() && isPalindrome(right) && dict[left] != i)
                     result.push_back({i, dict[left]});
                 if (dict.find(right) != dict.end() && isPalindrome(left) && dict[right] != i)
@@ -57,3 +56,12 @@ public:
         return true;
     }
 };
+
+
+//int main() {
+//    Solution_336 sol;
+//    vector<string> words{"a", ""};
+//    vector<vector<int>> result(sol.palindromePairs(words));
+//    for (auto&& pair: result)
+//        cout << pair[0] << "\t" << pair[1] << endl;
+//}
