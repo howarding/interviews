@@ -27,18 +27,26 @@ public:
     // Exp: https://discuss.leetcode.com/topic/48172/simple-java-hashset-solution
     // Time:	O(n)
     // Space:	O(n)
-    bool isReflected(vector<pair<int, int>> &points) {
+    bool isReflected(vector<vector<int>>& points) {
         int max_x = INT_MIN, min_x = INT_MAX;
         unordered_map<int, unordered_set<int>> y_xs;
         for (auto &&point : points) {
-            max_x = max(max_x, point.first);
-            min_x = min(min_x, point.first);
-            y_xs[point.second].insert(point.first);
+            max_x = max(max_x, point[0]);
+            min_x = min(min_x, point[0]);
+            y_xs[point[1]].insert(point[0]);
         }
         int sum_x = min_x + max_x;
         for (auto &&point : points)
-            if (y_xs[point.second].find(sum_x - point.first) == y_xs[point.second].end())
+            if (y_xs[point[1]].find(sum_x - point[0]) == y_xs[point[1]].end())
                 return false;
         return true;
     }
 };
+
+
+
+//int main() {
+//    Solution_356 sol;
+//    vector<vector<int>> points{{1, 1}, {-1, 1}};
+//    cout << sol.isReflected(points) << endl;
+//}
