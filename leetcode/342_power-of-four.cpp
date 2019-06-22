@@ -15,8 +15,9 @@ public:
     // Time:	O(1)
     // Space:	O(1)
     bool isPowerOfFour(int num) {
-        return (num > 0 && (num & (num - 1)) == 0 && (num & 0xaaaaaaaa) == 0);
+        return num > 0 && (num & (num - 1)) == 0 && (num & 0xaaaaaaaa) == 0;
         //0xaaaaaaaa is to get rid of those power of 2 but not power of 4
+        //0xaaaaaaaa = 10101010101010101010101010101010
         //so that the single 1 bit always appears at the odd position
     }
 

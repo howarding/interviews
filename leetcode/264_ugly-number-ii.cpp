@@ -36,3 +36,10 @@ public:
         return k[n - 1];
     }
 };
+
+
+int main() {
+    Solution_264 sol;
+    int n = 10;
+    cout << sol.nthUglyNumber(n) << endl;
+}

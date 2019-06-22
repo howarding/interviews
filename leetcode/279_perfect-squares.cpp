@@ -9,6 +9,7 @@ using namespace std;
 
 class Solution_279 {
 public:
+    // DP
     // Exp: https://discuss.leetcode.com/topic/24255/summary-of-4-different-solutions-bfs-dp-static-dp-and-mathematics
     // Time:	O(n^3/2)
     // Space:	O(n)

@@ -18,15 +18,30 @@
 
 #include <iostream>
 #include <unordered_map>
+#include <vector>
 
 using namespace std;
 
 class Solution_409 {
 public:
+    // 偶数个字符的数量，有奇数字符就加1
+    // Time:	O(n)
+    // Space:	O(1)
+    int longestPalindrome(string s) {
+        vector<int> count(256);
+        for (const char c: s)
+            count[c]++;
+        int result = 0;
+        for (int num: count)
+            result += num / 2 * 2;
+        return result == s.size() ? result : result + 1;
+    }
+
+    // 难理解
     // Exp: https://discuss.leetcode.com/topic/61338/what-are-the-odds-python-c/6
     // Time:	O(n)
     // Space:	O(n)
-    int longestPalindrome(string s) {
+    int longestPalindrome1(string s) {
         unordered_map<char, int> char_map;
         for (char c : s)
             char_map[c] ^= 1;

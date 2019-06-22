@@ -49,13 +49,10 @@ public:
 
     /** Returns a random node's value. */
     int getRandom() {
-        ListNode *dumb = root;
-        int result = root->val;
-        for (int i = 1; dumb; i++) {
-            if (rand() % i == 0)
-                result = dumb->val;
-            dumb = dumb->next;
-        }
+        int result, i = 1;
+        for (ListNode* p = root; p; p = p->next)
+            if (rand() % i++ == 0)
+                result = p->val;
         return result;
     }
 };

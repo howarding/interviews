@@ -37,9 +37,8 @@
 using namespace std;
 
 class PhoneDirectory {
+    unordered_set<int> available;
     unordered_set<int> used;
-    queue<int> available;
-    int max;
 public:
     // Exp: https://discuss.leetcode.com/topic/53094/java-ac-solution-using-queue-and-set
     // Time:	O(1)
@@ -47,34 +46,31 @@ public:
     /** Initialize your data structure here
         @param maxNumbers - The maximum numbers that can be stored in the phone directory. */
     PhoneDirectory(int maxNumbers) {
-        max = maxNumbers;
-        for (int i = 0; i < max; i++)
-            available.push(i);
+        for (int i = 0; i < maxNumbers; i++)
+            available.insert(i);
     }
 
     /** Provide a number which is not assigned to anyone.
         @return - Return an available number. Return -1 if none is available. */
     int get() {
-        if (available.empty()) return -1;
-        int result = available.front();
-        available.pop();
-        used.insert(result);
-        return result;
+        int num = -1;
+        if (!available.empty()) {
+            num = *available.begin();
+            available.erase(num);
+            used.insert(num);
+        }
+        return num;
     }
 
     /** Check if a number is available or not. */
     bool check(int number) {
-        if (number >= max || number < 0)
-            return false;
-        return used.find(number) == used.end();
+        return available.find(number) != available.end();
     }
 
     /** Recycle or release a number. */
     void release(int number) {
-        if (used.find(number) != used.end()) {
-            used.erase(number);
-            available.push(number);
-        }
+        used.erase(number);
+        available.insert(number);
     }
 };
 

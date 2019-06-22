@@ -16,4 +16,4 @@ add_executable(
         ${mianJing_google}
         ${prototype}
         ${test}
-        prototype/bits.cpp leetcode/248_strobogrammatic-number-iii.cpp mianJing_google/flow-free.cpp leetcode/703_kth-largest-element-in-a-stream.cpp leetcode/973_k-closest-points-to-origin.cpp test/fileReadWrite.cpp leetcode/465_optimal-account-balancing.cpp)
+        prototype/bits.cpp leetcode/248_strobogrammatic-number-iii.cpp mianJing_google/flow-free.cpp leetcode/703_kth-largest-element-in-a-stream.cpp leetcode/973_k-closest-points-to-origin.cpp test/fileReadWrite.cpp leetcode/465_optimal-account-balancing.cpp prototype/reservoir_sampling.cpp)

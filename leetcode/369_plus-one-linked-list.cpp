@@ -29,6 +29,7 @@ struct ListNode {
  */
 class Solution_369 {
 public:
+    // 找最后一个非9的数，iterative
     // Exp: https://discuss.leetcode.com/topic/49556/iterative-two-pointers-with-dummy-node-java-o-n-time-o-1-space
     // Time:	O(n)
     // Space:	O(1)
@@ -48,5 +49,26 @@ public:
             node = node->next;
         }
         return dummy->val ? dummy : head;
+    }
+
+
+    // 常规方法 Recursive
+    // Time:    O(n)
+    // Space:   O(1)
+    ListNode* plusOne2(ListNode* head) {
+        int carry = plus(head);
+        if (carry) {
+            ListNode* dummy = new ListNode(1);
+            dummy->next = head;
+            return dummy;
+        } else
+            return head;
+
+    }
+
+    int plus(ListNode* node) {
+        int total = node->val + (node->next ? plus(node->next) : 1);
+        node->val = total % 10;
+        return total / 10;
     }
 };

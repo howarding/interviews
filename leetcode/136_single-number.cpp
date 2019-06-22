@@ -11,7 +11,7 @@ using namespace std;
 
 class Solution_136 {
 public:
-    // XOR
+    // 异或 XOR
     // Exp: https://discuss.leetcode.com/topic/1916/my-o-n-solution-using-xor
     // Time:	O(n)
     // Space:	O(1)
