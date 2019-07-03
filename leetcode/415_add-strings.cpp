@@ -26,10 +26,10 @@ public:
             int sum = num_i + num_j + carry;
             int remainder = sum % 10;
             carry = sum / 10;
-            result = to_string(remainder) + result;
+            result.push_back('0' + remainder);
         }
-        if (carry)
-            result = to_string(carry) + result;
+        if (carry) result.push_back('0' + carry);
+        reverse(result.begin(), result.end());
         return result;
     }
 };

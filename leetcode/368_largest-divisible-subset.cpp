@@ -44,12 +44,44 @@ public:
                 }
             }
         }
-
-        while (parent[m_index] != -1) {
+        while (m_index != -1) {
             result.push_back(nums[m_index]);
             m_index = parent[m_index];
         }
-        result.push_back(nums[m_index]);
+        return result;
+    }
+
+    vector<int> largestDivisibleSubset2(vector<int> &nums) {
+        vector<int> result;
+        if (nums.size() <= 1) return nums;
+        sort(nums.begin(), nums.end());
+        int max_len = 0;
+        int max_ind = -1;
+        vector<int> dp(nums.size(), 1);
+        vector<int> parent(nums.size(), -1);
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (nums[i] % nums[j] == 0) {
+                    dp[i] = max(dp[i] - 1, dp[j]) + 1;
+                    if (dp[i] == dp[j] + 1) parent[i] = j;
+                }
+            }
+            max_len = max(max_len, dp[i]);
+            if (max_len == dp[i]) max_ind = i;
+        }
+        while (max_ind != -1) {
+            result.push_back(nums[max_ind]);
+            max_ind = parent[max_ind];
+        }
         return result;
     }
 };
+
+
+//int main() {
+//    Solution_368 sol;
+//    vector<int> nums{1, 2, 3};
+//    vector<int> result = sol.largestDivisibleSubset2(nums);
+//    for (int num: result)
+//        cout << num << "\t";
+//}

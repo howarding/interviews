@@ -31,12 +31,10 @@ public:
         while (i <= j) {
             if (a >= 0)
                 sorted[index--] =
-                    quad(nums[i], a, b, c) > quad(nums[j], a, b, c) ? quad(nums[i++], a, b, c) : quad(nums[j--], a, b,
-                                                                                                      c);
+                    quad(nums[i], a, b, c) > quad(nums[j], a, b, c) ? quad(nums[i++], a, b, c) : quad(nums[j--], a, b, c);
             else
                 sorted[index++] =
-                    quad(nums[i], a, b, c) > quad(nums[j], a, b, c) ? quad(nums[j--], a, b, c) : quad(nums[i++], a, b,
-                                                                                                      c);
+                    quad(nums[i], a, b, c) > quad(nums[j], a, b, c) ? quad(nums[j--], a, b, c) : quad(nums[i++], a, b, c);
         }
         return sorted;
     }

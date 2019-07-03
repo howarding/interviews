@@ -38,8 +38,8 @@ public:
 };
 
 
-int main() {
-    Solution_264 sol;
-    int n = 10;
-    cout << sol.nthUglyNumber(n) << endl;
-}
+//int main() {
+//    Solution_264 sol;
+//    int n = 10;
+//    cout << sol.nthUglyNumber(n) << endl;
+//}
