@@ -35,10 +35,8 @@ public:
         while (i < m && j >= 0) {
             int ele = matrix[i][j];
             if (ele == target) return true;
-            if (ele < target)
-                i++;
-            else
-                j--;
+            if (ele < target) i++;
+            else j--;
         }
         return false;
     }

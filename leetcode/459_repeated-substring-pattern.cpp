@@ -26,6 +26,7 @@ using namespace std;
 
 class Solution_459 {
 public:
+    // Fastest
     // Exp:     https://discuss.leetcode.com/topic/67590/java-o-n
     // Time:	O(n)
     // Space:	O(n)
@@ -57,4 +58,16 @@ public:
         }
         return res;
     }
+
+    // My own
+    bool repeatedSubstringPattern2(string s) {
+        if (s.size() < 1) return false;
+        for (int i = 1; i < s.size(); i++) {
+            if (s[i] != s[0]) continue;
+            if (s.size() % i != 0) continue;
+            int j = i;
+            while (j < s.size() && s.substr(0, i) == s.substr(j, i)) j += i;
+            if (j == s.size()) return true;
+        }
+        return false;
 };

@@ -62,6 +62,22 @@ public:
         }
         return result;
     }
+
+    vector<string> decode2(string s) {
+        vector<string> result;
+        int len = 0, i = 0;
+        while (i < s.size())
+            if (isdigit(s[i])) {
+                len = len * 10 + s[i++] - '0';
+                continue;
+            }
+        if (s[i] == ':') {
+            result.push_back(s.substr(i+1, len));
+            i += len + 1;
+            len = 0;
+        }
+        return result;
+    }
 };
 
 // Your Codec object will be instantiated and called as such:

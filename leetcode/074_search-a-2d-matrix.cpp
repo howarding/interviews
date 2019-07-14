@@ -27,21 +27,15 @@ public:
     // Space:	O(1)
     bool searchMatrix(vector<vector<int> > &matrix, int target) {
         if (matrix.empty()) return false;
-        int m = matrix.size();
-        int n = matrix[0].size();
-        int left = 0;
-        int right = m * n - 1;
+        int m = matrix.size(), n = matrix[0].size();
+        int left = 0, right = m * n - 1;
         while (left <= right) {
             int mid = (left + right) / 2;
-            int i = mid / n;
-            int j = mid % n;
+            int i = mid / n, j = mid % n;
             int val = matrix[i][j];
-            if (target == val)
-                return true;
-            else if (target < val)
-                right = mid - 1;
-            else
-                left = mid + 1;
+            if (target == val) return true;
+            if (target < val) right = mid - 1;
+            else left = mid + 1;
         }
         return false;
     }

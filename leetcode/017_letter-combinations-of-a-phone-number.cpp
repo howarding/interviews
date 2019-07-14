@@ -66,6 +66,23 @@ public:
         return result;
     }
 
+    // Exp: Brute force
+    // Time:    O(2^n)
+    // Space:   O(n)
+    vector<string> letterCombinations_2(string digits) {
+        if (digits.empty()) return {};
+        vector<string> letters{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        vector<string> result{""};
+        for (char digit: digits) {
+            vector<string> combs;
+            for (string& str: result)
+                for (char letter: letters[digit - '0'])
+                    combs.push_back(str + letter);
+            result = combs;
+        }
+        return result;
+    }
+
 
     // 电话本扩展，最后只输出有效地组合，有效组合会给出来，用trie做就可以了
     vector<string> letterCombinations_fb_fu1(string digits) {
