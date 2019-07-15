@@ -17,11 +17,13 @@
 
 #include <iostream>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
 class Solution_378 {
 public:
+    // 1. Binary Search
     // Exp: https://discuss.leetcode.com/topic/52865/my-solution-using-binary-search-in-c
     // Time:	O(nlog(n)log(max-min))
     // Space:	O(1)
@@ -45,5 +47,29 @@ public:
                 high = max_v;
         }
         return -1;
+    }
+
+
+    // 2. Heap
+    // Exp: https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/discuss/85173/Share-my-thoughts-and-Clean-Java-Code
+    // Time:    O(klog(n))
+    // Space:   O(n)
+    struct Cmp {
+        bool operator()(const vector<int>& ele1, const vector<int>& ele2) {
+            return ele1[2] < ele2[2];
+        }
+    };
+
+    int kthSmallest1(vector<vector<int>> &matrix, int k) {
+        int n = matrix.size();
+        priority_queue<vector<int>, vector<vector<int>>, Cmp> min_heap;
+        for (int i = 0; i < n; i++) min_heap.push({0, i, matrix[0][i]});
+        for (int i = 0; i < k - 1; i++) {
+            auto& ele = min_heap.top();
+            min_heap.pop();
+            if (ele[0] == n - 1) continue;
+            min_heap.push({ele[0] + 1, ele[1], matrix[ele[0]+1][ele[1]]});
+        }
+        return min_heap.top()[2];
     }
 };

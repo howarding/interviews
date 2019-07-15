@@ -59,21 +59,16 @@ public:
     // Time:	O(n)
     // Space:	O(1)
     int kthSmallest_1(TreeNode *root, int k) {
-        stack<TreeNode *> st;
-
-        while (root) {
-            st.push(root);
-            root = root->left;
-        }
-
-        while (k >= 0) {
-            TreeNode *tmp = st.top();
-            st.pop();
-            if (--k == 0) return tmp->val;
-            TreeNode *right = tmp->right;
-            while (right) {
-                st.push(right);
-                right = right->left;
+        stack<TreeNode *> stk;
+        while (root || !stk.empty()) {
+            if (root) {
+                stk.push(root);
+                root = root->left;
+            } else {
+                root = stk.top();
+                stk.pop();
+                if (k-- == 1) return root->val;
+                root = root->right;
             }
         }
         return -1;
