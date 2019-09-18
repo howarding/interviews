@@ -35,9 +35,9 @@ class LFUCache {
     int _capacity;
     int num;
     int min_count;
-    unordered_map<int, pair<int, int>> cache;
-    unordered_map<int, list<int>> count_list;
-    unordered_map<int, list<int>::iterator> key_iter;
+    unordered_map<int, pair<int, int>> cache;           // {key, {value, count}}
+    unordered_map<int, list<int>> count_list;           // {count, [key1, key2, ...]}
+    unordered_map<int, list<int>::iterator> key_iter;   // {key, list<key>::iter}
 
 public:
     LFUCache(int capacity) {
@@ -49,13 +49,11 @@ public:
     // Space:   O(n)
     int get(int key) {
         if (cache.find(key) == cache.end()) return -1;
-        count_list[cache[key].second].erase(key_iter[key]);
-        cache[key].second++;
+        count_list[cache[key].second++].erase(key_iter[key]);
         count_list[cache[key].second].push_front(key);
         key_iter[key] = count_list[cache[key].second].begin();
 
-        if (count_list[min_count].size() == 0)
-            min_count++;
+        if (count_list[min_count].empty()) min_count++;
         return cache[key].first;
     }
 

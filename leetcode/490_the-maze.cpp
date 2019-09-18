@@ -50,8 +50,8 @@ using namespace std;
 
 class Solution_490 {
 public:
-    // Exp: https://discuss.leetcode.com/topic/77590/simple-c-dfs-solution-using-set-to-mark-the-visited-end-points
     // DFS
+    // Exp: https://discuss.leetcode.com/topic/77590/simple-c-dfs-solution-using-set-to-mark-the-visited-end-points
     // Time:	O(mn)
     // Space:	O(mn)
     bool hasPath(vector<vector<int>> &maze, vector<int> &start, vector<int> &destination) {
@@ -59,10 +59,7 @@ public:
         if (maze.empty()) return false;
         int m = maze.size(), n = maze[0].size();
         int x = start[0], y = start[1];
-        vector<vector<int>> directions = {{1,  0},
-                                          {-1, 0},
-                                          {0,  1},
-                                          {0,  -1}};
+        vector<vector<int>> directions{{1,  0}, {-1, 0}, {0,  1}, {0,  -1}};
         unordered_set<int> visited;
         visited.insert(x * n + y);
 
@@ -80,7 +77,7 @@ public:
             i += di;
             j += dj;
         }
-        vector<int> hit({i - directions[k][0], j - directions[k][1]});
+        vector<int> hit{i - di, j - dj};
         if (hit == destination) return true;
         if (visited.find(hit[0] * n + hit[1]) != visited.end()) return false;
         visited.insert(hit[0] * n + hit[1]);
@@ -88,7 +85,6 @@ public:
             if (l == k) continue;
             result |= dfs(maze, hit, destination, visited, directions, l);
         }
-//        visited.erase(hit[0] * n + hit[1]);
         return result;
     }
 };

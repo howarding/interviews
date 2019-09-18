@@ -55,7 +55,7 @@ public:
     }
 
 
-    // Iterative
+    // Iterative: Level-order traversal
     // Exp: https://discuss.leetcode.com/topic/4332/my-c-accepted-code-in-16ms-with-iteration-solution
     // Time:	O(n)
     // Space:	O(n)

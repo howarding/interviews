@@ -20,8 +20,7 @@ public:
     // Time:	O(n)
     // Space:	O(n)
     int longestConsecutive(vector<int> &nums) {
-        unordered_set<int> numbers;
-        for (const int& num: nums) numbers.insert(num);
+        unordered_set<int> numbers(nums.begin(), nums.end());
         int result = 0;
         for (int num: numbers) {
             if (numbers.find(num-1) == numbers.end()) {

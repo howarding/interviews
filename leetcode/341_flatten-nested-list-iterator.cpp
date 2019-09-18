@@ -74,8 +74,7 @@ public:
                 return true;
             sta.pop();
             for (int i = ele.getList().size() - 1; i >= 0; i--)
-                if (ele.getList()[i].isInteger() || ele.getList()[i].getList().size())
-                    sta.push(ele.getList()[i]);
+                sta.push(ele.getList()[i]);
         }
         return false;
     }

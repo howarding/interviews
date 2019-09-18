@@ -5,6 +5,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 file(GLOB leetcode "leetcode/*.cpp")
 file(GLOB mianjing_2sigma "mianjing_2sigma")
 file(GLOB mianJing_google "mianJing_google")
+file(GLOB mianJing_spotify "mianJing_spotify")
 file(GLOB prototype "prototype/*.cpp")
 file(GLOB test "test/*.cpp")
 
@@ -14,6 +15,7 @@ add_executable(
         ${leetcode}
         ${mianjing_2sigma}
         ${mianJing_google}
+        ${mainJing_spotify}
         ${prototype}
         ${test}
-        prototype/bits.cpp leetcode/248_strobogrammatic-number-iii.cpp mianJing_google/flow-free.cpp leetcode/703_kth-largest-element-in-a-stream.cpp leetcode/973_k-closest-points-to-origin.cpp test/fileReadWrite.cpp leetcode/465_optimal-account-balancing.cpp prototype/reservoir_sampling.cpp)
+)

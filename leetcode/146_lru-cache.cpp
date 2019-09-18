@@ -48,14 +48,13 @@ public:
     }
 
     void put(int key, int value) {
-        if (dict.find(key) != dict.end())
-            cache.erase(dict[key]);
-        else if (dict.size() == _capacity) {
+        if (dict.find(key) != dict.end()) cache.erase(dict[key]);
+        cache.push_front({key, value});
+        dict[key] = cache.begin();
+        if (cache.size() > _capacity) {
             dict.erase(cache.back().first);
             cache.pop_back();
         }
-        cache.push_front({key, value});
-        dict[key] = cache.begin();
     }
 };
 
