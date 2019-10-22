@@ -27,7 +27,8 @@ public:
     }
 
     void remove(string s, vector<string> &result, int last_i, int last_j, vector<char> par) {
-        for (int count = 0, i = last_i; i < s.size(); i++) {
+        int count = 0;
+        for (int i = last_i; i < s.size(); i++) {
             if (s[i] == par[0]) count++;
             if (s[i] == par[1]) count--;
             if (count >= 0) continue;
@@ -45,26 +46,56 @@ public:
     }
 
 
-    // FU: 结果只用输出一组解就可以, 扫两遍去掉没match的括号就可以了
+    // FB: 结果只用输出一组解就可以
+    // Stack
     // Time:	O(n)
     // Space:	O(n)
     string removeInvalidParentheses_fb(string s) {
-        string tmp, result;
-        stack<char> stk;
-        for (char c : s) {
-            if (c == '(') {
-                tmp += c;
-                stk.push(c);
-            } else if (c == ')' && !stk.empty()) {
-                tmp += c;
-                stk.pop();
+        string result;
+        stack<int> stk;
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] == '(') stk.push(i);
+            if (s[i] == ')') {
+                if (stk.empty()) s[i] = '_';
+                else stk.pop();
             }
         }
-        int n = stk.size();
-        for (int i = tmp.size() - 1; i >= 0; i--)
-            if (tmp[i] == ')' || n-- <= 0)
-                result = tmp[i] + result;
+        while(!stk.empty()) {
+            s[stk.top()] = '_';
+            stk.pop();
+        }
+        for (char c: s)
+            if (c != '_')
+                result.push_back(c);
         return result;
+    }
+
+    // FB: 结果只用输出一组解就可以
+    // BEST: Count + In place
+    // Time:	O(n)
+    // Space:	O(1)
+    string removeInvalidParentheses_fb1(string s) {
+        int count = 0;
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] == '(') count++;
+            if (s[i] == ')') {
+                if (count == 0) s[i] = '_';
+                else count--;
+            }
+        }
+        for (int i = s.size() - 1; i >= 0; i--) {
+            if (count == 0) break;
+            if (s[i] == '(') {
+                s[i] = '_';
+                count--;
+            }
+        }
+        int start = 0;
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] != '_')
+                s[start++] = s[i];
+        }
+        s.resize(start);
     }
 };
 

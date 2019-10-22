@@ -10,6 +10,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -45,5 +46,52 @@ public:
                 count += dict[sum - k];
         }
         return count;
+    }
+
+    // FB: return 是否存在 (数组内全是正数)
+    // Set: 此方法数组内数字正负都可以
+    // Time:    O(n)
+    // Space:   O(n)
+    bool hasSubarray(vector<int>& nums, int k) {
+        unordered_set<int> sums;
+        int sum = 0;
+        for (int num : nums) {
+            sums.insert(sum);
+            sum += num;
+            if (sum == k) return true;
+            if (sums.find(sum - k) != sums.end()) return true;
+        }
+        return false;
+    }
+
+    // FB: return 是否存在 (数组内全是正数)
+    // 2 Pointers
+    // Time:    O(n)
+    // Space:   O(1)
+    bool hasSubarray1(vector<int>& nums, int k) {
+        int start = 0, end = 0;
+        int sum = 0;
+        while (end < nums.size()) {
+            sum += nums[end++];
+            while (sum > k && start < end)
+                sum -= nums[start++];
+            if (sum == k) return true;
+        }
+        return sum == k;
+    }
+
+    // FB FU: LC325  what is the max/min length of a valid subarray?
+    int shotestSubarray(vector<int>& nums, int k) {
+        int result = INT_MAX;
+        unordered_map<int, int> dict;
+        dict[0] = -1;
+        int sum = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            sum += nums[i];
+            dict[sum] = i;
+            if (dict.find(sum - k) != dict.end())
+                result = min(result, dict[sum] - dict[sum - k]);
+        }
+        return result == INT_MAX ? -1 : result;
     }
 };

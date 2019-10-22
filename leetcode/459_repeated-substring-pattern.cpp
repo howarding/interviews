@@ -70,4 +70,5 @@ public:
             if (j == s.size()) return true;
         }
         return false;
+    }
 };

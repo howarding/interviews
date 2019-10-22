@@ -29,14 +29,14 @@ public:
     // Space:	O(n)
     int maxSubArrayLen(vector<int> &nums, int k) {
         if (nums.empty()) return 0;
+        unordered_map<int, int> sum_lower;
+        sum_lower[0] = -1;
         int sum = 0, result = 0;
-        unordered_map<int, int> dict;
         for (int i = 0; i < nums.size(); i++) {
             sum += nums[i];
-            if (sum == k) result = i + 1;
-            if (dict.find(sum - k) != dict.end())
-                result = max(result, i - dict[sum - k]);
-            if (dict.find(sum) == dict.end()) dict[sum] = i;
+            if (sum_lower.find(sum) == sum_lower.end()) sum_lower[sum] = i;
+            if (sum_lower.find(sum - k) != sum_lower.end())
+                result = max(result, i - sum_lower[sum - k]);
         }
         return result;
     }

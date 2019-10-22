@@ -61,4 +61,52 @@ public:
             return a[0] * a[0] + a[1] * a[1] < b[0] * b[0] + b[1] * b[1];
         }
     };
+
+    // Quick Select
+    // Time:
+    //      best/avg:   O(n)
+    //      worst:      O(n^2)
+    // Space:   O(n)
+    vector<vector<int>> kClosest1(vector<vector<int>>& points, int K) {
+        vector<vector<int>> result;
+        quick_select(points, 0, points.size() - 1, K);
+        for (int i = 0; i < K; i++) result.push_back(points[i]);
+        return result;
+    }
+
+    void quick_select(vector<vector<int>>& points, int left, int right, int K) {
+        int i = partition(points, left, right);
+        int len = i - left + 1;
+        if (len == K) return;
+        if (len > K) quick_select(points, left, i - 1, K);
+        else quick_select(points, i + 1, right, K - len);
+    }
+
+    int partition(vector<vector<int>>& points, int left, int right) {
+        int pivot = dis(points[left]);
+        int start = left++;
+        while (left < right) {
+            if (dis(points[left]) > pivot && dis(points[right]) < pivot)
+                swap(points[left++], points[right--]);
+            if (dis(points[left]) <= pivot) left++;
+            if (dis(points[right]) >= pivot) right--;
+        }
+        swap(points[start], points[right]);
+        return right;
+    }
+
+    int dis(vector<int>& point) {
+        return point[0] * point[0] + point[1] * point[1];
+    }
 };
+
+
+int main() {
+    Solution_973 sol;
+    vector<vector<int>> points{{1, 3}, {-2, 2}};
+    int K = 1;
+    vector<vector<int>> result = sol.kClosest1(points, K);
+    for (const vector<int>& point: result) {
+        cout << point[0] << "\t" << point[1] << endl;
+    }
+}
