@@ -71,6 +71,10 @@ public:
         priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_greater> min_heap;
         priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_less1> max_heap1;
         priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_greater1> min_heap1;
+
+        priority_queue<int> max_heap_int;
+        priority_queue<int, vector<int>, less<int>> max_heap_int1;
+        priority_queue<int, vector<int>, greater<int>> min_heap_int;
     }
 };
 

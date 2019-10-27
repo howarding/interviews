@@ -36,6 +36,7 @@ using namespace std;
 
 class Solution_438 {
 public:
+    // HashMap
     vector<int> findAnagrams(string s, string p) {
         vector<int> result;
         if (s.size() < p.size()) return result;

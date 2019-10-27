@@ -54,7 +54,7 @@ public:
     }
 
     struct cmp {
-        bool operator()(pair<string, int> a, pair<string, int> b) {
+        bool operator()(pair<string, int>& a, pair<string, int>& b) {
             return a.second > b.second || (a.second == b.second && a.first < b.first);
         }
     };

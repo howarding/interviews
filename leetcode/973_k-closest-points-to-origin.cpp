@@ -101,12 +101,12 @@ public:
 };
 
 
-int main() {
-    Solution_973 sol;
-    vector<vector<int>> points{{1, 3}, {-2, 2}};
-    int K = 1;
-    vector<vector<int>> result = sol.kClosest1(points, K);
-    for (const vector<int>& point: result) {
-        cout << point[0] << "\t" << point[1] << endl;
-    }
-}
+//int main() {
+//    Solution_973 sol;
+//    vector<vector<int>> points{{1, 3}, {-2, 2}};
+//    int K = 1;
+//    vector<vector<int>> result = sol.kClosest1(points, K);
+//    for (const vector<int>& point: result) {
+//        cout << point[0] << "\t" << point[1] << endl;
+//    }
+//}
