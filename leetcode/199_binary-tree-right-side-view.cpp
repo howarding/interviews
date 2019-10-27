@@ -56,7 +56,7 @@ public:
 
 
 
-    // DFS, InOrder (reverse)
+    // DFS, PreOrder (reverse)
     // Exp: https://discuss.leetcode.com/topic/11768/my-simple-accepted-solution-java
     // Time:	O(n)
     // Space:	O(1)

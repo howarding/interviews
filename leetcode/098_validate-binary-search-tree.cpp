@@ -39,29 +39,14 @@ struct TreeNode {
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+ // FB: 要确认左边数是否是 <= 还是 <  node->val
 class Solution_098 {
 public:
-    // Inorder  Recursive
-    // Time:	O(n)
-    // Space:	O(1)
-    bool isValidBST(TreeNode *root) {
-        TreeNode *prev = nullptr;
-        return helper(root, prev);
-    }
-
-    bool helper(TreeNode *node, TreeNode *&prev) {
-        if (!node) return true;
-        if (!helper(node->left, prev)) return false;
-        if (prev && prev->val >= node->val) return false;
-        prev = node;
-        return helper(node->right, prev);
-    }
-
-
     // Inorder  Iterative   FASTER
+    // 左边数 <= 或者 < node->val  都可以！！！
     // Time:	O(n)
     // Space:	O(n)
-    bool isValidBST_1(TreeNode *root) {
+    bool isValidBST(TreeNode *root) {
         if (!root) return true;
         stack<TreeNode *> stk;
         TreeNode *prev = nullptr;
@@ -72,11 +57,31 @@ public:
             } else {
                 root = stk.top();
                 stk.pop();
-                if (prev && prev->val >= root->val) return false;
+                if (prev && prev->val >= root->val) return false;   // 左边数 <= node->val
+                // if (prev && prev->val > root->val) return false; // 左边数 < node->val
                 prev = root;
                 root = root->right;
             }
         }
         return true;
+    }
+
+
+    // Inorder  Recursive
+    // 左边数 <= 或者 < node->val  都可以！！！
+    // Time:	O(n)
+    // Space:	O(1)
+    bool isValidBST1(TreeNode *root) {
+        TreeNode *prev = nullptr;
+        return helper(root, prev);
+    }
+
+    bool helper(TreeNode *node, TreeNode *&prev) {
+        if (!node) return true;
+        if (!helper(node->left, prev)) return false;
+        if (prev && prev->val >= node->val) return false;       // 左边数 <= node->val
+        // if (prev && prev->val > node->val) return false;     // 左边数 < node->val
+        prev = node;
+        return helper(node->right, prev);
     }
 };
