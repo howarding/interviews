@@ -1,135 +1,145 @@
 #include<iostream>
 #include <list>
+#include <vector>
 #include <queue>
 #include <stack>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
+typedef int Node;
 
 class Graph {
-    int V;                  // # nodes
-    vector<list<int>> adj;  // adjacency list
-    vector<int> indegree;   // indegree of each node
+    unordered_map<Node, vector<Node>> adj;
+    unordered_map<Node, size_t> indegree;
+    unordered_set<Node> nodes;
 public:
-    Graph(int v) {
-        V = v;
-        adj = vector<list<int>>(V, list<int>());
-        indegree = vector<int>(V);
-    }
+    Graph() {}
 
     ~Graph() {
-//        delete adj;
-//        delete indegree;
+//        delete adj1;
+//        delete indegree1;
     }
 
-    void addEdge(int v, int w) {
-        adj[v].push_back(w);
-        indegree[w]++;
+    void addEdge(Node u, Node v) {
+        adj[u].push_back(v);
+        indegree[v]++;
+        nodes.insert(u);
+        nodes.insert(v);
     }
 
     // Kahn's Algorithm == BFS
     // Time:	O(V + E)
     // Space:	O(V)
-    bool topological_sort() {
-        queue<int> que;           // a set of nodes with 0 indegree
-        for (int i = 0; i < V; i++)
-            if (!indegree[i])
-                que.push(i);        // push all nodes with 0 indegree
+    vector<Node> getTopologicalSort_BFS() {
+        vector<Node> result;
+        if (nodes.empty()) return result;
 
-        int count = 0;              // count # nodes that have been output so far.
+        queue<Node> que;
+        for (const Node& node: nodes)
+            if (indegree[node] == 0)
+                que.push(node);     // start from those root nodes.
+
+        int count = 0;
         while (!que.empty()) {
-            int v = que.front();
+            Node node = que.front();
             que.pop();
 
-            cout << v << "\t";       // output the current node
+            result.push_back(node);
             count++;
 
-            // reduce the indegree of v's destination nodes by 1.
-            for (auto &neighbor : adj[v])
-                if (!(--indegree[neighbor]))
-                    que.push(neighbor);   // push nodes with 0 indegree into que
+            for (const Node& neighbor: adj[node])
+                if (--indegree[neighbor] == 0)
+                    que.push(neighbor);
         }
 
-        return count == V;          // validate there's no cycle in the graph.
+        return count == nodes.size() ? result : vector<Node>();
     }
 
-    // DFS
+    // DFS + Stack
     // Time:	O(V + E)
     // Space:	O(V)
-    bool topological_sort_dfs() {
-        stack<int> stk;
-        vector<bool> visited(V, false), onPath(V, false);
+    vector<Node> getTopologicalSort_DFS() {
+        vector<Node> result;
+        if (nodes.empty()) return result;
 
-        for (int i = 0; i < V; i++)
-            if (!visited[i] && !topological_sort_helper(i, visited, onPath, stk))
-                return false;
+        stack<Node> stk;
+        unordered_set<Node> visited, onPath;
+
+        for (const Node& node: nodes)
+            if (visited.find(node) == visited.end() && !helper(node, visited, onPath, stk))
+                return result;
 
         while (!stk.empty()) {
-            cout << stk.top() << "\t";
+            result.push_back(stk.top());
             stk.pop();
         }
-        return true;
-    }
-
-    bool topological_sort_helper(int node, vector<bool> &visited, vector<bool>& onPath, stack<int> &stk) {
-        onPath[node] = visited[node] = true;
-        for (int child : adj[node])
-            if (onPath[child] || (!visited[child] && !topological_sort_helper(child, visited, onPath, stk)))
-                return false;
-        stk.push(node);
-        onPath[node] = false;
-        return true;
-    }
-
-
-    // Generate all Topological Sort
-    vector<vector<int>> all_topological_sort() {
-        vector<bool> visited(V, false);
-        vector<int> path;
-        vector<vector<int>> result;
-        all_topological_sort_helper(path, result, visited);
         return result;
     }
 
-    void all_topological_sort_helper(vector<int> &path, vector<vector<int>> &result, vector<bool> &visited) {
-        if (path.size() == V) {
+    bool helper(Node node, unordered_set<Node>& visited, unordered_set<Node>& onPath, stack<Node>& stk) {
+        onPath.insert(node);
+        visited.insert(node);
+        for (Node& neighbor: adj[node])
+            if (onPath.find(neighbor) != onPath.end()
+            || (visited.find(neighbor) == visited.end() && !helper(neighbor, visited, onPath, stk)))
+                return false;
+        stk.push(node);
+        onPath.erase(node);
+        return true;
+    }
+
+    // Generate all Topological Sort
+    vector<vector<Node>> getAllTopologicalSort() {
+        unordered_set<Node> visited;
+        vector<Node> path;
+        vector<vector<Node>> result;
+        helper2(visited, path, result);
+        return result;
+    }
+
+    void helper2(unordered_set<Node>& visited, vector<Node>& path, vector<vector<Node>>& result) {
+        if (path.size() == nodes.size()) {
             result.push_back(path);
             return;
         }
-        for (int i = 0; i < V; i++)
-            if (!indegree[i] && !visited[i]) {
-                for (int neighbor : adj[i])
+        for (const Node& node: nodes)
+            if (indegree[node] == 0 && visited.find(node) == visited.end()) {
+                path.push_back(node);
+                visited.insert(node);
+                for (Node& neighbor: adj[node])
                     indegree[neighbor]--;
 
-                path.push_back(i);
-                visited[i] = true;
-                all_topological_sort_helper(path, result, visited);
+                helper2(visited, path, result);
 
-                visited[i] = false;
                 path.pop_back();
-                for (int neighbor : adj[i])
+                visited.erase(node);
+                for (Node& neighbor: adj[node])
                     indegree[neighbor]++;
             }
     }
 };
 
 
-//int main() {
-//    Graph graph(6);
-//    graph.addEdge(5, 2);
-//    graph.addEdge(5, 0);
-//    graph.addEdge(4, 0);
-//    graph.addEdge(4, 1);
-//    graph.addEdge(2, 3);
-//    graph.addEdge(3, 1);
-//
-//    graph.topological_sort();
-//    cout << endl;
-//    graph.topological_sort_dfs();
-//    cout << endl;
-//    vector<vector<int>> result(graph.all_topological_sort());
-//    for (auto& path : result) {
-//        for (int ele : path)
-//            cout << ele << "\t";
-//        cout << endl;
-//    }
-//}
+int main() {
+    Graph graph;
+    graph.addEdge(5, 2);
+    graph.addEdge(5, 0);
+    graph.addEdge(4, 0);
+    graph.addEdge(4, 1);
+    graph.addEdge(2, 3);
+    graph.addEdge(3, 1);
+    // graph.addEdge(1, 5);     // to check whether topological sort can detect this cycle.
+
+    vector<Node> result1(graph.getTopologicalSort_BFS());
+    vector<Node> result2(graph.getTopologicalSort_DFS());
+    for (const Node& node: result2)
+        cout << node << "\t";
+    cout << endl;
+    vector<vector<Node>> result(graph.getAllTopologicalSort());
+    for (auto& path : result) {
+        for (Node& ele : path)
+            cout << ele << "\t";
+        cout << endl;
+    }
+}
