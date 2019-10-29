@@ -121,25 +121,25 @@ public:
 };
 
 
-int main() {
-    Graph graph;
-    graph.addEdge(5, 2);
-    graph.addEdge(5, 0);
-    graph.addEdge(4, 0);
-    graph.addEdge(4, 1);
-    graph.addEdge(2, 3);
-    graph.addEdge(3, 1);
-    // graph.addEdge(1, 5);     // to check whether topological sort can detect this cycle.
-
-    vector<Node> result1(graph.getTopologicalSort_BFS());
-    vector<Node> result2(graph.getTopologicalSort_DFS());
-    for (const Node& node: result2)
-        cout << node << "\t";
-    cout << endl;
-    vector<vector<Node>> result(graph.getAllTopologicalSort());
-    for (auto& path : result) {
-        for (Node& ele : path)
-            cout << ele << "\t";
-        cout << endl;
-    }
-}
+//int main() {
+//    Graph graph;
+//    graph.addEdge(5, 2);
+//    graph.addEdge(5, 0);
+//    graph.addEdge(4, 0);
+//    graph.addEdge(4, 1);
+//    graph.addEdge(2, 3);
+//    graph.addEdge(3, 1);
+//    // graph.addEdge(1, 5);     // to check whether topological sort can detect this cycle.
+//
+//    vector<Node> result1(graph.getTopologicalSort_BFS());
+//    vector<Node> result2(graph.getTopologicalSort_DFS());
+//    for (const Node& node: result2)
+//        cout << node << "\t";
+//    cout << endl;
+//    vector<vector<Node>> result(graph.getAllTopologicalSort());
+//    for (auto& path : result) {
+//        for (Node& ele : path)
+//            cout << ele << "\t";
+//        cout << endl;
+//    }
+//}
