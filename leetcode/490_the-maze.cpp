@@ -55,7 +55,6 @@ public:
     // Time:	O(mn)
     // Space:	O(mn)
     bool hasPath(vector<vector<int>> &maze, vector<int> &start, vector<int> &destination) {
-        bool result = false;
         if (maze.empty()) return false;
         int m = maze.size(), n = maze[0].size();
         int x = start[0], y = start[1];
@@ -64,15 +63,14 @@ public:
         visited.insert(x * n + y);
 
         for (int k = 0; k < 4; k++)
-            result |= dfs(maze, start, destination, visited, directions, k);
-        return result;
+            if (dfs(maze, start, destination, visited, directions, k)) return true;
+        return false;
     }
 
     bool dfs(vector<vector<int>> &maze, vector<int> &start, vector<int> &destination, unordered_set<int> &visited,
              vector<vector<int>> &directions, int k) {
         int m = maze.size(), n = maze[0].size();
         int i = start[0], j = start[1], di = directions[k][0], dj = directions[k][1];
-        bool result = false;
         while (i >= 0 && i < m && j >= 0 && j < n && !maze[i][j]) {
             i += di;
             j += dj;
@@ -81,10 +79,8 @@ public:
         if (hit == destination) return true;
         if (visited.find(hit[0] * n + hit[1]) != visited.end()) return false;
         visited.insert(hit[0] * n + hit[1]);
-        for (int l = 0; l < 4; l++) {
-            if (l == k) continue;
-            result |= dfs(maze, hit, destination, visited, directions, l);
-        }
-        return result;
+        for (int l = 0; l < 4; l++)
+            if (l != k && dfs(maze, hit, destination, visited, directions, l)) return true;
+        return false;
     }
 };

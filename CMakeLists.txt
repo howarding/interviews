@@ -20,5 +20,10 @@ add_executable(
         ${mainJing_spotify}
         ${prototype}
         ${test}
+        leetcode/953_verifying-an-alien-dictionary.cpp
         mianjing_fb/task_sheduler.cpp
-)
+        mianjing_fb/maze_walking.cpp
+        mianjing_fb/select_kth_element.cpp
+        mianjing_fb/graph_clone.cpp
+        mianjing_fb/intersection_of_two_sorted_arrays.cpp
+        mianjing_fb/sorted_iterator_over_k_sorted_lists.cpp)

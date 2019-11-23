@@ -28,45 +28,63 @@
 
 using namespace std;
 
-struct UndirectedGraphNode {
-    int label;
-    vector<UndirectedGraphNode *> neighbors;
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    vector<Node*> neighbors;
 
-    UndirectedGraphNode(int x) : label(x) {};
+    Node() {}
+
+    Node(int _val, vector<Node*> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
 };
 
-/**
- * Definition for undirected graph.
- * struct UndirectedGraphNode {
- *     int label;
- *     vector<UndirectedGraphNode *> neighbors;
- *     UndirectedGraphNode(int x) : label(x) {};
- * };
- */
+
+// FB
 class Solution_133 {
 public:
+    // BFS, Iterative
     // Exp: https://discuss.leetcode.com/topic/16957/7-17-lines-c-bfs-dfs-solutions
     // Time:	O(n)
     // Space:	O(n)
-    UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
+    Node* cloneGraph(Node* node) {
         if (!node) return node;
-        UndirectedGraphNode *result = new UndirectedGraphNode(node->label);
-        unordered_map<UndirectedGraphNode *, UndirectedGraphNode *> map;
-        map[node] = result;
-        queue<UndirectedGraphNode *> nodes;
-        nodes.push(node);
-        while (!nodes.empty()) {
-            UndirectedGraphNode *ele = nodes.front();
-            nodes.pop();
-            for (auto neighbor: ele->neighbors) {
-                if (map.find(neighbor) == map.end()) {
-                    UndirectedGraphNode *neighbor_clone = new UndirectedGraphNode(neighbor->label);
-                    map[neighbor] = neighbor_clone;
-                    nodes.push(neighbor);
+        unordered_map<Node*, Node*> dict;
+        dict[node] = new Node(node->val, vector<Node*>());
+        queue<Node*> que;
+        que.push(node);
+        while (!que.empty()) {
+            Node* ele = que.front();
+            que.pop();
+            for (Node* neighbor: ele->neighbors) {
+                if (dict.find(neighbor) == dict.end()) {
+                    dict[neighbor] = new Node(neighbor->val, vector<Node*>());
+                    que.push(neighbor);
                 }
-                map[ele]->neighbors.push_back(map[neighbor]);
+                dict[ele]->neighbors.push_back(dict[neighbor]);
             }
         }
-        return result;
+        return dict[node];
+    }
+
+
+    // DFS, Recursive
+    // Time:	O(n)
+    // Space:	O(n)
+    Node* cloneGraph2(Node* node) {
+        unordered_map<Node*, Node*> dict;
+        return helper(node, dict);
+    }
+
+    Node* helper(Node* node, unordered_map<Node*, Node*>& dict) {
+        if (dict.find(node) != dict.end())
+            return dict[node];
+        dict[node] = new Node(node->val, vector<Node*>());
+        for (Node* neighbor: node->neighbors)
+            dict[node]->neighbors.push_back(helper(neighbor, dict));
+        return dict[node];
     }
 };
