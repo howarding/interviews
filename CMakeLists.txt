@@ -26,4 +26,6 @@ add_executable(
         mianjing_fb/select_kth_element.cpp
         mianjing_fb/graph_clone.cpp
         mianjing_fb/intersection_of_two_sorted_arrays.cpp
-        mianjing_fb/sorted_iterator_over_k_sorted_lists.cpp)
+        mianjing_fb/sorted_iterator_over_k_sorted_lists.cpp
+        mianJing_google/dice-combinations.cpp
+        mianJing_google/array-difference.cpp mianJing_google/AlliesAssociated.cpp prototype/union-find.cpp)
