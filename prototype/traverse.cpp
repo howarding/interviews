@@ -69,11 +69,9 @@ public:
     // DFS recursive
     void dfs_recursive() {
         unordered_set<int> visited;
-        for (int root : nodes) {
-            if (visited.find(root) == visited.end()) {
+        for (int root : nodes)
+            if (visited.find(root) == visited.end())
                 helper(visited, root);
-            }
-        }
         cout << endl;
     }
 

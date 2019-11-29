@@ -100,8 +100,8 @@ public:
 
     // Time:    O(log(n))
     void Union(string& node1, string& node2) {
-        string root1 = parent[node1];
-        string root2 = parent[node2];
+        string root1 = Find(node1);
+        string root2 = Find(node2);
         if (root1 == root2) return;
         if (sz[root1] < sz[root2]) {
             parent[root1] = root2;

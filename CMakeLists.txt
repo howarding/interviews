@@ -28,4 +28,4 @@ add_executable(
         mianjing_fb/intersection_of_two_sorted_arrays.cpp
         mianjing_fb/sorted_iterator_over_k_sorted_lists.cpp
         mianJing_google/dice-combinations.cpp
-        mianJing_google/array-difference.cpp mianJing_google/AlliesAssociated.cpp prototype/union-find.cpp)
+        mianJing_google/array-difference.cpp mianJing_google/AlliesAssociated.cpp prototype/union-find.cpp leetcode/947_most-stones-removed-with-same-row-or-column.cpp)
