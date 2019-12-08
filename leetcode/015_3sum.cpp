@@ -21,7 +21,7 @@ public:
     // Sort + Two Sum II (2 Pointers)
     // Exp: https://discuss.leetcode.com/topic/8107/share-my-ac-c-solution-around-50ms-o-n-n-with-explanation-and-comments/16
     // Time:    O(n^2)
-    // Space:    O(n)
+    // Space:    O(1)
     vector<vector<int>> threeSum(vector<int> &nums) {
         vector<vector<int>> result;
         if (nums.size() < 3) return result;
@@ -50,6 +50,9 @@ public:
 
 
     // FU 1. 如果不能排序怎么做，没有duplicate elements
+    // SET
+    // Time:    O(n^2)
+    // Space:   O(n)
     vector<vector<int>> threeSum_fbfu1(vector<int> &nums) {
         vector<vector<int>> result;
         if (nums.size() < 3) return result;
