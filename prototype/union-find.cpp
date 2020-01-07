@@ -34,7 +34,7 @@ public:
 
     // Time:    O(1)
     bool isConnected(string& node1, string& node2) {
-        return node_group[node1] == node_group[node2];
+        return Find(node1) == Find(node2);
     }
 
     // Time:    O(1)
@@ -58,15 +58,15 @@ public:
 
     // Time:    O(h)
     void Union(string& node1, string& node2) {
-        string root1 = parent[node1];
-        string root2 = parent[node2];
+        string root1 = Find(node1);
+        string root2 = Find(node2);
         if (root1 == root2) return;
         parent[root2] = root1;
         groupNum--;
     }
 
     // Time:    O(h)
-    string Find(string& node) {
+    string Find(string node) {
         while (parent[node] != node)
             node = parent[node];
         return node;
@@ -114,7 +114,7 @@ public:
     }
 
     // Time:    O(log(n))
-    string Find(string& node) {
+    string Find(string node) {
         while (parent[node] != node) {
             // parent[node] = parent[parent[node]];    // 将node的父节点设置为它的爷爷节点，压缩树的深度，查找更快
             node = parent[node];
