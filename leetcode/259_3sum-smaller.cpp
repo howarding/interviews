@@ -16,7 +16,8 @@ using namespace std;
 
 class Solution_259 {
 public:
-    // Exp: https://discuss.leetcode.com/topic/23421/simple-and-easy-understanding-o-n-2-java-solution
+    // Sort + 2 Pointers
+    // Exp: https://leetcode.com/problems/3sum-smaller/solution/
     // Time:	O(n^2)
     // Space:	O(1)
     int threeSumSmaller(vector<int> &nums, int target) {
