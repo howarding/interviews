@@ -13,13 +13,17 @@
 #include <iostream>
 #include <vector>
 #include <unordered_set>
+#include <unordered_map>
+#include <set>
+#include <iterator>
 
 using namespace std;
 
 class Solution_015 {
 public:
+    // BEST
     // Sort + Two Sum II (2 Pointers)
-    // Exp: https://discuss.leetcode.com/topic/8107/share-my-ac-c-solution-around-50ms-o-n-n-with-explanation-and-comments/16
+    // Exp: https://leetcode.com/problems/3sum/solution/
     // Time:    O(n^2)
     // Space:    O(1)
     vector<vector<int>> threeSum(vector<int> &nums) {
@@ -48,12 +52,37 @@ public:
         return result;
     }
 
+    // Sort + Two Sum (HashSet)
+    // Time:    O(n^2)
+    // Space:    O(n)
+    vector<vector<int>> threeSum1(vector<int>& nums) {
+        vector<vector<int>> result;
+        if (nums.size() < 3) return result;
+        sort(nums.begin(), nums.end());
+        for (int i = 0; i < nums.size() - 2 && nums[i] <= 0; i++) {
+            twoSum(nums, i, result);
+            while (i < nums.size() - 2 && nums[i] == nums[i + 1]) i++;
+        }
+        return result;
+    }
+
+    void twoSum(vector<int>& nums, int i, vector<vector<int>>& result) {
+        unordered_set<int> visited;
+        for (int j = i + 1; j < nums.size(); j++) {
+            int complement = -nums[i] - nums[j];
+            if (visited.find(complement) != visited.end()) {
+                result.push_back({nums[i], complement, nums[j]});
+                while (j < nums.size() - 1 && nums[j] == nums[j + 1]) j++;
+            }
+            visited.insert(nums[j]);
+        }
+    }
 
     // FU 1. 如果不能排序怎么做，没有duplicate elements
     // SET
     // Time:    O(n^2)
     // Space:   O(n)
-    vector<vector<int>> threeSum_fbfu1(vector<int> &nums) {
+    vector<vector<int>> threeSum_fbfu1(vector<int>& nums) {
         vector<vector<int>> result;
         if (nums.size() < 3) return result;
         unordered_set<int> visited;
@@ -68,6 +97,28 @@ public:
             }
         }
         return result;
+    }
+
+    vector<vector<int>> threeSum_fbfu2(vector<int>& nums) {
+        if (nums.size() < 3) return {};
+        set<vector<int>> result;
+        unordered_set<int> dups;
+        unordered_map<int, int> visited;
+        for (int i = 0; i < nums.size() - 2; i++) {
+            if (dups.insert(nums[i]).second) {
+                for (int j = i + 1; j < nums.size(); j++) {
+                    int remain = -nums[i] - nums[j];
+                    unordered_map<int, int>::iterator iter = visited.find(remain);
+                    if (iter != visited.end() && iter->second == i) {
+                        vector<int> triplet = {nums[i], nums[j], remain};
+                        sort(triplet.begin(), triplet.end());
+                        result.insert(triplet);
+                    }
+                    visited[nums[j]] = i;
+                }
+            }
+        }
+        return {result.begin(), result.end()};
     }
 
 
