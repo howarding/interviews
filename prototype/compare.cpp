@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// 1. Function object CLASS
+// 1. Function-object CLASS
 struct Cmp_less {
     bool operator()(const pair<string, int>& a, const pair<string, int>& b) {
         return a.second < b.second;
@@ -60,20 +60,24 @@ public:
         // Function object
         Cmp_less cmp_less;
         Cmp_greater cmp_greater;
+
+        // sort: https://en.cppreference.com/w/cpp/algorithm/sort
         sort(result.begin(), result.end(), cmp_less);
         sort(result.begin(), result.end(), cmp_greater);
 
 
 
         // heaps
-        // Function object CLASS
+        // Function-object CLASS
         priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_less> max_heap;
         priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_greater> min_heap;
         priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_less1> max_heap1;
         priority_queue<pair<string, int>, vector<pair<string, int>>, Cmp_greater1> min_heap1;
 
+        // priority_queue: https://en.cppreference.com/w/cpp/container/priority_queue
         priority_queue<int> max_heap_int;
         priority_queue<int, vector<int>, less<int>> max_heap_int1;
+        priority_queue<int, vector<int>, less<vector<int>::value_type>> max_heap_int2;
         priority_queue<int, vector<int>, greater<int>> min_heap_int;
     }
 };

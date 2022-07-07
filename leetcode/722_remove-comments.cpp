@@ -97,11 +97,11 @@ public:
     }
 };
 
-int main() {
-    Solution_722 sol;
-    cout << "722_remove-comments" << endl;
-    vector<string> source = {"/*Test program */", "int main()", "{ ", "  // variable declaration ", "int a, b, c;", "/* This is a test", "   multiline  ", "   comment for ", "   testing */", "a = b + c;", "}"};
-    vector<string> result = sol.removeComments(source);
-    for (string& line: result)
-        cout << line << endl;
-}
+//int main() {
+//    Solution_722 sol;
+//    cout << "722_remove-comments" << endl;
+//    vector<string> source = {"/*Test program */", "int main()", "{ ", "  // variable declaration ", "int a, b, c;", "/* This is a test", "   multiline  ", "   comment for ", "   testing */", "a = b + c;", "}"};
+//    vector<string> result = sol.removeComments(source);
+//    for (string& line: result)
+//        cout << line << endl;
+//}
