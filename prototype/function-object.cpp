@@ -114,4 +114,17 @@ int main() {
     iter = find_if(sen.begin(), sen.end(), SizeLess());
     strings.print<string>(iter, sen.end());
 
+    cout << endl << endl << "Sentence 5:" << endl;
+    sen = sentence3;
+    cout << "\tBefore sorting:" << endl;
+    strings.print<string>(sen.begin(), sen.end());
+    cout << "\tAfter sorting:" << endl;
+    /** Function pointer */
+    sort(sen.begin(), sen.end(), Strings::compare_less);
+    strings.print<string>(sen.begin(), sen.end());
+    cout << "\tFind greater:" << endl;
+    /** Value Function object */
+    iter = find_if(sen.begin(), sen.end(), SizeGreater(5));
+    strings.print<string>(iter, sen.end());
+
 }
