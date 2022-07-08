@@ -60,12 +60,22 @@ public:
         // Function object
         Cmp_less cmp_less;
         Cmp_greater cmp_greater;
+        Cmp_less1 cmp_less1;
+        Cmp_greater1 cmp_greater1;
 
         // sort: https://en.cppreference.com/w/cpp/algorithm/sort
         sort(result.begin(), result.end(), cmp_less);
         sort(result.begin(), result.end(), cmp_greater);
+        sort(result.begin(), result.end(), Cmp_less());
+        sort(result.begin(), result.end(), Cmp_greater());
+
+        sort(result.begin(), result.end(), cmp_less1);
+        sort(result.begin(), result.end(), cmp_greater1);
+        sort(result.begin(), result.end(), Cmp_less1());
+        sort(result.begin(), result.end(), Cmp_greater1());
 
 
+        cout << Cmp_greater()({"1", 1}, {"2", 2});
 
         // heaps
         // Function-object CLASS
