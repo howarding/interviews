@@ -21,4 +21,4 @@ add_executable(
         ${prototype}
         ${test}
         prototype/class-initialize.cpp
-        prototype/function-object.cpp)
+        prototype/function-object.cpp prototype/callable-objects.cpp)
