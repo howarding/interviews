@@ -39,7 +39,7 @@ public:
     // Time:    O(n)
     // Space:   O(1)
     bool find(int value) {
-        for (auto &i : nums) {
+        for (auto& i : nums) {
             int num = i.first;
             int remain = value - num;
             if (nums.find(remain) != nums.end())
@@ -57,7 +57,7 @@ private:
     set<int> numbers;
 public:
 
-    /** Add the number to an internal data structure.. */
+    /** Add the number to an internal data structure. */
     // Time:    O(n)
     // Space:   O(n)
     void add2(int number) {
