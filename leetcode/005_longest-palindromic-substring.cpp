@@ -19,19 +19,20 @@ using namespace std;
 
 class Solution_005 {
 public:
-    // Faster, remove duplicate chars
+    // Faster, skip palindrome checks on duplicate chars
     // Exp: https://discuss.leetcode.com/topic/12187/simple-c-solution-8ms-13-lines
+    // Exp: https://leetcode.com/problems/longest-palindromic-substring/solution/
     // Time:	O(n^2)
     // Space:	O(1)
     string longestPalindrome(string s) {
         if (s.empty()) return "";
         if (s.size() == 1) return s;
         int start_ind = 0, max_len = 1;
-        for (int i = 0; i < s.size();) {
+        for (int i = 0; i < s.size(); i++) {
             if ((s.size() - i) * 2 <= max_len) break;
             int start = i, end = i;
             while (end + 1 < s.size() && s[end + 1] == s[end]) end++;
-            i = end + 1;
+            i = end;
             while (end + 1 < s.size() && start > 0 && s[end+1] == s[start-1]) {
                 start--;
                 end++;
