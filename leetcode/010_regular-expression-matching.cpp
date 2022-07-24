@@ -91,8 +91,8 @@ public:
     }
 };
 
-int main() {
-    Solution_010 sol;
-    string s = "ab", p = ".*";
-    cout << sol.isMatch_0(s, p) << endl;
-}
+//int main() {
+//    Solution_010 sol;
+//    string s = "ab", p = ".*";
+//    cout << sol.isMatch_0(s, p) << endl;
+//}
