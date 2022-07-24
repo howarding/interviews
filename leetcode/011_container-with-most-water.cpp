@@ -19,6 +19,7 @@ public:
         while (left < right) {
             int h = min(height[left], height[right]);
             water = max(water, (right - left) * h);
+            // For those heights less than h, just skip them. No need to do max every time.
             while (height[left] <= h && left < right) left++;
             while (height[right] <= h && left < right) right--;
         }
