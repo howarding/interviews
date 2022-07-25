@@ -18,7 +18,6 @@ public:
                                           {'[', ']'},
                                           {'{', '}'}};
         stack<char> sta;
-        if (s.empty()) return true;
         for (char c : s) {
             if (dict.find(c) != dict.end()) {
                 sta.push(c);
