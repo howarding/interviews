@@ -140,23 +140,23 @@ void print(const Node& node) {
     cout << "Function on " << node << endl;
 }
 
-int main() {
-    /**
-     * Make a graph with the structure:
-     *      2 -- 1 -- 0 -- 4 -- 3
-     *           |         |
-     *           5         6
-     */
-    Graph g;
-    vector<Node> nodes{Node(0), Node(1), Node(2), Node(3), Node(4), Node(5), Node(6)};
-    g.addEdge(nodes[1], nodes[5]);
-    g.addEdge(nodes[1], nodes[0]);
-    g.addEdge(nodes[2], nodes[1]);
-    g.addEdge(nodes[3], nodes[4]);
-    g.addEdge(nodes[4], nodes[0]);
-    g.addEdge(nodes[4], nodes[6]);
-
-    g.bfs(print);
-    g.dfs_iterative(print);
-    g.dfs_recursive(print);
-}
+//int main() {
+//    /**
+//     * Make a graph with the structure:
+//     *      2 -- 1 -- 0 -- 4 -- 3
+//     *           |         |
+//     *           5         6
+//     */
+//    Graph g;
+//    vector<Node> nodes{Node(0), Node(1), Node(2), Node(3), Node(4), Node(5), Node(6)};
+//    g.addEdge(nodes[1], nodes[5]);
+//    g.addEdge(nodes[1], nodes[0]);
+//    g.addEdge(nodes[2], nodes[1]);
+//    g.addEdge(nodes[3], nodes[4]);
+//    g.addEdge(nodes[4], nodes[0]);
+//    g.addEdge(nodes[4], nodes[6]);
+//
+//    g.bfs(print);
+//    g.dfs_iterative(print);
+//    g.dfs_recursive(print);
+//}
