@@ -18,24 +18,32 @@ using namespace std;
 
 class Solution_022 {
 public:
-    // Exp: DFS
+    // Exp: Backtrack
     // Time:	O(n)
     // Space:	O(n)
     vector<string> generateParenthesis(int n) {
+        int left = 0, right = 0;
         vector<string> result;
+        string path;
         if (n > 0)
-            generate(n, "", 0, 0, result);
+            helper(n, left, right, path, result);
         return result;
     }
 
-    void generate(int n, string s, int l, int r, vector<string> &result) {
-        if (l == n) {
-            s.append(n - r, ')');
-            result.push_back(s);
+    void helper(int n, int left, int right, string& path, vector<string>& result) {
+        if (left == n && right == n) {
+            result.push_back(path);
             return;
         }
-        generate(n, s + '(', l + 1, r, result);
-        if (l > r)
-            generate(n, s + ')', l, r + 1, result);
+        if (left < n) {
+            path.push_back('(');
+            helper(n, left + 1, right, path, result);
+            path.pop_back();
+        }
+        if (left > right) {
+            path.push_back(')');
+            helper(n, left, right + 1, path, result);
+            path.pop_back();
+        }
     }
 };
