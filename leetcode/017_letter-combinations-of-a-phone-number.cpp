@@ -24,20 +24,22 @@ public:
         vector<string> result;
         if (digits.empty()) return result;
         vector<string> dict = {" ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-        string path = "";
+        string path;
         int ind = 0;
         dfs(digits, dict, ind, path, result);
         return result;
     }
 
-    void dfs(string &digits, vector<string> &dict, int ind, string path, vector<string> &result) {
+    void dfs(string& digits, vector<string>& dict, int ind, string& path, vector<string>& result) {
         if (ind == digits.size()) {
             result.push_back(path);
             return;
         }
-        int len = dict[digits[ind] - '0'].size();
-        for (int i = 0; i < len; i++)
-            dfs(digits, dict, ind + 1, path + dict[digits[ind] - '0'][i], result);
+        for (char c: dict[digits[ind] - '0']) {
+            path.push_back(c);
+            dfs(digits, dict, ind + 1, path, result);
+            path.pop_back();
+        }
     }
 
 
