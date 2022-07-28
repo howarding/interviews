@@ -20,7 +20,6 @@ using namespace std;
 struct ListNode {
     int val;
     ListNode *next;
-
     ListNode(int x) : val(x), next(NULL) {}
 };
 
@@ -34,10 +33,52 @@ struct ListNode {
  */
 class Solution_025 {
 public:
+    // Best
+    // MY OWN: Iterative
+    // Reverse k nodes batch by batch
+    // Time:	O(n)    2 PASS
+    // Space:	O(1)
+    ListNode *reverseKGroup(ListNode *head, int k) {
+        if (head == nullptr || head->next == nullptr || k == 1) return head;
+        auto* dummy = new ListNode(-1);
+        dummy->next = head;
+        ListNode *start = head, *end = dummy, *p = dummy;
+        int i = 0;
+        while(end) {
+            // Not reached k nodes yet.
+            if (i++ < k)
+                end = end->next;
+            // Got k nodes in a batch
+            else {
+                ListNode* tmp = end->next;
+                // Reverse the k nodes
+                reverse(start, end);
+                p->next = start;
+                start = end->next = tmp;
+                p = end;
+                i = 0;
+            }
+        }
+        return dummy->next;
+    }
+
+    void reverse(ListNode* &start, ListNode* &end) {
+        ListNode* pre = nullptr;
+        ListNode* p = start;
+        ListNode* stop = end->next;
+        while (p != stop) {
+            ListNode* tmp = p->next;
+            p->next = pre;
+            pre = p;
+            p = tmp;
+        }
+        swap(start, end);
+    }
+
     // Reverse group by group
     // Time:	O(n)
     // Space:	O(1)
-    ListNode *reverseKGroup(ListNode *head, int k) {
+    ListNode *reverseKGroup1(ListNode *head, int k) {
         int count = 0;
         ListNode *dummy = new ListNode(-1);
         dummy->next = head;
