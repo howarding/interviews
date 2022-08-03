@@ -20,5 +20,4 @@ add_executable(
         ${mainJing_spotify}
         ${prototype}
         ${test}
-        prototype/class-initialize.cpp
-        prototype/function-object.cpp prototype/callable-objects.cpp)
+)
