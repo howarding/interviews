@@ -14,7 +14,8 @@ public:
     // Time:	O(m+n)
     // Space:	O(1)
     int strStr(string haystack, string needle) {
-
+        // TODO: KMP algorithm
+        return -1;
     }
 
 

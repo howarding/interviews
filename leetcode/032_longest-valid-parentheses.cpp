@@ -12,28 +12,25 @@ using namespace std;
 class Solution_032 {
 public:
     // Stack
-    // Exp: https://discuss.leetcode.com/topic/2289/my-o-n-solution-using-a-stack
-    // Time:	O(n)
+    // Exp: https://leetcode.com/problems/longest-valid-parentheses/solution/
+    // Time:	O(n)    One pass
     // Space:	O(n)
     int longestValidParentheses(string s) {
         stack<int> stk;
-        for (int i = 0; i < s.size(); i++)
-            if (s[i] == ')' && !stk.empty() && s[stk.top()] == '(')
+        int result = 0;
+        stk.push(-1);
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] == '(') stk.push(i);
+            else {
                 stk.pop();
-            else
-                stk.push(i);
-        if (stk.empty()) return s.size();
-        int result = 0, top = s.size();
-        while (!stk.empty()) {
-            int ind = stk.top();
-            stk.pop();
-            result = max(result, top - ind - 1);
-            top = ind;
+                if (stk.empty())
+                    stk.push(i);
+                else
+                    result = max(result, i - stk.top());
+            }
         }
-        result = max(result, top);
         return result;
     }
-
 
     // DP
     // Exp: https://discuss.leetcode.com/topic/2426/my-dp-o-n-solution-without-using-stack
@@ -41,6 +38,7 @@ public:
     // Space:	O(n)
     int longestValidParentheses1(string s) {
         // TODO: Complete it.
+        return -1;
     }
 };
 
