@@ -55,6 +55,19 @@ public:
                 nums[count++] = num;
         return count;
     }
+
+    // Reverse order
+    // Time:	O(n)
+    // Space:	O(1)
+    int removeElement1(vector<int>& nums, int val) {
+        int ind = nums.size() - 1;
+        for (int i = nums.size() - 1; i >= 0; i--) {
+            if (nums[i] == val) {
+                nums[i] = nums[ind--];
+            }
+        }
+        return ind + 1;
+    }
 };
 
 
