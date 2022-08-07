@@ -3,6 +3,13 @@
 
 using namespace std;
 
+
+/**
+ * Binary Search problems \n
+ * \Leetcode
+ *      034_find-first-and-last-position-of-element-in-sorted-array \n
+ *      035_search-insert-position  \n
+ */
 class BinarySearch {
 public:
     /**
