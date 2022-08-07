@@ -17,47 +17,60 @@ using namespace std;
 
 class Solution_037 {
 public:
-    // Backtracking
+    // Backtrack
     // Exp: https://discuss.leetcode.com/topic/11327/straight-forward-java-solution-using-backtracking
     // Time:	O(n^2)
     // Space:	O(n^2)
     void solveSudoku(vector<vector<char>>& board) {
-        if (board.empty()) return;
-        vector<vector<bool>> row(vector<vector<bool>>(9, vector<bool>(9, false)));
-        vector<vector<bool>> column(vector<vector<bool>>(9, vector<bool>(9, false)));
-        vector<vector<bool>> box(vector<vector<bool>>(9, vector<bool>(9, false)));
+        vector<vector<bool>> rows(9, vector<bool>(9, false));
+        vector<vector<bool>> columns(9, vector<bool>(9, false));
+        vector<vector<bool>> boxes(9, vector<bool>(9, false));
         for (int i = 0; i < 9; i++)
             for (int j = 0; j < 9; j++)
                 if (board[i][j] != '.') {
                     int num = board[i][j] - '1';
                     int k = i / 3 * 3 + j / 3;
-                    row[i][num] = column[j][num] = box[k][num] = true;
+                    rows[i][num] = columns[j][num] = boxes[k][num] = true;
                 }
-        solve(board, row, column, box, 0, 0);
+        solve(0, board, rows, columns, boxes);
     }
 
-    bool solve(
-            vector<vector<char>>& board,
-            vector<vector<bool>>& row,
-            vector<vector<bool>>& column,
-            vector<vector<bool>>& box,
-            int m,
-            int n
-    ) {
-        if (m == board.size()) return true;
-        int next_m = n == board[0].size() - 1 ? m + 1 : m;
-        int next_n = n == board[0].size() - 1 ? 0 : n + 1;
-        if (board[m][n] != '.') return solve(board, row, column, box, next_m, next_n);
-        int k = m / 3 * 3 + n / 3;
-        for (char c = '1'; c <= '9'; c++) {
-            if (row[m][c-'1'] || column[n][c-'1'] || box[k][c-'1'])
+    bool solve(int k, vector<vector<char>>& board, vector<vector<bool>>& rows, vector<vector<bool>>& columns, vector<vector<bool>>& boxes) {
+        if (k == board.size() * board[0].size()) return true;
+        int m = k / 9, n = k % 9;
+        int l = m / 3 * 3 + n / 3;
+        if (board[m][n] != '.') return solve(k + 1, board, rows, columns, boxes);
+        for (int i = 0; i < 9; i++) {
+            if (rows[m][i] || columns[n][i] || boxes[l][i])
                 continue;
-            board[m][n] = c;
-            row[m][c-'1'] = column[n][c-'1'] = box[k][c-'1'] = true;
-            if (solve(board, row, column, box, next_m, next_n)) return true;
+            board[m][n] = i + '1';
+            rows[m][i] = columns[n][i] = boxes[l][i] = true;
+            if (solve(k + 1, board, rows, columns, boxes)) return true;
             board[m][n] = '.';
-            row[m][c-'1'] = column[n][c-'1'] = box[k][c-'1'] = false;
+            rows[m][i] = columns[n][i] = boxes[l][i] = false;
         }
         return false;
     }
 };
+
+//int main() {
+//    Solution_037 solution037;
+//    vector<vector<char>> board{
+//        {'5','3','.','.','7','.','.','.','.'},
+//        {'6','.','.','1','9','5','.','.','.'},
+//        {'.','9','8','.','.','.','.','6','.'},
+//        {'8','.','.','.','6','.','.','.','3'},
+//        {'4','.','.','8','.','3','.','.','1'},
+//        {'7','.','.','.','2','.','.','.','6'},
+//        {'.','6','.','.','.','.','2','8','.'},
+//        {'.','.','.','4','1','9','.','.','5'},
+//        {'.','.','.','.','8','.','.','7','9'}
+//    };
+//
+//    solution037.solveSudoku(board);
+//    for (auto&& line: board) {
+//        for (auto c: line)
+//            cout << c << "  ";
+//        cout << endl;
+//    }
+//}

@@ -46,12 +46,12 @@ public:
     }
 };
 
-int main() {
-    Solution_034 solution034;
-//    vector<int> nums{5, 7, 7, 8, 8, 10};
-//    int target = 8;
-    vector<int> nums{2, 2};
-    int target = 3;
-    vector<int> result = solution034.searchRange(nums, target);
-    cout << result[0] << "\t" << result[1] << endl;
-}
+//int main() {
+//    Solution_034 solution034;
+////    vector<int> nums{5, 7, 7, 8, 8, 10};
+////    int target = 8;
+//    vector<int> nums{2, 2};
+//    int target = 3;
+//    vector<int> result = solution034.searchRange(nums, target);
+//    cout << result[0] << "\t" << result[1] << endl;
+//}
