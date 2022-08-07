@@ -44,4 +44,31 @@ public:
         if (nums[start] == target && nums[end] == target) return {start, end};
         return {-1, -1};
     }
+
+    vector<int> searchRange1(vector<int>& nums, int target) {
+        int left = 0, right = nums.size() - 1;
+        int mid = 0;
+        while (left <= right) {
+            mid = (left + right) / 2;
+            if (target <= nums[mid]) right = mid;
+            else left = mid + 1;
+        }
+        int start = nums[right] == target ? right : -1;
+        left = start, right = nums.size() - 1;
+        while (left <= right) {
+            mid = (left + right) / 2;
+            if (nums[mid] <= target) left = mid;
+            else right = mid - 1;
+        }
+        int end = nums[left] == target ? left : -1;
+        return vector<int>({start, end});
+    }
 };
+
+int main() {
+    Solution_034 solution034;
+    vector<int> nums{5, 7, 7, 8, 8, 10};
+    int target = 8;
+    vector<int> result = solution034.searchRange1(nums, target);
+    cout << result[0] << "\t" << result[1] << endl;
+}

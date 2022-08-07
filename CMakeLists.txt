@@ -20,4 +20,4 @@ add_executable(
         ${mainJing_spotify}
         ${prototype}
         ${test}
-)
+        prototype/binary-search.cpp)
