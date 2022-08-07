@@ -20,18 +20,18 @@ using namespace std;
 class Solution_039 {
     int count = 0;
 public:
-    // Exp: https://discuss.leetcode.com/topic/14654/accepted-16ms-c-solution-use-backtracking-easy-understand
+    // Exp: https://leetcode.com/problems/combination-sum/solution/
     // Time:
     // Space:
-    vector<vector<int>> combinationSum(vector<int> &candidates, int target) {
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> result;
         if (candidates.empty()) return result;
         vector<int> path;
-        dfs(candidates, 0, target, path, result);
+        helper(candidates, 0, target, path, result);
         return result;
     }
 
-    void dfs(vector<int> &candidates, int start, int rest, vector<int> &path, vector<vector<int>> &result) {
+    void helper(vector<int> &candidates, int start, int rest, vector<int>& path, vector<vector<int>>& result) {
         if (rest < 0) return;
         if (rest == 0) {
             result.push_back(path);
@@ -40,9 +40,23 @@ public:
 
         for (int i = start; i < candidates.size(); i++) {
             path.push_back(candidates[i]);
-            dfs(candidates, i, rest - candidates[i], path, result);
+            helper(candidates, i, rest - candidates[i], path, result);
             path.pop_back();
         }
+    }
+
+    // My Own
+    // Similar to dfs fun
+    void helper2(vector<int>& candidates, int start, int rest, vector<int>& path, vector<vector<int>>& result) {
+        if (rest < 0 || start == candidates.size()) return;
+        if (rest == 0) {
+            result.push_back(path);
+            return;
+        }
+        path.push_back(candidates[start]);
+        helper2(candidates, start, rest - candidates[start], path, result);
+        path.pop_back();
+        helper2(candidates, start + 1, rest, path, result);
     }
 };
 

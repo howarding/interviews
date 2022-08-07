@@ -38,15 +38,14 @@ public:
             result = "";
             int count = 1;
             for (int j = 1; j < pre.size(); j++)
-                if (pre[j] == pre[j-1])
-                    count++;
+                if (pre[j] == pre[j - 1]) count++;
                 else {
                     result.push_back('0' + count);
-                    result.push_back(pre[j-1]);
+                    result.push_back(pre[j - 1]);
                     count = 1;
                 }
             result.push_back('0' + count);
-            result.push_back(pre[pre.size()-1]);
+            result.push_back(pre.back());
             pre = result;
         }
         return result;
