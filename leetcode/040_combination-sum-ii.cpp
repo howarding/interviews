@@ -29,20 +29,20 @@ public:
         if (candidates.empty()) return result;
         sort(candidates.begin(), candidates.end());
         vector<int> path;
-        dfs(candidates, 0, target, path, result);
+        helper(candidates, 0, target, path, result);
         return result;
     }
 
-    void dfs(vector<int> &candidates, int start, int rest, vector<int> &path, vector<vector<int>> &result) {
+    void helper(vector<int> &candidates, int start, int rest, vector<int> &path, vector<vector<int>> &result) {
         if (rest < 0) return;
         if (rest == 0) {
             result.push_back(path);
             return;
         }
         for (int i = start; i < candidates.size(); i++) {
-            if (i != start && candidates[i] == candidates[i - 1]) continue;
+            if (i > start && candidates[i] == candidates[i - 1]) continue;
             path.push_back(candidates[i]);
-            dfs(candidates, i + 1, rest - candidates[i], path, result);
+            helper(candidates, i + 1, rest - candidates[i], path, result);
             path.pop_back();
         }
     }
