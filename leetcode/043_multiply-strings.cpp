@@ -15,6 +15,8 @@ using namespace std;
 class Solution_043 {
 public:
     // 2 nested for loops
+    // Exp: https://leetcode.com/problems/multiply-strings/solutions/1495073/multiply-strings/
+    // Approach 3
     // Exp: https://discuss.leetcode.com/topic/9449/brief-c-solution-using-only-strings-and-without-reversal
     // Time:	O(m*n)  m: length of num1. n: length of num2.
     // Space:	O(m+n)

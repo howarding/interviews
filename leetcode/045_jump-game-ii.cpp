@@ -26,12 +26,11 @@ public:
     int jump(vector<int>& nums) {
         if (nums.size() <= 1) return 0;
         int i = 0, current_reach = 0, next_reach = 0, level = 0;
-        while (i <= current_reach) {
-            if (current_reach >= nums.size() - 1) return level;
+        while (current_reach < nums.size() - 1) {
             for (; i <= current_reach; i++)
                 next_reach = max(next_reach, nums[i] + i);
-            level++;
             if (next_reach == current_reach) return INT_MAX;    //***cannot move forward from this level
+            level++;
             current_reach = next_reach;
         }
         return level;

@@ -12,6 +12,7 @@ using namespace std;
 class Solution_042 {
 public:
     // 2Pointers
+    // Exp: https://leetcode.com/problems/trapping-rain-water/solutions/127551/trapping-rain-water/
     // Exp: https://discuss.leetcode.com/topic/5125/sharing-my-simple-c-code-o-n-time-o-1-space
     // Time:	O(n)
     // Space:	O(1)
