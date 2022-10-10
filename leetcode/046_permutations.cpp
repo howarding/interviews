@@ -19,33 +19,29 @@ using namespace std;
 class Solution_046 {
 public:
     // Backtrack
-    // Exp: https://discuss.leetcode.com/topic/5881/my-elegant-recursive-c-solution-with-inline-explanation
-    // Time:	O(n)
-    // Space:	O(1)
-    vector<vector<int>> permute(vector<int> &nums) {
+    // Exp: https://leetcode.com/problems/permutations/solutions/222300/permutations/
+    // Time:	O(sum_{k}{P(n,k)})
+    // Space:	O(n!)
+    vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> result;
         vector<int> path;
-        dfs(nums, path, result);
+        backtrack(nums, 0, path, result);
         return result;
     }
 
-    void dfs(vector<int> &nums, vector<int> &path, vector<vector<int> > &result) {
-        if (path.size() == nums.size()) {
+    void backtrack(vector<int>& nums, int start, vector<int>& path, vector<vector<int>>& result) {
+        if (start == nums.size()) {
             result.push_back(path);
             return;
         }
-        for (int i = 0; i < nums.size(); i++) {
-            int val = nums[i];
-            vector<int>::iterator it = find(path.begin(), path.end(), val);
-            if (it == path.end()) {
-                path.push_back(val);
-                dfs(nums, path, result);
-                path.pop_back();
-            }
+        for (int i = start; i < nums.size(); i++) {
+            swap(nums[start], nums[i]);
+            path.push_back(nums[start]);
+            backtrack(nums, start + 1, path, result);
+            swap(nums[start], nums[i]);
+            path.pop_back();
         }
     }
-
-
 
 
 

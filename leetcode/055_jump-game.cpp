@@ -27,4 +27,17 @@ public:
         }
         return true;
     }
+
+    // DP
+    // Time:	O(n)
+    // Space:	O(1)
+    bool canJump2(vector<int>& nums) {
+        int max_reach = 0, i = 0;
+        while (i <= max_reach) {
+            if (max_reach >= nums.size() - 1) return true;
+            max_reach = max(max_reach, i + nums[i]);
+            i++;
+        }
+        return false;
+    }
 };

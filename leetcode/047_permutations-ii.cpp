@@ -22,27 +22,27 @@ public:
     vector<vector<int>> permuteUnique(vector<int> &nums) {
         sort(nums.begin(), nums.end());
         vector<vector<int>> result;
-        helper(nums, 0, result);
+        backtrack(nums, 0, result);
         return result;
     }
 
-    void helper(vector<int> nums, int i, vector<vector<int>> &result) {
-        if (i == nums.size() - 1) {
+    void backtrack(vector<int> nums, int start, vector<vector<int>> &result) {
+        if (start == nums.size() - 1) {
             result.push_back(nums);
             return;
         }
 
-        for (int k = i; k < nums.size(); k++) {
-            if (k != i && nums[k] == nums[i]) continue;
-            swap(nums[k], nums[i]);
-            helper(nums, i + 1, result);
+        for (int i = start; i < nums.size(); i++) {
+            if (i != start && nums[i] == nums[start]) continue;
+            swap(nums[start], nums[i]);
+            backtrack(nums, start + 1, result);
         }
     }
 };
 
 //int main() {
 //    Solution_047 sol;
-//    vector<int> nums{1, 2, 2, 4};
+//    vector<int> nums{1, 1, 2};
 //    vector<vector<int>> result(sol.permuteUnique(nums));
 //    for (auto&& path: result) {
 //        for (auto num: path)
