@@ -31,7 +31,7 @@ public:
 
         vector<vector<string>> result;
         for (auto &element: dict)
-            result.push_back(vector<string>(element.second.begin(), element.second.end()));
+            result.push_back(element.second);
         return result;
     }
 

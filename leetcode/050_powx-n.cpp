@@ -10,15 +10,10 @@ public:
     // Time:	O(log(n))
     // Space:	O(1)
     double myPow(double x, int n) {
+        if (n == INT_MIN) return myPow(x, n + 1) * 1 / x;
+        if (n < 0) return myPow(1/x, -n);
         if (n == 0) return 1;
-        if (n == INT_MIN) {
-            x = x * x;
-            n /= 2;
-        }
-        if (n < 0) {
-            x = 1 / x;
-            n = -n;
-        }
-        return (n % 2 == 0) ? myPow(x * x, n / 2) : myPow(x * x, n / 2) * x;
+        if (n == 1) return x;
+        return myPow(x * x, n / 2) * myPow(x, n % 2);
     }
 };
