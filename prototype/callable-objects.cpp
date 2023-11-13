@@ -34,7 +34,7 @@ auto lambdaShorter = [](const string& a, const string& b) {
 
 /**
  * Function pointer Define
- * @return
+ * @return bool
  */
 static bool (*pointerShorter) (const string&, const string&);
 
