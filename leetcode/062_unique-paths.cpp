@@ -20,12 +20,12 @@ public:
     // Space:	O(n)
     int uniquePaths(int m, int n) {
         if (m == 1 || n == 1) return 1;
-        vector<int> num(n, 0);
-        for(int i = 0; i < n; i++)
-            num[i] = 1;
-        for(int i = 1; i < m; i++)
-            for(int j = 1; j < n; j++)
-                num[j] += num[j-1];
-        return num[n-1];
+        vector<int> paths(n, 0);
+        paths[0] = 1;
+        for (int i = 0; i < m; i++)
+            for (int j = 1; j < n; j++) {
+                paths[j] += paths[j - 1];
+            }
+        return paths.back();
     }
 };
